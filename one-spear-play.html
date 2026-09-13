@@ -1,0 +1,2357 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#10242c"><meta name="description" content="一矛到底 · 青岚渡。按住蓄力、轻移选路、松手投出绳枪。原创单指无尽挑战。"><title>一矛到底 · 青岚渡</title>
+<style>
+*{box-sizing:border-box}:root{--vvw:100vw;--vvh:100vh;--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}html,body{margin:0;width:100%;height:100%;min-width:100%;min-height:100%;overflow:hidden;overscroll-behavior:none;background:#091a23;color:#e8dec0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%}body{position:fixed;inset:0;width:var(--vvw);height:var(--vvh)}#game-root{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);background:radial-gradient(ellipse at 50% 38%,#27494a 0,#122d35 44%,#091a23 100%)}#game-root:before,#game-root:after{content:"";position:absolute;top:0;bottom:0;width:max(0px,calc((var(--vvw) - var(--vvh)*1.7777778)/2));min-width:0;pointer-events:none;opacity:.46;background:linear-gradient(90deg,rgba(7,22,29,.96),rgba(30,66,72,.32));z-index:0}#game-root:before{left:0}#game-root:after{right:0;transform:scaleX(-1)}canvas{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:16/9;touch-action:none;outline:none;-webkit-tap-highlight-color:transparent;box-shadow:0 0 42px rgba(0,0,0,.18)}#rotate{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);z-index:5;background:radial-gradient(ellipse at 50% 30%,#244942,#0b1e29 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:max(24px,var(--safe-top)) max(24px,var(--safe-right)) max(24px,var(--safe-bottom)) max(24px,var(--safe-left))}#rotate[hidden]{display:none}.phone{width:50px;height:86px;border:2px solid #c8c498;border-radius:10px;transform:rotate(90deg);margin-bottom:clamp(30px,9vh,52px);position:relative}.phone:after{content:"";position:absolute;bottom:7px;left:21px;width:5px;height:5px;border:1px solid #c8c498;border-radius:50%}#rotate h2{margin:0 0 12px;font-size:clamp(20px,5.8vw,25px);font-weight:500;letter-spacing:.16em}#rotate p{margin:0;font-size:clamp(13px,3.8vw,15px);line-height:1.9;color:#a0b3a0}noscript{position:fixed;inset:0;padding:50px;background:#142e36;z-index:20}@media (orientation:landscape) and (max-height:430px){#game-root{padding-top:max(2px,var(--safe-top));padding-bottom:max(2px,var(--safe-bottom))}canvas{box-shadow:none}}@supports(height:100dvh){:root{--vvw:100dvw;--vvh:100dvh}}
+</style><script>(function(){function syncViewport(){var v=window.visualViewport;var w=Math.max(1,Math.round(v?v.width:window.innerWidth));var h=Math.max(1,Math.round(v?v.height:window.innerHeight));document.documentElement.style.setProperty('--vvw',w+'px');document.documentElement.style.setProperty('--vvh',h+'px');}syncViewport();window.addEventListener('resize',syncViewport,{passive:true});window.addEventListener('orientationchange',syncViewport,{passive:true});if(window.visualViewport){window.visualViewport.addEventListener('resize',syncViewport,{passive:true});window.visualViewport.addEventListener('scroll',syncViewport,{passive:true});}})();</script></head><body><div id="game-root"></div><div id="rotate" hidden><div class="phone"></div><h2>横过来，天地更大</h2><p>横屏即可开始飞渡<br>当前进度已保留</p></div><noscript>游戏需要启用 JavaScript。请在支持 Canvas 的现代浏览器中打开。</noscript><script>(function(mods){'use strict';const cache={};function norm(p){const a=[];for(const s of p.split('/')){if(s==='..')a.pop();else if(s&&s!=='.')a.push(s);}let id=a.join('/');return id.endsWith('.js')?id:id+'.js';}function load(id){id=norm(id);if(cache[id])return cache[id].exports;if(!mods[id])throw new Error('Missing module: '+id);const m={exports:{}};cache[id]=m;mods[id](r=>load(id.slice(0,id.lastIndexOf('/')+1)+r),m,m.exports);return m.exports;}load('offline.js');})({"config/balance.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.lerp = exports.clamp = exports.B = void 0;
+/** Gameplay numbers live here. Durations use seconds; positions use logical pixels. */
+exports.B = {
+    width: 1280, height: 720,
+    hp: 100, heal: 32, reviveHP: 36,
+    chargeSeconds: 1.28, powerMin: 0.10,
+    chargePowerOffset: 0.27, chargeRangeScale: 1490,
+    perfectBand: 0.036, hitBand: 0.115, tutorialHitBonus: 0.055,
+    dragStep: 68, dragHysteresis: 18,
+    gravity: 950, flightMin: 0.29, flightMax: 0.51,
+    powerErrorY: 165,
+    headRadius: 12, bodyRadius: 22, magnet: 11,
+    spearReturn: 0.23, hitStop: 0.045, perfectStop: 0.075, multiStop: 0.11,
+    ropeMin: 0.29, ropeMax: 0.52, ropeArc: 74,
+    fallDuration: 0.82, fallForwardMin: 90, fallForwardMax: 620, fallLift: 68,
+    settle: 0.10, landingGrace: 0.82,
+    meleeFirstDelay: 0.16, meleeInterval: 0.17, meleeInvuln: 0.10,
+    decisionWindow: 3.05, minimumDecision: 2.2, enemyStagger: 0.38, enemyAttackIntervalScale: 0.50, firstRangedAttackDelay: 2.00,
+    arrowFlight: 0.70, arrowDodgeThreshold: 100, damageInvuln: 0.50,
+    maxEnemies: 7, maxParticles: 150, maxFloats: 22, maxHistory: 5,
+    comboScoreCap: 32, skipPlatformBonus: 32,
+    distancePerPixel: 0.10, healWeight: 0.22, lowHPHealWeight: 0.72,
+    lowHP: 36, mercyMisses: 2, peakEvery: 11,
+    spawnGaps: [355, 580, 805], spawnHeights: [490, 330, 545],
+    unlock: { tripleRoute: 24, runner: 95, fast: 70, double: 40, armor: 215, shield: 270, elite: 115, triple: 340 },
+    enemies: {
+        archer: { name: '弓手', damage: 19, melee: 10, windup: 3.00, hp: 1, score: 100, color: '#dd7966' },
+        quick: { name: '疾射', damage: 14, melee: 9, windup: 2.35, hp: 1, score: 120, color: '#e8ad5d' },
+        armor: { name: '铁卫', damage: 27, melee: 14, windup: 3.25, hp: 2, score: 160, color: '#b8bbb5' },
+        shield: { name: '盾卫', damage: 23, melee: 12, windup: 3.00, hp: 1, score: 170, color: '#d4aa61' },
+        runner: { name: '游弓', damage: 17, melee: 10, windup: 2.80, hp: 1, score: 140, color: '#c59cdd' },
+        elite: { name: '逐风将', damage: 30, melee: 16, windup: 2.60, hp: 2, score: 250, color: '#fa6559' }
+    },
+    shieldPeriod: 2.8, shieldOpen: 1.3,
+    palette: {
+        sky: '#101f29', deep: '#0a1922', ink: '#0c252d', mountain: '#1e4248',
+        paper: '#f1e6c8', muted: '#9cae9f', jade: '#79d5bc', gold: '#f2c66e',
+        coral: '#e97765', stone: '#526963', stoneLight: '#8b9b83'
+    }
+};
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+exports.clamp = clamp;
+const lerp = (a, b, t) => a + (b - a) * t;
+exports.lerp = lerp;
+
+},
+"entities/types.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+
+},
+"game/Game.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Game = void 0;
+const balance_1 = require("../config/balance");
+const math_1 = require("../utils/math");
+const WorldGenerator_1 = require("../systems/WorldGenerator");
+const DifficultySystem_1 = require("../systems/DifficultySystem");
+const TargetingSystem_1 = require("../systems/TargetingSystem");
+const CombatSystem_1 = require("../systems/CombatSystem");
+const ScoreSystem_1 = require("../systems/ScoreSystem");
+const StorageSystem_1 = require("../systems/StorageSystem");
+const AudioSystem_1 = require("../systems/AudioSystem");
+const HapticSystem_1 = require("../systems/HapticSystem");
+const FXSystem_1 = require("../systems/FXSystem");
+const AdAdapter_1 = require("../systems/AdAdapter");
+class Game {
+    constructor(query = typeof location !== 'undefined' ? location.search : '') {
+        this.state = 'menu';
+        this.storage = new StorageSystem_1.StorageSystem();
+        this.audio = new AudioSystem_1.AudioSystem();
+        this.haptic = new HapticSystem_1.HapticSystem();
+        this.fx = new FXSystem_1.FXSystem();
+        this.ads = new AdAdapter_1.MockAdAdapter();
+        this.platforms = [];
+        this.history = [];
+        this.arrows = [];
+        this.shot = null;
+        this.player = { x: 310, y: 503 };
+        this.playerFrom = { x: 310, y: 503 };
+        this.playerTo = { x: 310, y: 503 };
+        this.hp = balance_1.B.hp;
+        this.stats = (0, ScoreSystem_1.emptyStats)();
+        this.cameraX = 0;
+        this.selected = 0;
+        this.elapsed = 0;
+        this.visualTime = 0;
+        this.chargeTime = 0;
+        this.power = 0;
+        this.step = 0;
+        this.level = 0;
+        this.timer = 0;
+        this.freeze = 0;
+        this.ropeDuration = .4;
+        this.grace = 0;
+        this.invuln = 0;
+        this.shake = 0;
+        this.flash = 0;
+        this.landSquash = 0;
+        this.comboIdle = 0;
+        this.consecutiveMiss = 0;
+        this.paused = false;
+        this.pauseReason = '';
+        this.portrait = false;
+        this.help = false;
+        this.reviveUsed = false;
+        this.rewarded = false;
+        this.adPending = false;
+        this.deathReason = '';
+        this.lastEvent = '';
+        this.notice = '';
+        this.noticeTime = 0;
+        this.banner = '';
+        this.bannerTime = 0;
+        this.helpStep = 0;
+        this.scoreFlashTime = 0;
+        this.scoreFlashJump = 0;
+        this.scoreFlashSkip = 0;
+        this.scoreFlashCombo = 0;
+        this.pullTarget = null;
+        this.activeShooterId = null;
+        this.meleePlatform = null;
+        this.meleeTimer = 0;
+        this.activePointer = false;
+        this.dragStart = { x: 0, y: 0 };
+        this.downSelected = 0;
+        this.fullPulse = false;
+        this.perfectPulse = false;
+        this.ui = [];
+        this.fps = 60;
+        this.frameSamples = [];
+        this.maxActive = 0;
+        this.timeScale = 1;
+        this.bossPhase = 0;
+        this.lastBossStep = 0;
+        this.newRecord = false;
+        this.testMode = false;
+        this.listeners = [];
+        const q = new URLSearchParams(query);
+        this.fixedSeed = q.has('seed');
+        this.seed = q.has('seed') ? (/^\d+$/.test(q.get('seed')) ? Number(q.get('seed')) >>> 0 : (0, math_1.hashSeed)(q.get('seed'))) : (Date.now() ^ Math.floor(Math.random() * 1e8)) >>> 0;
+        this.debug = q.get('debug') === '1';
+        this.generator = new WorldGenerator_1.WorldGenerator(this.seed);
+        this.audio.enabled = this.storage.data.sound;
+        this.haptic.enabled = this.storage.data.vibration;
+        this.prepareWorld();
+        if (q.get('autostart') === '1')
+            this.start();
+    }
+    prepareWorld() {
+        this.generator = new WorldGenerator_1.WorldGenerator(this.seed);
+        this.platforms = [];
+        this.history = [];
+        this.player = { x: 310, y: 503 };
+        this.cameraX = 0;
+        this.history.push({ id: 0, x: 310, y: 507, width: 185, kind: 'safe', enemies: [], heal: 0, value: 1, label: '青岚渡', tier: 0, visited: true, shake: 0, seed: 3, anchorX: 310, anchorY: 465 });
+        this.nextGroup();
+    }
+    start(sameSeed = false) {
+        if (!this.fixedSeed && !sameSeed)
+            this.seed = (Date.now() ^ Math.floor(Math.random() * 1e8)) >>> 0;
+        this.state = 'ready';
+        this.hp = balance_1.B.hp;
+        this.stats = (0, ScoreSystem_1.emptyStats)();
+        this.step = 0;
+        this.elapsed = 0;
+        this.level = 0;
+        this.timer = 0;
+        this.freeze = 0;
+        this.arrows = [];
+        this.shot = null;
+        this.fx.reset();
+        this.chargeTime = 0;
+        this.power = 0;
+        this.grace = 1.1;
+        this.invuln = 0;
+        this.shake = 0;
+        this.flash = 0;
+        this.landSquash = 0;
+        this.comboIdle = 0;
+        this.consecutiveMiss = 0;
+        this.activeShooterId = null;
+        this.meleePlatform = null;
+        this.meleeTimer = 0;
+        this.reviveUsed = false;
+        this.rewarded = false;
+        this.adPending = false;
+        this.deathReason = '';
+        this.paused = false;
+        this.pauseReason = '';
+        this.help = false;
+        this.activePointer = false;
+        this.bossPhase = 0;
+        this.lastBossStep = 0;
+        this.newRecord = false;
+        this.notice = '';
+        this.noticeTime = 0;
+        this.scoreFlashTime = 0;
+        this.scoreFlashJump = 0;
+        this.scoreFlashSkip = 0;
+        this.scoreFlashCombo = 0;
+        this.prepareWorld();
+        this.banner = '青 岚 渡';
+        this.bannerTime = 1.8;
+        this.tutorialPrompt();
+        this.audio.unlock();
+        this.audio.play('select');
+    }
+    nextGroup(landed) {
+        if (this.step > 0 && this.step % balance_1.B.peakEvery === 0 && this.lastBossStep !== this.step && this.elapsed >= 60) {
+            this.bossPhase = 3;
+            this.lastBossStep = this.step;
+            this.banner = '逐风将 · 三崖追猎';
+            this.bannerTime = 2.0;
+        }
+        const fresh = this.generator.make({ x: this.player.x, y: this.player.y, elapsed: this.elapsed, step: this.step, hp: this.hp, combo: this.stats.combo, level: this.level, misses: this.consecutiveMiss, bossPhase: this.bossPhase });
+        for (const p of fresh)
+            (0, TargetingSystem_1.alignPierce)(p, { x: this.player.x + 17, y: this.player.y - 54 });
+        // Platforms that were already visible are real world objects, not a disposable preview.
+        // After landing, keep every still-ahead platform exactly as the player saw it and only append farther terrain.
+        this.platforms = landed && this.step >= 3 ? (0, WorldGenerator_1.mergeVisiblePlatforms)(this.platforms, landed, fresh, fresh.length) : fresh;
+        this.selected = 0;
+    }
+    tutorialPrompt() {
+        const text = [
+            '第1跳 · 单人台：按住蓄力，力度合适后松手',
+            '第2跳 · 双人台：一矛穿透两人；漏一个，落地会被捅',
+            '第3跳 · 回血台：扎中锚点飞过去，落地自动回血',
+            '你已经完全学会了，提示就取消了哦！祝少侠好运！'
+        ][Math.min(this.step, 3)];
+        this.say(text, this.step < 3 ? 3.6 : 3.0);
+    }
+    get target() { return this.platforms[this.selected] || this.platforms[0]; }
+    get ideal() { return (0, TargetingSystem_1.idealPower)(this.player.x + 17, this.target); }
+    get stage() { return (0, DifficultySystem_1.stageName)(this.elapsed); }
+    get canAct() { return !this.paused && !this.portrait && !this.help && (this.state === 'ready' || this.state === 'charging'); }
+    say(text, time = 1.5) { this.notice = text; this.noticeTime = time; this.lastEvent = text; }
+    buttonAt(x, y) { const slop = 14; return [...this.ui].reverse().find(b => x >= b.x - slop && x <= b.x + b.w + slop && y >= b.y - slop && y <= b.y + b.h + slop); }
+    down(x, y) {
+        this.audio.unlock();
+        const b = this.buttonAt(x, y);
+        if (b) {
+            void this.action(b.id);
+            return;
+        }
+        if (!this.canAct || this.activePointer)
+            return;
+        // Direct targeting is optional; hold-anywhere always has a useful default.
+        for (let i = 0; i < this.platforms.length; i++) {
+            const p = this.platforms[i];
+            if (Math.hypot(x - (p.x - this.cameraX), y - (p.y - 58)) < 70) {
+                this.selected = i;
+                break;
+            }
+        }
+        this.activePointer = true;
+        this.state = 'charging';
+        this.chargeTime = 0;
+        this.power = 0;
+        this.dragStart = { x, y };
+        this.downSelected = this.selected;
+        this.fullPulse = false;
+        this.perfectPulse = false;
+        this.haptic.pulse('charge');
+    }
+    move(x, y) {
+        if (!this.activePointer || this.state !== 'charging' || !this.canAct)
+            return;
+        const dy = y - this.dragStart.y, dx = x - this.dragStart.x;
+        const order = this.platforms.map((p, i) => ({ y: p.y, i })).sort((a, b) => a.y - b.y);
+        const origin = order.findIndex(e => e.i === this.downSelected);
+        let index = this.downSelected;
+        if (Math.abs(dy) >= balance_1.B.dragStep) {
+            const shift = Math.sign(dy) * Math.max(1, Math.floor((Math.abs(dy) + balance_1.B.dragHysteresis) / balance_1.B.dragStep));
+            index = order[(0, balance_1.clamp)(origin + shift, 0, order.length - 1)].i;
+        }
+        else if (Math.abs(dx) >= balance_1.B.dragStep * 1.15)
+            index = (0, balance_1.clamp)(this.downSelected + Math.sign(dx), 0, this.platforms.length - 1);
+        if (index !== this.selected) {
+            this.selected = index;
+            this.audio.play('select');
+            this.perfectPulse = false;
+        }
+    }
+    up() {
+        if (!this.activePointer)
+            return;
+        this.activePointer = false;
+        if (this.state !== 'charging' || this.paused || this.portrait || this.help) {
+            this.cancel();
+            return;
+        }
+        this.throwSpear();
+    }
+    cancel() { this.activePointer = false; this.audio.stopCharge(); if (this.state === 'charging') {
+        this.state = 'ready';
+        this.chargeTime = 0;
+        this.power = 0;
+    } }
+    select(direction) { if (!this.canAct)
+        return; this.selected = (this.selected + direction + this.platforms.length) % this.platforms.length; this.audio.play('select'); }
+    togglePause(reason = '已暂停') { if (this.state === 'menu' || this.state === 'result')
+        return; this.cancel(); this.paused = !this.paused; this.pauseReason = reason; if (this.paused)
+        this.audio.suspend();
+    else
+        this.audio.unlock(); }
+    onHide() { if (this.state !== 'menu' && this.state !== 'result' && !this.paused) {
+        this.cancel();
+        this.paused = true;
+        this.pauseReason = '已暂停 · 返回后继续';
+    } this.audio.suspend(); }
+    setPortrait(value) { if (value && !this.portrait)
+        this.cancel(); this.portrait = value; }
+    async action(id) {
+        switch (id) {
+            case 'start':
+            case 'restart':
+                this.start();
+                break;
+            case 'same':
+                this.start(true);
+                break;
+            case 'menu':
+                this.cancel();
+                this.state = 'menu';
+                this.paused = false;
+                this.help = false;
+                this.prepareWorld();
+                break;
+            case 'pause':
+                this.togglePause();
+                break;
+            case 'resume':
+                this.paused = false;
+                this.audio.unlock();
+                break;
+            case 'sound':
+                this.storage.data.sound = !this.storage.data.sound;
+                this.audio.enabled = this.storage.data.sound;
+                this.audio.stopCharge();
+                this.storage.save();
+                break;
+            case 'vibration':
+                this.storage.data.vibration = !this.storage.data.vibration;
+                this.haptic.enabled = this.storage.data.vibration;
+                this.storage.save();
+                break;
+            case 'motion':
+                this.storage.data.motion = !this.storage.data.motion;
+                this.storage.save();
+                break;
+            case 'help':
+                this.cancel();
+                this.help = !this.help;
+                break;
+            case 'closehelp':
+                this.help = false;
+                break;
+            case 'revive':
+                if (this.reviveUsed || this.adPending || this.state !== 'result')
+                    break;
+                this.adPending = true;
+                try {
+                    const r = await this.ads.showRewarded('revive');
+                    if (r.completed) {
+                        const last = this.history[this.history.length - 1];
+                        if (last) {
+                            this.player = { x: last.x - 25, y: last.y - 4 };
+                            this.cameraX = Math.max(0, this.player.x - 320);
+                        }
+                        this.reviveUsed = true;
+                        this.hp = balance_1.B.reviveHP;
+                        this.state = 'ready';
+                        this.paused = false;
+                        this.shot = null;
+                        this.arrows = [];
+                        this.meleePlatform = null;
+                        this.meleeTimer = 0;
+                        this.grace = 2;
+                        this.invuln = 1.2;
+                        if (!this.platforms.length)
+                            this.nextGroup();
+                        this.audio.play('heal');
+                        this.say('演示续命 · 生命 +36（未播放广告）', 2.2);
+                    }
+                }
+                finally {
+                    this.adPending = false;
+                }
+                break;
+            case 'double':
+                if (this.rewarded || this.state !== 'result')
+                    break;
+                this.rewarded = true;
+                this.say('Mock 奖励展示 ×2 · 不计入竞技分数', 2);
+                break;
+            case 'fullscreen':
+                try {
+                    if (document.fullscreenElement)
+                        await document.exitFullscreen();
+                    else
+                        await document.documentElement.requestFullscreen();
+                }
+                catch {
+                    this.say('当前浏览器不支持全屏', 1.5);
+                }
+                break;
+        }
+    }
+    throwSpear() {
+        this.audio.stopCharge();
+        this.stats.shots++;
+        this.comboIdle = 0;
+        this.shot = (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, this.target, this.power, this.elapsed, this.step < 3);
+        this.state = 'throwing';
+        this.timer = 0;
+        this.freeze = .018;
+        this.audio.play('throw');
+        this.haptic.pulse('throw');
+        this.shake = Math.max(this.shake, 2);
+        this.helpStep = Math.max(this.helpStep, 1);
+        this.fx.burst(this.player.x + 18, this.player.y - 54, balance_1.B.palette.gold, 7, 'dust');
+    }
+    hitFeedback(hit) {
+        const e = hit.enemy;
+        if (hit.blocked) {
+            this.fx.ring(e.x, e.y - 35, balance_1.B.palette.gold);
+            this.audio.play('block');
+            this.say('盾未开 · 等亮窗，或换一条路');
+            return;
+        }
+        if (!hit.kill) {
+            this.fx.burst(e.x, e.y - 30, '#adbbbd', 13);
+            this.audio.play('block');
+            this.fx.text(e.x, e.y - 91, '未清场 · 落地危险', balance_1.B.palette.coral, 22);
+            return;
+        }
+        (0, ScoreSystem_1.recordKill)(this.stats, hit.head);
+        this.fx.burst(e.x, e.y - 48, hit.head ? balance_1.B.palette.gold : balance_1.B.palette.coral, hit.head ? 26 : 13);
+        this.fx.ring(e.x, e.y - 45, hit.head ? balance_1.B.palette.gold : balance_1.B.palette.coral);
+        if ((this.shot?.kills ?? 1) === 1)
+            this.fx.text(this.target.x, e.y - 115, hit.head ? 'PERFECT' : '击破', hit.head ? balance_1.B.palette.gold : balance_1.B.palette.paper, hit.head ? 32 : 23);
+        this.freeze = hit.head ? balance_1.B.perfectStop : balance_1.B.hitStop;
+        this.shake = Math.max(this.shake, hit.head ? 5 : 2.4);
+        this.haptic.pulse(hit.head ? 'perfect' : 'hit');
+        this.audio.play(hit.head ? 'perfect' : 'hit');
+    }
+    beginPull() {
+        const p = this.platforms.find(v => v.id === this.shot?.platformId);
+        if (!p || !this.shot)
+            return;
+        this.pullTarget = p;
+        this.meleePlatform = null;
+        this.meleeTimer = 0;
+        this.playerFrom = { ...this.player };
+        this.playerTo = { x: p.x - 25, y: p.y - 4 };
+        this.ropeDuration = (0, balance_1.clamp)((0, math_1.distance)(this.playerFrom, this.playerTo) / 1750, balance_1.B.ropeMin, balance_1.B.ropeMax);
+        this.state = 'pulling';
+        this.timer = 0;
+        this.shot.anchored = true;
+        this.audio.play('fly');
+        this.fx.ring(this.shot.pos.x, this.shot.pos.y, balance_1.B.palette.jade);
+        const ordered = this.platforms.filter(v => !v.visited && v.x > this.player.x + 72).sort((a, b) => a.x - b.x);
+        const targetRank = ordered.findIndex(v => v.id === p.id);
+        const award = (0, ScoreSystem_1.awardJump)(this.stats, targetRank === 1);
+        this.scoreFlashJump = award.jump;
+        this.scoreFlashSkip = award.skip;
+        this.scoreFlashCombo = award.combo;
+        this.scoreFlashTime = 1.05;
+        if (award.combo >= 2)
+            this.audio.play('combo', award.jump);
+        if (award.skip) {
+            this.banner = '越 台 飞 渡';
+            this.bannerTime = .95;
+            this.shake = Math.max(this.shake, 4);
+            this.haptic.pulse('perfect');
+        }
+        if (this.shot.kills >= 2) {
+            this.stats.double++;
+            this.banner = this.shot.kills >= 3 ? '一 矛 三 杀' : '一 矛 双 杀';
+            this.bannerTime = 1.25;
+            this.audio.play('multi');
+            this.freeze = balance_1.B.multiStop;
+            this.shake = 8;
+        }
+        this.consecutiveMiss = 0;
+    }
+    land() {
+        const p = this.pullTarget;
+        if (!p)
+            return;
+        this.player = { ...this.playerTo };
+        p.visited = true;
+        p.shake = .24;
+        this.history.push(p);
+        while (this.history.length > balance_1.B.maxHistory)
+            this.history.shift();
+        this.step++;
+        this.stats.distance = Math.floor((this.player.x - 310) * balance_1.B.distancePerPixel);
+        this.landSquash = .18;
+        this.grace = balance_1.B.landingGrace;
+        this.fx.burst(this.player.x, this.player.y, balance_1.B.palette.muted, 12, 'dust');
+        this.audio.play('land');
+        this.haptic.pulse('land');
+        this.shake = Math.max(this.shake, 2);
+        if (p.heal) {
+            const hp = Math.min(balance_1.B.hp, this.hp + p.heal), delta = hp - this.hp;
+            this.hp = hp;
+            p.heal = 0;
+            this.stats.healed += delta;
+            this.fx.text(this.player.x, this.player.y - 110, delta ? '生命 +' + delta : '生命充盈', balance_1.B.palette.jade, 29, 1.1);
+            this.audio.play('heal');
+            this.fx.burst(this.player.x, this.player.y - 30, balance_1.B.palette.jade, 20, 'leaf');
+            if (this.hp <= 55)
+                this.say('接住了 · 继续向前', 1.25);
+        }
+        if (p.kind === 'boss') {
+            this.bossPhase--;
+            if (this.bossPhase === 0) {
+                this.hp = Math.min(balance_1.B.hp, this.hp + 18);
+                this.banner = '逐 风 破 阵';
+                this.bannerTime = 1.7;
+                this.audio.play('multi');
+            }
+        }
+        else if (this.bossPhase > 0) {
+            this.bossPhase = 0;
+            this.say('避开逐风将 · 活着继续', 1.4);
+        }
+        const survivors = p.enemies.filter(e => e.alive);
+        if (survivors.length) {
+            this.meleePlatform = p;
+            this.meleeTimer = balance_1.B.meleeFirstDelay;
+            this.banner = survivors.length > 1 ? '残 敌 围 攻' : '残 敌 贴 身';
+            this.bannerTime = .9;
+            this.say(`${survivors.length} 名残敌贴身 · 快出手脱离`, 1.45);
+        }
+        this.shot = null;
+        this.pullTarget = null;
+        this.state = 'settling';
+        this.timer = 0;
+        this.nextGroup(p);
+        if (this.step <= 3) {
+            if (survivors.length && this.step === 2)
+                this.say(`${survivors.length} 名残敌贴身！立刻蓄力跳向回血台；落地自动回血`, 2.8);
+            else
+                this.tutorialPrompt();
+        }
+    }
+    breakCombo(reason = '敌人已经出手') {
+        if (this.stats.combo <= 0)
+            return;
+        this.stats.combo = 0;
+        this.fx.text(this.player.x, this.player.y - 128, '连跳中断', balance_1.B.palette.coral, 29, .72);
+        this.lastEvent = reason + ' · 连跳归 1';
+    }
+    miss(reason = '投空 · 人已跃出') {
+        this.stats.misses++;
+        this.stats.combo = 0;
+        this.consecutiveMiss++;
+        this.deathReason = '标枪落空 · 坠下悬崖';
+        this.meleePlatform = null;
+        this.meleeTimer = 0;
+        const dx = (0, balance_1.clamp)((0, TargetingSystem_1.rangeForPower)(this.shot?.power ?? this.power) * .70, balance_1.B.fallForwardMin, balance_1.B.fallForwardMax);
+        this.playerFrom = { ...this.player };
+        this.playerTo = { x: this.player.x + dx, y: balance_1.B.height + 150 };
+        this.state = 'falling';
+        this.timer = 0;
+        this.audio.play('miss');
+        this.haptic.pulse('hurt');
+        this.shake = 5;
+        this.say(reason + ' · 坠崖！', .9);
+    }
+    hurt(damage, source, mode = 'ranged') {
+        if (this.invuln > 0 || this.state === 'dead' || this.state === 'result' || this.state === 'menu' || this.state === 'falling')
+            return;
+        this.breakCombo(source + '发动攻击');
+        this.hp = Math.max(0, this.hp - damage);
+        this.stats.damage += damage;
+        this.invuln = mode === 'melee' ? balance_1.B.meleeInvuln : balance_1.B.damageInvuln;
+        this.flash = .33;
+        this.shake = 8;
+        this.audio.play('hurt');
+        this.haptic.pulse('hurt');
+        this.fx.text(this.player.x, this.player.y - 94, '−' + damage, balance_1.B.palette.coral, 30);
+        this.fx.burst(this.player.x, this.player.y - 37, balance_1.B.palette.coral, 16);
+        if (mode === 'melee') {
+            this.deathReason = source + '近身围攻';
+            this.say(source + ' 捅刺 −' + damage + ' · 立刻出手脱身', .72);
+        }
+        else {
+            this.deathReason = source + '的箭命中';
+            this.say(source + ' −' + damage + ' · 出箭后飞走可躲开', 1.65);
+        }
+        if (this.hp <= 0)
+            this.die();
+    }
+    die() { this.cancel(); this.state = 'dead'; this.timer = 0; this.newRecord = this.stats.score > this.storage.data.score; this.audio.play('over'); this.storage.finish(this.stats); this.fx.burst(this.player.x, this.player.y - 30, balance_1.B.palette.coral, 35); }
+    tick(realDt) {
+        realDt = (0, balance_1.clamp)(realDt, 0, .06);
+        this.visualTime += realDt;
+        this.fps = (0, balance_1.lerp)(this.fps, 1 / Math.max(realDt, .001), .025);
+        if (this.state === 'menu' || this.state === 'result') {
+            if (this.noticeTime > 0)
+                this.noticeTime -= realDt;
+            this.fx.update(realDt);
+            return;
+        }
+        if (this.paused || this.portrait || this.help)
+            return;
+        const dt = Math.min(realDt, .0334) * this.timeScale;
+        this.fx.update(dt);
+        this.shake = Math.max(0, this.shake - dt * 22);
+        this.flash = Math.max(0, this.flash - dt);
+        this.landSquash = Math.max(0, this.landSquash - dt);
+        this.noticeTime -= dt;
+        this.bannerTime -= dt;
+        this.scoreFlashTime = Math.max(0, this.scoreFlashTime - dt);
+        if (this.freeze > 0) {
+            this.freeze -= dt;
+            return;
+        }
+        if (this.state === 'dead') {
+            this.timer += dt;
+            if (this.timer >= .85)
+                this.state = 'result';
+            return;
+        }
+        this.elapsed += dt;
+        this.level = (0, DifficultySystem_1.difficulty)(this.elapsed, this.step);
+        this.invuln = Math.max(0, this.invuln - dt);
+        this.grace = Math.max(0, this.grace - dt);
+        this.comboIdle += dt;
+        if (this.state === 'charging') {
+            this.chargeTime += dt;
+            this.power = (0, TargetingSystem_1.powerAt)(this.chargeTime);
+            this.audio.charge(this.power);
+            if (this.power > .98 && !this.fullPulse) {
+                this.fullPulse = true;
+                this.haptic.pulse('full');
+            }
+            if (Math.abs(this.power - this.ideal) < balance_1.B.perfectBand && !this.perfectPulse) {
+                this.perfectPulse = true;
+                this.haptic.pulse('full');
+            }
+        }
+        // Only the closest living enemy may use a ranged attack. Farther enemies stay visually readable but do not charge or fire.
+        // When a new closest enemy takes over, its first ranged shot gets a fresh 2.0 s reaction window.
+        const closestEnemy = this.platforms
+            .flatMap(p => p.enemies)
+            .filter(e => e.alive && e.x >= this.player.x - 24)
+            .sort((a, b) => Math.hypot(a.x - this.player.x, a.y - this.player.y) - Math.hypot(b.x - this.player.x, b.y - this.player.y))[0] || null;
+        const nextShooterId = closestEnemy?.id ?? null;
+        if (nextShooterId !== this.activeShooterId) {
+            this.activeShooterId = nextShooterId;
+            if (closestEnemy?.firstAttack)
+                closestEnemy.timer = balance_1.B.firstRangedAttackDelay;
+        }
+        const attackState = ['ready', 'charging', 'retracting', 'throwing'].includes(this.state);
+        const firstAttackState = attackState || this.state === 'settling';
+        const threatening = attackState && this.grace <= 0;
+        for (const p of this.platforms) {
+            p.shake = Math.max(0, p.shake - dt);
+            for (const e of p.enemies) {
+                e.hit = Math.max(0, e.hit - dt);
+                if (!e.alive) {
+                    e.deadAt += dt;
+                    continue;
+                }
+                if (e.kind === 'runner')
+                    e.x = e.baseX + Math.sin(this.elapsed * 2.1 + e.phase) * 23;
+                if (e.kind === 'shield')
+                    e.open = (this.elapsed + e.phase) % balance_1.B.shieldPeriod < balance_1.B.shieldOpen;
+                const isClosestShooter = e.id === this.activeShooterId && this.meleePlatform?.id !== e.platformId;
+                const canChargeAttack = isClosestShooter && (e.firstAttack ? firstAttackState : threatening);
+                if (canChargeAttack) {
+                    const before = e.timer;
+                    e.timer -= dt;
+                    if (before > .5 && e.timer <= .5)
+                        this.audio.play('warn');
+                    if (e.timer <= 0) {
+                        this.breakCombo(balance_1.B.enemies[e.kind].name + '已出手');
+                        if (this.arrows.length < 12)
+                            this.arrows.push({ x: e.x - 18, y: e.y - 38, fromX: e.x - 18, fromY: e.y - 38, toX: this.player.x, toY: this.player.y - 32, time: 0, duration: balance_1.B.arrowFlight + (e.x - this.player.x) / 3800, damage: balance_1.B.enemies[e.kind].damage, enemy: balance_1.B.enemies[e.kind].name, active: true });
+                        e.firstAttack = false;
+                        e.timer = e.period;
+                    }
+                }
+            }
+        }
+        for (const a of this.arrows) {
+            if (!a.active)
+                continue;
+            a.time += dt;
+            const t = (0, balance_1.clamp)(a.time / a.duration, 0, 1);
+            a.x = (0, balance_1.lerp)(a.fromX, a.toX, t);
+            a.y = (0, balance_1.lerp)(a.fromY, a.toY, t) - Math.sin(t * Math.PI) * 23;
+            if (t >= 1) {
+                a.active = false;
+                if ((0, math_1.distance)({ x: a.toX, y: a.toY }, { x: this.player.x, y: this.player.y - 32 }) < balance_1.B.arrowDodgeThreshold) {
+                    this.hurt(a.damage, a.enemy);
+                }
+                else {
+                    this.stats.dodges++;
+                    this.fx.text(a.toX, a.toY - 34, '闪过', balance_1.B.palette.jade, 20, .65);
+                }
+            }
+        }
+        this.arrows = this.arrows.filter(a => a.active);
+        if (this.meleePlatform && ['ready', 'charging', 'throwing', 'retracting', 'settling'].includes(this.state)) {
+            const survivors = this.meleePlatform.enemies.filter(e => e.alive);
+            for (const e of survivors)
+                e.hit = Math.max(0, e.hit - dt);
+            if (!survivors.length) {
+                this.meleePlatform = null;
+                this.meleeTimer = 0;
+            }
+            else {
+                this.meleeTimer -= dt;
+                if (this.meleeTimer <= 0) {
+                    this.meleeTimer = balance_1.B.meleeInterval;
+                    const damage = survivors.reduce((sum, e) => sum + balance_1.B.enemies[e.kind].melee, 0);
+                    for (const e of survivors)
+                        e.hit = .16;
+                    this.breakCombo(`${survivors.length}名残敌已出手`);
+                    this.fx.burst(this.player.x - 6, this.player.y - 35, balance_1.B.palette.coral, 12);
+                    this.hurt(damage, `${survivors.length}名残敌`, 'melee');
+                }
+            }
+        }
+        if (this.state === 'throwing' && this.shot) {
+            const s = this.shot;
+            s.prev = { ...s.pos };
+            s.elapsed += dt;
+            s.pos = (0, TargetingSystem_1.shotPoint)(s, s.elapsed);
+            const p = this.platforms.find(p => p.id === s.platformId);
+            if (p && !s.blocked) {
+                for (const e of p.enemies) {
+                    const hit = (0, CombatSystem_1.hitEnemy)(s, e);
+                    if (hit)
+                        this.hitFeedback(hit);
+                    if (s.blocked)
+                        break;
+                }
+            }
+            if (s.elapsed >= s.duration || s.blocked) {
+                const anchored = !!p && !s.blocked && s.quality !== 'miss' && (s.quality === 'anchor' || s.hits.length > 0);
+                if (anchored) {
+                    s.pos = { ...s.end };
+                    this.beginPull();
+                }
+                else
+                    this.miss(s.blocked ? '盾牌弹开了标枪' : s.hits.length ? '标枪没能扎牢' : '标枪落空');
+            }
+        }
+        else if (this.state === 'retracting') {
+            this.timer += dt;
+            if (this.timer >= balance_1.B.spearReturn) {
+                this.state = 'ready';
+                this.shot = null;
+            }
+        }
+        else if (this.state === 'falling') {
+            this.timer += dt;
+            const t = (0, balance_1.clamp)(this.timer / balance_1.B.fallDuration, 0, 1), e = (0, math_1.smooth)(t);
+            this.player.x = (0, balance_1.lerp)(this.playerFrom.x, this.playerTo.x, e);
+            this.player.y = (0, balance_1.lerp)(this.playerFrom.y, this.playerTo.y, t * t) - Math.sin(Math.min(1, t * 1.12) * Math.PI) * balance_1.B.fallLift;
+            if (this.shot) {
+                this.shot.pos.y += dt * 260;
+                this.shot.pos.x += dt * 55;
+            }
+            if (t >= 1) {
+                this.hp = 0;
+                this.die();
+            }
+        }
+        else if (this.state === 'pulling') {
+            this.timer += dt;
+            const t = (0, balance_1.clamp)(this.timer / this.ropeDuration, 0, 1), e = (0, math_1.smooth)(t);
+            this.player.x = (0, balance_1.lerp)(this.playerFrom.x, this.playerTo.x, e);
+            this.player.y = (0, balance_1.lerp)(this.playerFrom.y, this.playerTo.y, e) - Math.sin(t * Math.PI) * balance_1.B.ropeArc;
+            if (Math.random() < .5)
+                this.fx.burst(this.player.x - 15, this.player.y - 28, balance_1.B.palette.jade, 1, 'dust');
+            if (t >= 1)
+                this.land();
+        }
+        else if (this.state === 'settling') {
+            this.timer += dt;
+            if (this.timer >= balance_1.B.settle)
+                this.state = 'ready';
+        }
+        this.cameraX = (0, balance_1.lerp)(this.cameraX, Math.max(0, this.player.x - 320), Math.min(1, dt * (this.state === 'pulling' ? 10 : 14)));
+        this.maxActive = Math.max(this.maxActive, this.platforms.reduce((n, p) => n + p.enemies.length, 0) + this.history.length + this.arrows.length + this.fx.particles.filter(p => p.life > 0).length);
+    }
+    preview(power = this.power) { return (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, this.target, power, this.elapsed, this.step < 3); }
+    snapshot() { return { state: this.state, hp: this.hp, seed: this.seed, step: this.step, elapsed: this.elapsed, level: this.level, selected: this.selected, ideal: this.ideal, power: this.power, cameraX: this.cameraX, player: { ...this.player }, stats: { ...this.stats }, pattern: this.generator.pattern, patternId: this.generator.patternId, platforms: this.platforms.map(p => ({ id: p.id, x: p.x, y: p.y, kind: p.kind, heal: p.heal, enemies: p.enemies.map(e => ({ id: e.id, kind: e.kind, hp: e.hp, open: e.open, timer: e.timer, firstAttack: !!e.firstAttack, alive: e.alive })) })), objects: { platforms: this.platforms.length, history: this.history.length, arrows: this.arrows.length, particles: this.fx.particles.filter(p => p.life > 0).length, maxActive: this.maxActive }, melee: { platformId: this.meleePlatform?.id ?? null, survivors: this.meleePlatform?.enemies.filter(e => e.alive).length ?? 0, timer: this.meleeTimer }, fps: this.fps, paused: this.paused, portrait: this.portrait, reviveUsed: this.reviveUsed, activeShooterId: this.activeShooterId }; }
+    destroy() { this.audio.destroy(); for (const fn of this.listeners)
+        fn(); }
+}
+exports.Game = Game;
+
+},
+"game/controls.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.attachControls = attachControls;
+/** Shared input contract for Phaser and the dependency-free preview. */
+function attachControls(canvas, game) {
+    let pointer = null;
+    const bindings = [];
+    function on(target, name, fn, options) { target.addEventListener(name, fn, options); bindings.push(() => target.removeEventListener(name, fn, options)); }
+    function point(e) { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) * 1280 / r.width, y: (e.clientY - r.top) * 720 / r.height }; }
+    on(canvas, 'pointerdown', ((e) => { if (pointer !== null || !e.isPrimary || e.button > 0)
+        return; e.preventDefault(); pointer = e.pointerId; try {
+        canvas.setPointerCapture(pointer);
+    }
+    catch { } const p = point(e); game.down(p.x, p.y); }), { passive: false });
+    on(canvas, 'pointermove', ((e) => { if (e.pointerId !== pointer)
+        return; e.preventDefault(); const p = point(e); game.move(p.x, p.y); }), { passive: false });
+    on(canvas, 'pointerup', ((e) => { if (e.pointerId !== pointer)
+        return; e.preventDefault(); game.up(); pointer = null; }), { passive: false });
+    const cancel = () => { pointer = null; game.cancel(); };
+    on(canvas, 'pointercancel', cancel);
+    on(canvas, 'lostpointercapture', () => { if (pointer !== null)
+        cancel(); });
+    on(canvas, 'contextmenu', e => e.preventDefault());
+    on(window, 'keydown', ((e) => {
+        if (e.repeat)
+            return;
+        if (e.code === 'Space') {
+            e.preventDefault();
+            if (game.state === 'menu' || game.state === 'result')
+                game.start();
+            else
+                game.down(700, 600);
+        }
+        if (e.code === 'ArrowUp' || e.code === 'KeyW') {
+            e.preventDefault();
+            game.select(1);
+        }
+        if (e.code === 'ArrowDown' || e.code === 'KeyS') {
+            e.preventDefault();
+            game.select(-1);
+        }
+        if (e.code === 'Escape' || e.code === 'KeyP')
+            game.togglePause();
+        if (e.code === 'KeyR' && (game.debug || game.state === 'result'))
+            game.start(true);
+        if (game.debug && e.code === 'KeyH')
+            game.hurt(20, '调试');
+        if (game.debug && e.code === 'KeyJ')
+            game.hp = Math.min(100, game.hp + 32);
+        if (game.debug && e.code === 'KeyK' && game.canAct) {
+            game.elapsed += 90;
+            game.nextGroup();
+            game.say('调试：推进难度阶段');
+        }
+    }));
+    on(window, 'keyup', ((e) => { if (e.code === 'Space') {
+        e.preventDefault();
+        game.up();
+    } }));
+    on(document, 'visibilitychange', () => { if (document.hidden) {
+        pointer = null;
+        game.onHide();
+    } });
+    on(window, 'blur', () => { pointer = null; game.onHide(); });
+    const orient = () => { const vv = window.visualViewport; const w = vv ? vv.width : innerWidth, h = vv ? vv.height : innerHeight; const portrait = h > w; game.setPortrait(portrait); const overlay = document.getElementById('rotate'); if (overlay)
+        overlay.hidden = !portrait; };
+    on(window, 'resize', orient);
+    on(window, 'orientationchange', orient);
+    if (window.visualViewport) on(window.visualViewport, 'resize', orient);
+    orient();
+    if (game.debug)
+        window.__SPEAR__ = { game, snapshot: () => game.snapshot() };
+    return () => { for (const fn of bindings)
+        fn(); delete window.__SPEAR__; };
+}
+
+},
+"offline.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Game_1 = require("./game/Game");
+const Renderer_1 = require("./render/Renderer");
+const controls_1 = require("./game/controls");
+const canvas = document.createElement('canvas');
+canvas.width = 1280;
+canvas.height = 720;
+canvas.setAttribute('aria-label', '一矛到底游戏画面：按住蓄力，上下轻拖选路，松手投矛');
+document.getElementById('game-root').appendChild(canvas);
+const ctx = canvas.getContext('2d', { alpha: false });
+const game = new Game_1.Game(), renderer = new Renderer_1.Renderer(ctx), cleanup = (0, controls_1.attachControls)(canvas, game);
+window.__GAME_RUNTIME__ = 'canvas-offline';
+let last = performance.now(), raf = 0;
+function frame(now) { game.tick((now - last) / 1000); last = now; renderer.render(game); raf = requestAnimationFrame(frame); }
+raf = requestAnimationFrame(frame);
+window.addEventListener('pagehide', () => { game.onHide(); });
+window.addEventListener('beforeunload', () => { cancelAnimationFrame(raf); cleanup(); game.destroy(); }, { once: true });
+
+},
+"render/Renderer.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Renderer = void 0;
+const balance_1 = require("../config/balance");
+const math_1 = require("../utils/math");
+const ScoreSystem_1 = require("../systems/ScoreSystem");
+const P = balance_1.B.palette;
+const FONT = '"Noto Sans SC", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+const SERIF = '"Noto Serif SC", "Songti SC", "SimSun", Georgia, serif';
+class Renderer {
+    constructor(ctx) {
+        this.layers = [];
+        this.rockCache = new Map();
+        this.ctx = ctx;
+        this.sky = this.makeSky();
+        this.layers = [this.makeMountains(0), this.makeMountains(1), this.makeMountains(2)];
+    }
+    canvas(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+    makeSky() {
+        const c = this.canvas(1280, 720), g = c.getContext('2d');
+        let a = g.createLinearGradient(0, 0, 0, 720);
+        a.addColorStop(0, '#101e29');
+        a.addColorStop(.48, '#25484a');
+        a.addColorStop(1, '#132e35');
+        g.fillStyle = a;
+        g.fillRect(0, 0, 1280, 720);
+        const rng = new math_1.RNG(8909);
+        for (let i = 0; i < 135; i++) {
+            g.fillStyle = 'rgba(215,224,194,' + rng.range(.07, .32) + ')';
+            g.beginPath();
+            g.arc(rng.range(0, 1280), rng.range(0, 270), rng.range(.5, 1.1), 0, Math.PI * 2);
+            g.fill();
+        }
+        g.fillStyle = 'rgba(229,213,158,.025)';
+        g.beginPath();
+        g.arc(1050, 145, 119, 0, Math.PI * 2);
+        g.fill();
+        g.fillStyle = 'rgba(229,213,158,.045)';
+        g.beginPath();
+        g.arc(1050, 145, 84, 0, Math.PI * 2);
+        g.fill();
+        g.fillStyle = '#ddcf9e';
+        g.beginPath();
+        g.arc(1050, 145, 57, 0, Math.PI * 2);
+        g.fill();
+        g.fillStyle = 'rgba(126,143,121,.2)';
+        g.beginPath();
+        g.arc(1036, 129, 8, 0, Math.PI * 2);
+        g.arc(1070, 161, 13, 0, Math.PI * 2);
+        g.fill();
+        // Small grain is baked once, rather than generated each frame.
+        for (let i = 0; i < 4000; i++) {
+            g.fillStyle = i % 2 ? 'rgba(240,231,205,.025)' : 'rgba(0,8,14,.045)';
+            g.fillRect(rng.int(0, 1280), rng.int(0, 720), 1, 1);
+        }
+        return c;
+    }
+    makeMountains(layer) {
+        const c = this.canvas(1920, 720), g = c.getContext('2d'), rng = new math_1.RNG(422 + layer * 77);
+        const colors = ['#385752', '#254947', '#173b3e'];
+        g.fillStyle = colors[layer];
+        g.beginPath();
+        g.moveTo(-100, 720);
+        let x = -100;
+        while (x < 2040) {
+            const base = 450 + layer * 45, peak = rng.range(170 + layer * 90, 370 + layer * 70), w = rng.range(120, 270);
+            g.lineTo(x, base);
+            g.lineTo(x + w * .27, peak + 47);
+            g.lineTo(x + w * .45, peak + 18);
+            g.lineTo(x + w * .57, peak);
+            g.lineTo(x + w * .70, peak + 70);
+            g.lineTo(x + w, base - 25);
+            x += w;
+        }
+        g.lineTo(2020, 720);
+        g.closePath();
+        g.fill();
+        g.globalAlpha = .16;
+        g.strokeStyle = '#b4c4a6';
+        g.lineWidth = 1;
+        for (let i = 0; i < 27; i++) {
+            let px = rng.range(0, 1920), py = rng.range(390 + layer * 50, 630);
+            g.beginPath();
+            g.moveTo(px, py);
+            g.lineTo(px + 35, py - 12);
+            g.lineTo(px + 75, py + 17);
+            g.stroke();
+        }
+        g.globalAlpha = 1;
+        if (layer === 2) {
+            for (let i = 0; i < 14; i++) {
+                const x = rng.range(0, 1920), y = rng.range(470, 620);
+                this.pine(g, x, y, rng.range(.4, .85), '#143238');
+            }
+        }
+        return c;
+    }
+    text(t, x, y, size = 18, color = P.paper, align = 'left', weight = '400', serif = false) { const c = this.ctx; c.font = `${weight} ${size}px ${serif ? SERIF : FONT}`; c.textAlign = align; c.textBaseline = 'middle'; c.fillStyle = color; c.fillText(t, x, y); }
+    spaced(t, x, y, size, color, space = 5) { const c = this.ctx; c.font = `${size}px ${FONT}`; c.textBaseline = 'middle'; c.fillStyle = color; for (const ch of t) {
+        c.fillText(ch, x, y);
+        x += c.measureText(ch).width + space;
+    } }
+    round(x, y, w, h, r, fill, stroke) { const c = this.ctx; c.beginPath(); c.roundRect(x, y, w, h, r); c.fillStyle = fill; c.fill(); if (stroke) {
+        c.strokeStyle = stroke;
+        c.lineWidth = 1;
+        c.stroke();
+    } }
+    line(x1, y1, x2, y2, color, width = 1) { const c = this.ctx; c.strokeStyle = color; c.lineWidth = width; c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); c.stroke(); }
+    diamond(x, y, r, color, outline = false) { const c = this.ctx; c.beginPath(); c.moveTo(x, y - r); c.lineTo(x + r, y); c.lineTo(x, y + r); c.lineTo(x - r, y); c.closePath(); if (outline) {
+        c.strokeStyle = color;
+        c.lineWidth = 1.2;
+        c.stroke();
+    }
+    else {
+        c.fillStyle = color;
+        c.fill();
+    } }
+    button(g, id, label, x, y, w, h, primary = false) { g.ui.push({ id, x, y, w, h }); this.round(x, y, w, h, 8, primary ? '#d6c491' : 'rgba(12,33,40,.85)', primary ? '#f3dfaa' : '#617871'); if (primary) {
+        this.diamond(x + 26, y + h / 2, 4, '#38514e');
+        this.text(label, x + w / 2 + 5, y + h / 2, 21, '#172f34', 'center', '600');
+        this.line(x + 14, y + 6, x + w - 14, y + 6, 'rgba(255,249,217,.32)');
+    }
+    else
+        this.text(label, x + w / 2, y + h / 2, 18, P.paper, 'center'); }
+    iconButton(g, id, label, x, y) { g.ui.push({ id, x: x - 23, y: y - 23, w: 46, h: 46 }); this.round(x - 21, y - 21, 42, 42, 9, 'rgba(11,30,37,.62)', 'rgba(187,205,174,.24)'); this.text(label, x, y - 1, 21, P.paper, 'center'); }
+    background(g) {
+        const c = this.ctx;
+        c.drawImage(this.sky, 0, 0);
+        for (let i = 0; i < 3; i++) {
+            const shift = (g.cameraX * (.10 + i * .09)) % 1920;
+            c.globalAlpha = i === 0 ? .65 : .90;
+            c.drawImage(this.layers[i], -shift, 0);
+            c.drawImage(this.layers[i], 1920 - shift, 0);
+        }
+        c.globalAlpha = 1;
+        for (let i = 0; i < 5; i++) {
+            const y = 340 + i * 72, x = ((g.visualTime * (4 + i * .8) + i * 437) % 1660) - 200;
+            let a = c.createLinearGradient(x - 180, y, x + 330, y);
+            a.addColorStop(0, 'rgba(158,185,161,0)');
+            a.addColorStop(.5, `rgba(158,185,161,${.055 - i * .006})`);
+            a.addColorStop(1, 'rgba(158,185,161,0)');
+            c.fillStyle = a;
+            c.beginPath();
+            c.ellipse(x + 60, y, 430, 12 + i * 5, 0, 0, Math.PI * 2);
+            c.fill();
+        }
+        // Passing birds are decorative, and never consume seeded gameplay randomness.
+        for (let i = 0; i < 4; i++) {
+            const bx = ((i * 94 + g.visualTime * 13) % 1500) - 80, by = 180 + Math.sin(i) * 38;
+            this.line(bx - 5, by + Math.sin(g.visualTime * 3 + i) * 2, bx, by, 'rgba(12,31,36,.55)', 1.3);
+            this.line(bx, by, bx + 5, by + Math.sin(g.visualTime * 3 + i) * 2, 'rgba(12,31,36,.55)', 1.3);
+        }
+    }
+    pine(c, x, y, s, col) { c.save(); c.translate(x, y); c.scale(s, s); c.strokeStyle = col; c.lineWidth = 6; c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(-12, -37, 2, -79); c.stroke(); for (let i = 0; i < 5; i++) {
+        const py = -25 - i * 15, px = (i % 2 ? -7 : 3);
+        c.fillStyle = col;
+        c.beginPath();
+        c.moveTo(px, py - 16);
+        c.lineTo(px + 30 - i * 3, py + 5);
+        c.quadraticCurveTo(px, py + 10, px - 32 + i * 4, py + 1);
+        c.closePath();
+        c.fill();
+    } c.restore(); }
+    rock(p) {
+        if (this.rockCache.has(p.id))
+            return this.rockCache.get(p.id);
+        const w = p.width + 90, h = 390, c = this.canvas(w, h), g = c.getContext('2d'), rng = new math_1.RNG(p.seed), left = 45, right = left + p.width;
+        const grd = g.createLinearGradient(0, 0, 0, h);
+        grd.addColorStop(0, '#435c56');
+        grd.addColorStop(.42, '#253f3f');
+        grd.addColorStop(1, 'rgba(13,37,43,0)');
+        g.fillStyle = grd;
+        g.beginPath();
+        g.moveTo(left - 6, 12);
+        g.lineTo(right + 5, 12);
+        g.lineTo(right - 5, 52);
+        g.lineTo(right + 3, 104);
+        g.lineTo(right - 28, 194);
+        g.lineTo(right - 35, 280);
+        g.lineTo((left + right) / 2 + 5, 382);
+        g.lineTo(left + 31, 246);
+        g.lineTo(left + 7, 180);
+        g.lineTo(left - 4, 75);
+        g.closePath();
+        g.fill();
+        g.fillStyle = 'rgba(14,36,40,.42)';
+        g.beginPath();
+        g.moveTo(right - 24, 24);
+        g.lineTo(right - 48, 155);
+        g.lineTo(right - 31, 224);
+        g.lineTo((left + right) / 2 + 5, 382);
+        g.lineTo(right - 5, 106);
+        g.lineTo(right + 5, 12);
+        g.closePath();
+        g.fill();
+        g.strokeStyle = 'rgba(149,174,145,.18)';
+        g.lineWidth = 1;
+        for (let i = 0; i < 11; i++) {
+            const x = rng.range(left + 9, right - 9), y = rng.range(35, 230);
+            g.beginPath();
+            g.moveTo(x, y);
+            g.lineTo(x - 7, y + 28);
+            g.lineTo(x + 1, y + 50);
+            g.stroke();
+        }
+        g.fillStyle = '#708878';
+        g.beginPath();
+        g.moveTo(left - 11, 12);
+        g.lineTo(left + 8, -1);
+        g.lineTo(right - 11, -1);
+        g.lineTo(right + 11, 11);
+        g.lineTo(right + 3, 22);
+        g.lineTo(left - 6, 22);
+        g.closePath();
+        g.fill();
+        g.strokeStyle = '#b6bea0';
+        g.lineWidth = 2;
+        g.beginPath();
+        g.moveTo(left - 9, 11);
+        g.lineTo(right + 9, 11);
+        g.stroke();
+        g.fillStyle = '#43594b';
+        for (let i = 0; i < 8; i++) {
+            const x = rng.range(left, right);
+            g.fillRect(x, 12, rng.range(6, 15), rng.range(2, 6));
+        }
+        g.strokeStyle = 'rgba(6,25,29,.3)';
+        g.lineWidth = 1;
+        for (let i = 1; i < 4; i++) {
+            g.beginPath();
+            g.moveTo(left + p.width * i / 4, 0);
+            g.lineTo(left + p.width * i / 4 - 7, 11);
+            g.stroke();
+        }
+        if (p.kind === 'safe') {
+            this.pine(g, left + 6, 5, .47, '#233e35');
+        }
+        this.rockCache.set(p.id, c);
+        return c;
+    }
+    drawPlatform(p, g, selected, history = false) {
+        const c = this.ctx, x = p.x - g.cameraX, y = p.y;
+        const shake = p.shake > 0 ? Math.sin(g.visualTime * 80) * p.shake * 9 : 0;
+        if (x < -300 || x > 1510)
+            return;
+        c.save();
+        c.translate(0, shake);
+        c.drawImage(this.rock(p), x - p.width / 2 - 45, y - 10);
+        if (p.enemies.length > 1) { // Each enemy stands on a real small step following the spear's visible line.
+            for (const e of p.enemies) {
+                const sy = e.y + 6;
+                this.round(e.baseX - g.cameraX - 19, sy, 38, Math.max(5, y - sy + 10), 2, '#718774');
+                this.line(e.baseX - g.cameraX - 18, sy, e.baseX - g.cameraX + 19, sy, '#a9b79b', 1.4);
+            }
+            this.line(x - p.width / 2 + 7, y - 2, x + p.width / 2 - 7, y - 2, '#ac9470', 2);
+        }
+        if (!history) {
+            const col = p.kind === 'heal' ? P.jade : p.kind === 'risk' || p.kind === 'boss' ? P.coral : p.kind === 'pierce' ? P.gold : P.muted;
+            if (selected) {
+                c.strokeStyle = col;
+                c.lineWidth = 2;
+                c.globalAlpha = .6;
+                c.beginPath();
+                c.ellipse(x, y + 6, p.width / 2 + 14, 10, 0, 0, Math.PI * 2);
+                c.stroke();
+                c.globalAlpha = 1;
+            }
+            if (p.kind === 'risk' || p.kind === 'boss') {
+                this.line(x + p.width / 2 - 13, y - 6, x + p.width / 2 - 13, y - 70, '#a99a76', 3);
+                c.fillStyle = p.kind === 'boss' ? '#ba5148' : '#976245';
+                c.beginPath();
+                c.moveTo(x + p.width / 2 - 13, y - 70);
+                c.quadraticCurveTo(x + p.width / 2 + 17, y - 76, x + p.width / 2 + 27, y - 59);
+                c.lineTo(x + p.width / 2 - 13, y - 47);
+                c.closePath();
+                c.fill();
+                this.diamond(x + p.width / 2 + 1, y - 61, 4, '#e0c892');
+            }
+            if (p.heal)
+                this.potion(x + p.width / 2 - 28, y - 26, g.visualTime);
+            if (!p.enemies.some(e => e.alive)) {
+                this.anchor(p.anchorX - g.cameraX, p.anchorY, g.visualTime);
+            }
+            const labelY = y + 38;
+            const w = p.kind === 'boss' ? 155 : p.kind === 'pierce' ? 126 : 128;
+            this.round(x - w / 2, labelY - 13, w, 27, 5, selected ? 'rgba(20,48,48,.95)' : 'rgba(12,30,36,.77)', selected ? col : 'rgba(132,159,139,.2)');
+            this.text(p.label, x, labelY, 14, col, 'center', selected ? '600' : '400');
+            const tag = ['近', '高', '远'][p.tier], cx = x - p.width / 2 - 4, cy = y - 103;
+            this.diamond(cx, cy, 13, selected ? col : '#67847b', true);
+            this.text(tag, cx, cy, 11, selected ? P.paper : P.muted, 'center');
+        }
+        c.restore();
+    }
+    potion(x, y, t) { const c = this.ctx; const bob = Math.sin(t * 3) * 3; c.save(); c.translate(x, y + bob); const aura = c.createRadialGradient(0, 0, 3, 0, 0, 31); aura.addColorStop(0, 'rgba(103,216,178,.25)'); aura.addColorStop(1, 'rgba(103,216,178,0)'); c.fillStyle = aura; c.fillRect(-32, -32, 64, 64); c.fillStyle = '#79d7b1'; c.beginPath(); c.moveTo(-5, -16); c.lineTo(5, -16); c.lineTo(5, -8); c.bezierCurveTo(16, -4, 16, 9, 8, 14); c.quadraticCurveTo(0, 18, -8, 14); c.bezierCurveTo(-16, 9, -16, -4, -5, -8); c.closePath(); c.fill(); c.strokeStyle = '#d6efd0'; c.lineWidth = 1.2; c.stroke(); this.round(-7, -20, 14, 6, 2, '#d9c384'); c.fillStyle = '#194c43'; c.fillRect(-2, -4, 4, 14); c.fillRect(-7, 1, 14, 4); c.restore(); }
+    anchor(x, y, t) { const c = this.ctx; this.line(x, y + 46, x, y + 9, '#708b79', 4); this.diamond(x, y, 13, P.jade, true); this.diamond(x, y, 5, '#bce0bc'); c.strokeStyle = 'rgba(121,213,188,.25)'; c.lineWidth = 1; c.beginPath(); c.arc(x, y, 20 + Math.sin(t * 3) * 2, 0, Math.PI * 2); c.stroke(); }
+    actor(x, y, isPlayer, g, e, scale = 1) {
+        const c = this.ctx;
+        c.save();
+        c.translate(x, y);
+        c.scale(scale, scale);
+        const falling = isPlayer && g.state === 'falling', moving = isPlayer && (g.state === 'pulling' || falling), charge = isPlayer && g.state === 'charging', dead = e && !e.alive, melee = !isPlayer && !!e && g.meleePlatform?.id === e.platformId && e.alive;
+        if (dead) {
+            const t = (0, balance_1.clamp)(e.deadAt / .38, 0, 1);
+            c.globalAlpha = 1 - t;
+            c.translate(18 * t, 21 * t);
+            c.rotate(t * 1.35);
+            if (t >= 1) {
+                c.restore();
+                return;
+            }
+        }
+        if (isPlayer && g.invuln > 0)
+            c.globalAlpha = Math.floor(g.visualTime * 16) % 2 ? .55 : 1;
+        if (isPlayer && g.state === 'dead') {
+            c.rotate(Math.min(1, g.timer) * 1.5);
+            c.globalAlpha = Math.max(.15, 1 - g.timer);
+        }
+        if (isPlayer && g.landSquash > 0)
+            c.scale(1 + g.landSquash * .65, 1 - g.landSquash * .7);
+        if (falling)
+            c.rotate(.35 + (0, balance_1.clamp)(g.timer / balance_1.B.fallDuration, 0, 1) * 1.05);
+        else if (moving)
+            c.rotate(.25);
+        if (charge)
+            c.rotate(-g.power * .07);
+        const body = isPlayer ? '#e9dec0' : e?.kind === 'armor' ? '#b7c3b1' : e?.kind === 'runner' ? '#a89cb1' : '#c18472';
+        const cloak = isPlayer ? '#cf6c56' : e?.kind === 'elite' ? '#893d3d' : '#3a4846';
+        // Fabric pennant: its motion is tied to charge/pull rather than a static stick figure.
+        c.fillStyle = cloak;
+        c.beginPath();
+        c.moveTo(-4, -47);
+        c.quadraticCurveTo(-26 - (moving ? 20 : 0), -40 + Math.sin(g.visualTime * 7) * 4, -37 - (moving ? 40 : 0), -26);
+        c.lineTo(-26 - (moving ? 29 : 0), -22 + Math.sin(g.visualTime * 6) * 4);
+        c.quadraticCurveTo(-14, -23, -3, -35);
+        c.closePath();
+        c.fill();
+        c.strokeStyle = isPlayer ? '#253e3e' : '#243436';
+        c.lineWidth = 7;
+        c.lineCap = 'round';
+        c.beginPath();
+        c.moveTo(-6, -21);
+        c.lineTo(moving ? -13 : -10, moving ? -5 : -3);
+        c.lineTo(moving ? -4 : -17, 0);
+        c.moveTo(5, -20);
+        c.lineTo(moving ? 21 : 10, moving ? -8 : -3);
+        c.lineTo(moving ? 28 : 19, 0);
+        c.stroke();
+        c.fillStyle = body;
+        c.beginPath();
+        c.moveTo(-12, -47);
+        c.lineTo(8, -48);
+        c.lineTo(17, -22);
+        c.quadraticCurveTo(-1, -13, -18, -23);
+        c.closePath();
+        c.fill();
+        c.fillStyle = isPlayer ? '#668377' : '#59665d';
+        c.beginPath();
+        c.moveTo(-6, -45);
+        c.lineTo(4, -47);
+        c.lineTo(10, -23);
+        c.lineTo(-5, -23);
+        c.closePath();
+        c.fill();
+        this.line(-14, -26, 13, -26, '#a88456', 4);
+        if (e?.kind === 'armor' || e?.kind === 'elite') {
+            this.round(-13, -45, 26, 21, 5, '#748d87', '#bfbaa0');
+            this.line(-9, -34, 10, -34, '#d8d1b0');
+        }
+        c.fillStyle = e?.hit ? '#fff0c3' : '#dfc69f';
+        c.beginPath();
+        c.arc(-1, -55, 10, 0, Math.PI * 2);
+        c.fill();
+        c.fillStyle = isPlayer ? '#253934' : '#414744';
+        c.beginPath();
+        c.ellipse(-1, -61, 10, 6, 0, Math.PI, Math.PI * 2);
+        c.fill();
+        if (isPlayer) {
+            c.fillStyle = '#d9cba0';
+            c.beginPath();
+            c.moveTo(-23, -60);
+            c.quadraticCurveTo(-10, -64, -2, -79);
+            c.quadraticCurveTo(10, -66, 20, -60);
+            c.closePath();
+            c.fill();
+            this.line(-22, -60, 19, -60, '#f3e4b9', 2);
+            this.line(-9, -58, 7, -58, '#5b6557', 2);
+        }
+        else {
+            this.line(-10, -58, 8, -58, cloak, 3);
+            if (e?.kind === 'elite') {
+                c.fillStyle = P.coral;
+                c.beginPath();
+                c.moveTo(-4, -65);
+                c.lineTo(3, -84);
+                c.lineTo(7, -63);
+                c.fill();
+            }
+            this.line(3, -56, 5, -56, '#202e2b', 2);
+        }
+        c.strokeStyle = body;
+        c.lineWidth = 5;
+        c.beginPath();
+        if (isPlayer) {
+            c.moveTo(6, -44);
+            c.lineTo(charge ? -5 - g.power * 11 : 17, -47);
+            c.lineTo(charge ? 4 - g.power * 11 : 20, -53);
+            c.moveTo(-10, -41);
+            c.lineTo(moving ? 15 : -12, -32);
+        }
+        else if (melee) {
+            const jab = Math.sin(g.visualTime * 31 + e.id) * 5;
+            c.moveTo(-9, -43);
+            c.lineTo(-29 - jab, -34);
+            c.moveTo(6, -43);
+            c.lineTo(-21 - jab, -31);
+        }
+        else {
+            c.moveTo(-9, -43);
+            c.lineTo(-28, -38);
+            c.moveTo(6, -43);
+            c.lineTo(-15, -34);
+        }
+        c.stroke();
+        if (isPlayer && !['throwing', 'pulling', 'falling', 'retracting', 'dead'].includes(g.state)) {
+            const px = charge ? -g.power * 16 : 0;
+            this.line(-20 + px, -53, 51 + px, -57, '#b5915c', 3);
+            this.line(44 + px, -56, 58 + px, -59, '#e3e6cd', 4);
+        }
+        if (!isPlayer && e) {
+            if (melee) {
+                const jab = Math.sin(g.visualTime * 31 + e.id) * 5;
+                this.line(-28 - jab, -35, -49 - jab, -28, '#d7d1b7', 3);
+                c.fillStyle = P.coral;
+                c.beginPath();
+                c.moveTo(-53 - jab, -28);
+                c.lineTo(-44 - jab, -33);
+                c.lineTo(-45 - jab, -24);
+                c.closePath();
+                c.fill();
+            }
+            else if (e.kind === 'shield' && !e.open) {
+                c.fillStyle = '#af8b55';
+                c.beginPath();
+                c.ellipse(-24, -33, 12, 24, 0, 0, Math.PI * 2);
+                c.fill();
+                c.strokeStyle = '#d6c28b';
+                c.lineWidth = 2;
+                c.stroke();
+                this.diamond(-24, -33, 5, '#364d45');
+            }
+            else {
+                const rangedActive = e.id === g.activeShooterId;
+                const draw = rangedActive ? Math.min(8, (1 - e.timer / e.period) * 12) : 0;
+                c.strokeStyle = rangedActive && e.timer < .5 ? P.coral : '#bdab82';
+                c.lineWidth = 2;
+                c.beginPath();
+                c.ellipse(-30, -38, 11, 24, 0, Math.PI * .5, Math.PI * 1.5);
+                c.stroke();
+                this.line(-30, -62, -19 + draw, -38, rangedActive ? '#cfc3a1' : '#867f70');
+                this.line(-19 + draw, -38, -30, -14, rangedActive ? '#cfc3a1' : '#867f70');
+            }
+        }
+        c.restore();
+    }
+    enemy(e, g) {
+        const x = e.x - g.cameraX, y = e.y;
+        this.actor(x, y, false, g, e);
+        if (!e.alive)
+            return;
+        const c = this.ctx, melee = g.meleePlatform?.id === e.platformId, rangedActive = !melee && e.id === g.activeShooterId, ratio = rangedActive ? (0, balance_1.clamp)(1 - e.timer / e.period, 0, 1) : 0, urgent = rangedActive && e.timer < .5;
+        const cy = y - 96;
+        c.fillStyle = 'rgba(10,29,35,.82)';
+        c.beginPath();
+        c.arc(x, cy, 15, 0, Math.PI * 2);
+        c.fill();
+        c.strokeStyle = 'rgba(207,177,145,.22)';
+        c.lineWidth = 3;
+        c.beginPath();
+        c.arc(x, cy, 13, 0, Math.PI * 2);
+        c.stroke();
+        if (melee || rangedActive) {
+            c.strokeStyle = melee ? P.coral : urgent ? P.coral : ratio > .55 ? '#dfad77' : '#9bb29a';
+            c.lineWidth = 3;
+            c.beginPath();
+            c.arc(x, cy, 13, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (melee ? (.55 + .35 * Math.sin(g.visualTime * 15)) : ratio));
+            c.stroke();
+        }
+        const enemyGlyph = e.kind === 'shield' ? (e.open ? '开' : '守') : e.kind === 'armor' ? '甲' : e.kind === 'elite' ? '将' : '弓';
+        this.text(melee ? '刀' : urgent ? '!' : enemyGlyph, x, cy, 12, melee || urgent ? P.coral : rangedActive ? P.paper : P.muted, 'center', '600');
+        if (melee || urgent) {
+            c.strokeStyle = `rgba(240,123,97,${.3 + Math.sin(g.visualTime * 21) * .18})`;
+            c.lineWidth = 1;
+            c.beginPath();
+            c.arc(x, cy, 21, 0, Math.PI * 2);
+            c.stroke();
+        }
+        if (e.hp > 1) {
+            for (let i = 0; i < e.hp; i++)
+                this.diamond(x - 5 + i * 10, y - 77, 3, '#cec39e');
+        }
+        if (g.debug)
+            this.text(melee ? 'MELEE' : rangedActive ? e.timer.toFixed(1) : 'WAIT', x, y - 119, 12, P.paper, 'center');
+    }
+    reticle(g) {
+        if (!g.canAct)
+            return;
+        const p = g.target, e = p.enemies.find(e => e.alive);
+        const x = (e ? e.x : p.anchorX) - g.cameraX, y = e ? e.y - 55 : p.anchorY;
+        const guided = g.step < 3, precise = guided && g.state === 'charging' && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand, hit = guided && g.state === 'charging' && Math.abs(g.power - g.ideal) <= balance_1.B.hitBand;
+        const col = precise ? P.gold : hit ? P.jade : '#c0c7a7', r = precise ? 25 : 29 + Math.sin(g.visualTime * 4) * 2, c = this.ctx;
+        c.strokeStyle = col;
+        c.lineWidth = 1.8;
+        for (let i = 0; i < 4; i++) {
+            const a = Math.PI / 4 + i * Math.PI / 2;
+            c.beginPath();
+            c.arc(x, y, r, a - .19, a + .19);
+            c.stroke();
+        }
+        this.line(x - r - 8, y, x - r - 1, y, col);
+        this.line(x + r + 1, y, x + r + 8, y, col);
+        if (precise) {
+            c.globalAlpha = .5;
+            c.beginPath();
+            c.arc(x, y, r + 7, 0, Math.PI * 2);
+            c.stroke();
+            c.globalAlpha = 1;
+        }
+    }
+    rope(g) {
+        const s = g.shot;
+        if (!s)
+            return;
+        const c = this.ctx;
+        let sx = s.pos.x, sy = s.pos.y;
+        if (g.state === 'retracting') {
+            const t = (0, balance_1.clamp)(g.timer / balance_1.B.spearReturn, 0, 1);
+            sx = (0, balance_1.lerp)(s.pos.x, g.player.x + 17, t);
+            sy = (0, balance_1.lerp)(s.pos.y, g.player.y - 54, t);
+        }
+        const px = g.player.x + 13 - g.cameraX, py = g.player.y - 43, ex = sx - g.cameraX, ey = sy;
+        c.lineCap = 'round';
+        c.strokeStyle = 'rgba(7,23,28,.66)';
+        c.lineWidth = 4.5;
+        c.beginPath();
+        c.moveTo(px, py);
+        c.quadraticCurveTo((px + ex) / 2, (py + ey) / 2 + (g.state === 'pulling' ? 0 : 28), ex, ey);
+        c.stroke();
+        c.strokeStyle = g.stats.combo >= 5 ? '#e4c27e' : '#bbac7e';
+        c.lineWidth = 2;
+        c.beginPath();
+        c.moveTo(px, py);
+        c.quadraticCurveTo((px + ex) / 2, (py + ey) / 2 + (g.state === 'pulling' ? 0 : 28), ex, ey);
+        c.stroke();
+        if (g.state === 'pulling') {
+            c.globalAlpha = .28;
+            this.line(px, py + 3, ex, ey + 3, P.jade, 1);
+            c.globalAlpha = 1;
+        }
+        const angle = Math.atan2(s.vy + balance_1.B.gravity * s.elapsed, s.vx);
+        c.save();
+        c.translate(ex, ey);
+        c.rotate(angle);
+        this.line(-36, 0, 2, 0, '#cab280', 3);
+        c.fillStyle = P.paper;
+        c.beginPath();
+        c.moveTo(11, 0);
+        c.lineTo(-3, -5);
+        c.lineTo(-1, 0);
+        c.lineTo(-3, 5);
+        c.closePath();
+        c.fill();
+        c.restore();
+    }
+    effects(g) {
+        const c = this.ctx;
+        for (const p of g.fx.particles)
+            if (p.life > 0) {
+                const t = (0, balance_1.clamp)(p.life / p.max, 0, 1);
+                c.globalAlpha = t;
+                c.fillStyle = p.color;
+                const x = p.x - g.cameraX;
+                if (p.type === 'ring') {
+                    c.strokeStyle = p.color;
+                    c.lineWidth = 2 * t;
+                    c.beginPath();
+                    c.arc(x, p.y, 8 + (1 - t) * 48, 0, Math.PI * 2);
+                    c.stroke();
+                }
+                else if (p.type === 'spark') {
+                    this.line(x, p.y, x - p.vx * .022, p.y - p.vy * .022, p.color, p.size * t);
+                }
+                else {
+                    c.beginPath();
+                    c.ellipse(x, p.y, p.size * t * 1.7, p.size * t, 0, 0, Math.PI * 2);
+                    c.fill();
+                }
+            }
+        c.globalAlpha = 1;
+        for (const f of g.fx.floats)
+            if (f.life > 0) {
+                c.globalAlpha = Math.min(1, f.life / .22);
+                this.text(f.text, f.x - g.cameraX, f.y, f.size, f.color, 'center', '600');
+            }
+        c.globalAlpha = 1;
+    }
+    hud(g) {
+        const c = this.ctx;
+        const top = c.createLinearGradient(0, 0, 0, 152);
+        top.addColorStop(0, 'rgba(8,23,31,.9)');
+        top.addColorStop(1, 'rgba(8,23,31,0)');
+        c.fillStyle = top;
+        c.fillRect(0, 0, 1280, 152);
+        this.diamond(45, 43, 8, P.jade, true);
+        this.text('气 血', 66, 43, 15, P.muted);
+        this.text(String(g.hp).padStart(3, '0'), 263, 43, 25, g.hp <= balance_1.B.lowHP ? P.coral : P.paper, 'right', '500');
+        this.round(41, 66, 221, 8, 4, '#344843');
+        if (g.hp > 0)
+            this.round(41, 66, 221 * g.hp / balance_1.B.hp, 8, 4, g.hp <= balance_1.B.lowHP ? P.coral : P.jade);
+        this.text(g.stage, 41, 96, 13, '#869e92');
+        if (g.stats.combo > 0) {
+            this.text(String(g.stats.combo).padStart(2, '0'), 41, 145, 35, P.gold, 'left', '600');
+            this.text('连跳', 94, 147, 16, P.paper);
+            this.text('下一跳 +' + (0, ScoreSystem_1.comboPoints)(g.stats.combo + 1), 94, 172, 12, P.gold);
+        }
+        this.text('青 岚 渡', 640, 42, 17, '#aebda5', 'center', '400', true);
+        this.line(562, 43, 597, 43, '#597b71');
+        this.line(683, 43, 718, 43, '#597b71');
+        this.round(920, 12, 184, 86, 12, 'rgba(8,24,31,.82)', 'rgba(242,198,110,.48)');
+        this.text('总 分', 942, 34, 14, P.muted, 'left', '600', true);
+        this.text(String(g.stats.score), 1082, 72, 52, P.gold, 'right', '700');
+        this.text(`${g.stats.distance} 米  /  ${g.stats.kills} 击破`, 1084, 116, 14, P.muted, 'right');
+        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 1145, 44);
+        this.iconButton(g, 'pause', 'Ⅱ', 1210, 44);
+        if (g.bannerTime > 0) {
+            c.globalAlpha = (0, balance_1.clamp)(g.bannerTime / .25, 0, 1);
+            this.text(g.banner, 640, g.step === 0 ? 150 : 151, g.step === 0 ? 30 : 35, P.gold, 'center', '500', true);
+            c.globalAlpha = 1;
+        }
+        if (g.scoreFlashTime > 0) {
+            const t = (0, balance_1.clamp)(g.scoreFlashTime / 1.05, 0, 1), alpha = Math.min(1, g.scoreFlashTime / .18), rise = (1 - t) * 24, size = 58 + 24 * t;
+            c.globalAlpha = alpha;
+            this.text('+' + g.scoreFlashJump, 640, 215 - rise, size, P.paper, 'center', '700');
+            this.text(g.scoreFlashCombo >= 6 ? '连跳封顶 32' : '连跳 ' + g.scoreFlashCombo, 640, 267 - rise, 20, P.gold, 'center', '600');
+            if (g.scoreFlashSkip > 0)
+                this.text('越台  +32', 640, 313 - rise, 42, P.gold, 'center', '700');
+            c.globalAlpha = 1;
+        }
+        const bottom = c.createLinearGradient(0, 572, 0, 720);
+        bottom.addColorStop(0, 'rgba(8,25,33,0)');
+        bottom.addColorStop(.5, 'rgba(8,25,33,.70)');
+        bottom.addColorStop(1, 'rgba(8,25,33,.94)');
+        c.fillStyle = bottom;
+        c.fillRect(0, 572, 1280, 148);
+        const charging = g.state === 'charging', can = g.canAct, guided = g.step < 3;
+        if ((charging || can) && guided) {
+            const x = 430, y = 655, w = 420;
+            this.round(x - 26, 608, w + 52, 82, 10, 'rgba(11,30,37,.55)', 'rgba(149,177,151,.18)');
+            const col = g.target.kind === 'heal' ? P.jade : g.target.kind === 'risk' ? P.coral : P.paper;
+            this.text(charging ? '瞄准 · ' + g.target.label : '按住蓄力', x, 629, 16, charging ? col : P.paper);
+            this.text(charging ? (Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? '精准！松手' : Math.abs(g.power - g.ideal) <= balance_1.B.hitBand ? '可命中 · 松手' : '对齐亮区') : '轻移选路  ·  松手投枪', x + w, 629, 14, charging && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? P.gold : P.muted, 'right');
+            this.round(x, y, w, 10, 5, '#314643');
+            const hit = balance_1.B.hitBand + balance_1.B.tutorialHitBonus, sweet = g.ideal;
+            this.round(x + Math.max(0, sweet - hit) * w, y, Math.min(1, sweet + hit) * w - Math.max(0, sweet - hit) * w, 10, 3, '#537f6b');
+            this.round(x + (sweet - balance_1.B.perfectBand) * w, y - 3, balance_1.B.perfectBand * 2 * w, 16, 3, '#ccae68');
+            this.line(x + sweet * w, y - 6, x + sweet * w, y + 16, '#f4e2a7', 2);
+            if (charging) {
+                this.round(x, y + 16, Math.max(1, g.power * w), 2, 1, '#728e77');
+                const xx = x + g.power * w;
+                c.fillStyle = '#f7ecd1';
+                c.beginPath();
+                c.moveTo(xx, y - 2);
+                c.lineTo(xx - 6, y - 12);
+                c.lineTo(xx + 6, y - 12);
+                c.closePath();
+                c.fill();
+                this.line(xx, y + 1, xx, y + 10, '#fff6d8', 2);
+            }
+            else {
+                const pulse = .4 + .25 * Math.sin(g.visualTime * 3);
+                c.globalAlpha = pulse;
+                this.diamond(x - 46, y + 2, 7, P.paper, true);
+                c.globalAlpha = 1;
+            }
+        }
+        else if (g.state === 'pulling') {
+            this.text('借 势 飞 渡', 640, 656, 20, P.jade, 'center', '400', true);
+        }
+        else if (g.state === 'throwing') {
+            this.text('一 矛 破 风', 640, 656, 20, P.paper, 'center', '400', true);
+        }
+        else if (g.state === 'falling') {
+            this.text('落 空 · 坠 崖', 640, 656, 20, P.coral, 'center', '500', true);
+        }
+        else if (g.state === 'retracting') {
+            this.text('收枪 · 再来一矛', 640, 656, 18, P.muted, 'center');
+        }
+        if (g.noticeTime > 0)
+            this.text(g.notice, 640, 702, 15, P.paper, 'center');
+        else if (g.step < 3) {
+            const tips = ['第1跳：看蓄力条，松手扎中单人台。', '第2跳：多人台尽量一矛穿透清场。', '第3跳：扎中灵药台，落地自动回血。'];
+            this.text(tips[g.step], 640, 702, 13, '#829b8e', 'center');
+        }
+        // Tutorial text fully disappears after the third successful landing.
+        if (g.debug) {
+            this.round(15, 206, 274, 152, 6, 'rgba(5,18,25,.84)');
+            this.text('DEBUG  ·  ' + Math.round(g.fps) + ' FPS', 28, 226, 13, P.jade);
+            this.text('SEED ' + g.seed + '  ·  Lv ' + g.level.toFixed(2), 28, 249, 12, P.paper);
+            this.text(g.generator.pattern + '  #' + g.step, 28, 271, 12, P.paper);
+            this.text('HP ' + g.hp + '  q ' + g.power.toFixed(3) + ' / ' + g.ideal.toFixed(3), 28, 293, 12, P.paper);
+            this.text('R重开  H扣血  J回血  K进阶  P暂停', 28, 319, 11, P.muted);
+            this.text('状态 ' + g.state, 28, 341, 11, P.muted);
+        }
+    }
+    menu(g) {
+        const c = this.ctx;
+        this.background(g);
+        const p = { id: -1, x: 1030, y: 533, width: 255, kind: 'safe', enemies: [], heal: 0, value: 1, label: '', tier: 0, visited: true, shake: 0, seed: 486, anchorX: 1040, anchorY: 475 };
+        const savedCam = g.cameraX;
+        g.cameraX = 0;
+        this.drawPlatform(p, g, false, true);
+        this.pine(c, 1107, 526, 1.13, '#153d38');
+        this.actor(987, 519, true, g, undefined, 1.7);
+        this.line(1013, 432, 1190, 344, '#caba86', 2);
+        this.anchor(1190, 344, g.visualTime);
+        this.drawPlatform({ ...p, id: -2, x: 1190, y: 391, width: 108, seed: 421 }, g, false, true);
+        g.cameraX = savedCam;
+        const shade = c.createLinearGradient(0, 0, 990, 0);
+        shade.addColorStop(0, 'rgba(8,25,34,.96)');
+        shade.addColorStop(.61, 'rgba(8,25,34,.83)');
+        shade.addColorStop(1, 'rgba(8,25,34,0)');
+        c.fillStyle = shade;
+        c.fillRect(0, 0, 1100, 720);
+        this.line(81, 113, 127, 113, P.gold, 1.5);
+        this.spaced('单指绳枪 · 无尽挑战', 145, 113, 14, '#bbbc9d', 2);
+        this.text('一矛到底', 77, 225, 92, '#eee1bb', 'left', '600', true);
+        this.text('青 岚 渡', 83, 309, 29, '#a9c7b1', 'left', '400', true);
+        this.line(220, 309, 389, 309, '#688e7e');
+        this.text('把每一次命中，变成下一次飞跃。', 84, 375, 22, '#b8c7b0');
+        this.text('按住蓄力   ·   轻移选路   ·   松手飞渡', 85, 419, 16, '#8fa99a');
+        this.button(g, 'start', '入山 · 开始挑战', 82, 468, 330, 66, true);
+        this.button(g, 'help', '怎么玩', 432, 468, 136, 66);
+        if (g.storage.data.score > 0) {
+            this.text('最佳  ' + g.storage.data.distance + ' 米   /   ' + g.storage.data.score + ' 分', 84, 566, 16, P.gold);
+        }
+        else
+            this.text('险路争先，悬崖取药，一矛穿阵。', 84, 566, 16, '#9fb39d');
+        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 1040, 648);
+        this.iconButton(g, 'vibration', g.storage.data.vibration ? '震' : '静', 1097, 648);
+        this.iconButton(g, 'motion', g.storage.data.motion ? '动' : '稳', 1154, 648);
+        this.iconButton(g, 'fullscreen', '⛶', 1211, 648);
+        this.text('原创程序美术 / 程序音效  ·  v1.3', 84, 651, 12, '#667f78');
+        this.text('ONE SPEAR. ONE MORE.', 84, 677, 11, '#536f69');
+    }
+    pausePanel(g) {
+        const c = this.ctx;
+        c.fillStyle = 'rgba(5,18,25,.78)';
+        c.fillRect(0, 0, 1280, 720);
+        this.round(406, 153, 468, 409, 15, '#112d35', '#536f66');
+        this.text(g.pauseReason || '山风暂歇', 640, 209, 29, P.paper, 'center', '400', true);
+        this.text('当前进度不会丢失', 640, 251, 16, P.muted, 'center');
+        this.button(g, 'resume', '继续飞渡', 458, 291, 364, 57, true);
+        this.button(g, 'help', '操作说明', 458, 363, 173, 47);
+        this.button(g, 'restart', '重新挑战', 649, 363, 173, 47);
+        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 518, 466);
+        this.iconButton(g, 'vibration', g.storage.data.vibration ? '震' : '静', 599, 466);
+        this.iconButton(g, 'motion', g.storage.data.motion ? '动' : '稳', 680, 466);
+        this.iconButton(g, 'menu', '⌂', 761, 466);
+        this.text('声音          震动          动效          主菜单', 640, 510, 13, P.muted, 'center');
+    }
+    helpPanel(g) {
+        const c = this.ctx;
+        c.fillStyle = 'rgba(5,18,25,.88)';
+        c.fillRect(0, 0, 1280, 720);
+        this.round(242, 98, 796, 524, 16, '#102c34', '#688a78');
+        this.text('只用一根手指', 640, 156, 31, P.paper, 'center', '500', true);
+        const items = [['01', '按住', '前三跳显示力度条教学；三跳后彻底收起，凭手感蓄力。'], ['02', '轻移', '向上 / 向下轻拖，切换高低路线；不拖也能玩。'], ['03', '松手', '蓄力越久有效飞距越远；扎中借绳飞渡，投空则坠崖。']];
+        items.forEach((a, i) => { const y = 223 + i * 79; this.diamond(306, y, 22, P.gold, true); this.text(a[0], 306, y, 14, P.gold, 'center'); this.text(a[1], 351, y - 11, 21, P.paper, 'left', '600'); this.text(a[2], 351, y + 20, 16, P.muted); });
+        this.line(292, 433, 988, 433, '#35594f');
+        this.text('成功飞渡：1 → 2 → 4 → 8 → 16 → 32；敌人先出手，连跳重新从 1 开始。', 640, 458, 15, P.gold, 'center');
+        this.text('越过最近台直达第二台：额外 +32。多人台没清完，落地会被残敌连刺。', 640, 491, 15, P.muted, 'center');
+        this.button(g, 'closehelp', '明白了', 499, 543, 282, 52, true);
+    }
+    results(g) {
+        const c = this.ctx;
+        c.fillStyle = 'rgba(5,18,25,.82)';
+        c.fillRect(0, 0, 1280, 720);
+        this.round(317, 74, 646, 577, 16, '#102b33', '#597669');
+        this.text(g.newRecord ? '再登一峰 · 新纪录' : '此程已尽，下次更远', 640, 128, 32, P.paper, 'center', '500', true);
+        this.text(g.deathReason || '气血耗尽', 640, 169, 15, P.coral, 'center');
+        this.text(String(g.stats.score), 640, 229, 58, P.gold, 'center', '500');
+        this.text('本 局 得 分', 640, 273, 13, P.muted, 'center');
+        this.line(369, 302, 911, 302, '#35544c');
+        const vals = [[g.stats.distance + ' 米', '飞渡距离'], [String(g.stats.kills), '击破敌人'], [String(g.stats.maxCombo), '最高连跳'], [String(g.stats.skips), '越台奖励']];
+        vals.forEach((a, i) => { const x = 422 + i * 145; this.text(a[0], x, 341, 28, P.paper, 'center', '500'); this.text(a[1], x, 378, 13, P.muted, 'center'); });
+        this.text(`精准爆头 ${g.stats.perfect} 次  ·  一矛多杀 ${g.stats.double} 次  ·  历史最佳 ${g.storage.data.distance} 米`, 640, 422, 14, P.muted, 'center');
+        this.button(g, 'restart', '再来一矛', 367, 460, 274, 60, true);
+        this.button(g, 'same', '同 Seed 再战', 661, 460, 252, 60);
+        if (!g.reviveUsed)
+            this.button(g, 'revive', g.adPending ? '正在处理…' : '演示续命 +36 HP（无广告）', 367, 536, 546, 47);
+        else
+            this.text('本局续命已用完 · 下一局见', 640, 563, 17, P.muted, 'center');
+        this.text('种子 ' + g.seed + '  /  不用刷新网页', 640, 615, 12, '#729185', 'center');
+        this.iconButton(g, 'menu', '⌂', 916, 123);
+    }
+    render(g) {
+        const c = this.ctx;
+        c.save();
+        c.setTransform(c.canvas.width / 1280, 0, 0, c.canvas.height / 720, 0, 0);
+        c.clearRect(0, 0, 1280, 720);
+        c.lineCap = 'round';
+        c.lineJoin = 'round';
+        g.ui = [];
+        if (g.state === 'menu')
+            this.menu(g);
+        else {
+            this.background(g);
+            c.save();
+            if (g.storage.data.motion && g.shake > 0)
+                c.translate(Math.sin(g.visualTime * 173) * g.shake, Math.cos(g.visualTime * 157) * g.shake * .45);
+            for (const p of g.history)
+                this.drawPlatform(p, g, false, true);
+            for (const p of g.platforms)
+                this.drawPlatform(p, g, p.id === g.target.id);
+            this.reticle(g);
+            if (g.meleePlatform)
+                for (const e of g.meleePlatform.enemies)
+                    this.enemy(e, g);
+            for (const p of g.platforms)
+                for (const e of p.enemies)
+                    this.enemy(e, g);
+            for (const a of g.arrows) {
+                const x = a.x - g.cameraX, angle = Math.atan2(a.toY - a.fromY, a.toX - a.fromX);
+                c.save();
+                c.translate(x, a.y);
+                c.rotate(angle);
+                this.line(-20, 0, 4, 0, '#ed9d7b', 2);
+                this.line(0, -3, 5, 0, '#edc89c', 2);
+                this.line(0, 3, 5, 0, '#edc89c', 2);
+                c.restore();
+            }
+            this.rope(g);
+            this.actor(g.player.x - g.cameraX, g.player.y, true, g);
+            this.effects(g);
+            c.restore();
+            if (g.flash > 0) {
+                const alpha = g.flash * .46;
+                c.strokeStyle = `rgba(213,70,50,${alpha})`;
+                c.lineWidth = 20;
+                c.strokeRect(0, 0, 1280, 720);
+            }
+            this.hud(g);
+            if (g.state === 'result') {
+                g.ui = [];
+                this.results(g);
+            }
+            if (g.paused) {
+                g.ui = [];
+                this.pausePanel(g);
+            }
+        }
+        if (g.help) {
+            g.ui = [];
+            this.helpPanel(g);
+        }
+        // Old route art never grows unbounded in an infinite run.
+        if (this.rockCache.size > 16) {
+            const ids = new Set([...g.history, ...g.platforms].map(p => p.id));
+            for (const id of this.rockCache.keys())
+                if (!ids.has(id))
+                    this.rockCache.delete(id);
+        }
+        c.restore();
+    }
+}
+exports.Renderer = Renderer;
+
+},
+"systems/AdAdapter.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MockAdAdapter = void 0;
+/** Explicit mock. A real adapter must resolve completed only on the provider's earned-reward callback. */
+class MockAdAdapter {
+    constructor() {
+        this.label = '演示续命（无真实广告）';
+    }
+    async showRewarded(_placement) { return { completed: true, mocked: true }; }
+}
+exports.MockAdAdapter = MockAdAdapter;
+
+},
+"systems/AudioSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AudioSystem = void 0;
+/** Original synthesized sound only. No samples or network requests. */
+class AudioSystem {
+    constructor() {
+        this.ctx = null;
+        this.master = null;
+        this.enabled = true;
+        this.chargeOsc = null;
+        this.chargeGain = null;
+    }
+    unlock() { if (!this.ctx) {
+        try {
+            const C = window.AudioContext || window.webkitAudioContext;
+            this.ctx = new C();
+            this.master = this.ctx.createGain();
+            this.master.gain.value = .22;
+            this.master.connect(this.ctx.destination);
+        }
+        catch {
+            return;
+        }
+    } if (this.ctx?.state === 'suspended')
+        void this.ctx.resume().catch(() => { }); }
+    tone(freq, duration, type = 'sine', volume = .2, delay = 0, end) {
+        if (!this.enabled || !this.ctx || !this.master)
+            return;
+        const t = this.ctx.currentTime + delay, o = this.ctx.createOscillator(), g = this.ctx.createGain();
+        o.type = type;
+        o.frequency.setValueAtTime(freq, t);
+        if (end)
+            o.frequency.exponentialRampToValueAtTime(Math.max(20, end), t + duration);
+        g.gain.setValueAtTime(0.001, t);
+        g.gain.exponentialRampToValueAtTime(volume, t + .008);
+        g.gain.exponentialRampToValueAtTime(.001, t + duration);
+        o.connect(g);
+        g.connect(this.master);
+        o.start(t);
+        o.stop(t + duration + .01);
+        o.onended = () => { o.disconnect(); g.disconnect(); };
+    }
+    noise(duration, volume = .2) { if (!this.enabled || !this.ctx || !this.master)
+        return; const n = Math.ceil(this.ctx.sampleRate * duration), b = this.ctx.createBuffer(1, n, this.ctx.sampleRate), a = b.getChannelData(0); for (let i = 0; i < n; i++)
+        a[i] = (Math.random() * 2 - 1) * (1 - i / n); const s = this.ctx.createBufferSource(), f = this.ctx.createBiquadFilter(), g = this.ctx.createGain(); f.type = 'lowpass'; f.frequency.value = 2400; g.gain.value = volume; s.buffer = b; s.connect(f); f.connect(g); g.connect(this.master); s.start(); s.onended = () => { s.disconnect(); f.disconnect(); g.disconnect(); }; }
+    charge(p) { if (!this.enabled || !this.ctx || !this.master)
+        return; if (!this.chargeOsc) {
+        this.chargeOsc = this.ctx.createOscillator();
+        this.chargeGain = this.ctx.createGain();
+        this.chargeOsc.type = 'sine';
+        this.chargeOsc.connect(this.chargeGain);
+        this.chargeGain.connect(this.master);
+        this.chargeOsc.start();
+    } this.chargeOsc.frequency.setTargetAtTime(100 + p * 230, this.ctx.currentTime, .04); this.chargeGain.gain.setTargetAtTime(.025 + p * .045, this.ctx.currentTime, .04); }
+    stopCharge() { if (this.chargeOsc) {
+        try {
+            this.chargeOsc.stop();
+            this.chargeOsc.disconnect();
+            this.chargeGain?.disconnect();
+        }
+        catch { }
+        this.chargeOsc = null;
+        this.chargeGain = null;
+    } }
+    play(k, combo = 0) {
+        if (k !== 'charge')
+            this.stopCharge();
+        switch (k) {
+            case 'throw':
+                this.noise(.12, .27);
+                this.tone(540, .12, 'triangle', .15, 0, 110);
+                break;
+            case 'fly':
+                this.tone(290, .16, 'sine', .06, 0, 90);
+                break;
+            case 'hit':
+                this.tone(150, .10, 'triangle', .5, 0, 45);
+                this.noise(.06, .23);
+                break;
+            case 'perfect':
+                this.noise(.095, .26);
+                this.tone(280, .13, 'triangle', .3, 0, 80);
+                this.tone(830, .25, 'sine', .26, .03);
+                this.tone(1245, .19, 'sine', .14, .08);
+                break;
+            case 'multi':
+                this.play('perfect');
+                this.tone(990, .25, 'triangle', .19, .11);
+                this.tone(1485, .3, 'sine', .23, .21);
+                break;
+            case 'hurt':
+                this.noise(.13, .3);
+                this.tone(110, .2, 'sawtooth', .2, 0, 45);
+                break;
+            case 'heal':
+                [523, 659, 784, 1046].forEach((f, i) => this.tone(f, .25, 'sine', .17, i * .065));
+                break;
+            case 'land':
+                this.noise(.09, .16);
+                this.tone(80, .1, 'sine', .27, 0, 40);
+                break;
+            case 'over':
+                [220, 196, 147, 110].forEach((f, i) => this.tone(f, .35, 'triangle', .15, i * .1));
+                break;
+            case 'combo':
+                this.tone(660 + Math.min(combo, 12) * 25, .21, 'sine', .18);
+                this.tone(990, .18, 'sine', .1, .08);
+                break;
+            case 'warn':
+                this.tone(660, .06, 'triangle', .11);
+                break;
+            case 'block':
+                this.tone(1300, .12, 'square', .08, 0, 600);
+                break;
+            case 'miss':
+                this.tone(190, .17, 'sine', .10, 0, 75);
+                break;
+            case 'select':
+                this.tone(470, .045, 'sine', .08);
+                break;
+        }
+    }
+    suspend() { this.stopCharge(); if (this.ctx?.state === 'running')
+        void this.ctx.suspend().catch(() => { }); }
+    destroy() { this.stopCharge(); void this.ctx?.close().catch(() => { }); }
+}
+exports.AudioSystem = AudioSystem;
+
+},
+"systems/CombatSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.hitEnemy = hitEnemy;
+const balance_1 = require("../config/balance");
+const math_1 = require("../utils/math");
+function hitEnemy(s, e) {
+    if (!e.alive || s.hits.includes(e.id) || s.quality === 'miss')
+        return null;
+    const head = (0, math_1.segmentCircle)(s.prev, s.pos, { x: e.x, y: e.y - 55 }, balance_1.B.headRadius + balance_1.B.magnet);
+    const body = (0, math_1.segmentCircle)(s.prev, s.pos, { x: e.x, y: e.y - 29 }, balance_1.B.bodyRadius + 6);
+    if (!head && !body)
+        return null;
+    s.hits.push(e.id);
+    if (e.kind === 'shield' && !e.open) {
+        s.blocked = true;
+        e.hit = 0.2;
+        return { enemy: e, head: false, kill: false, blocked: true };
+    }
+    const precise = s.quality === 'perfect' && head;
+    const damage = precise ? 2 : 1;
+    e.hp -= damage;
+    e.hit = 0.2;
+    if (e.hp <= 0) {
+        e.alive = false;
+        e.deadAt = 0.001;
+        s.kills++;
+        if (precise)
+            s.heads++;
+    }
+    return { enemy: e, head: precise, kill: e.hp <= 0, blocked: false };
+}
+
+},
+"systems/DifficultySystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.difficulty = difficulty;
+exports.stageName = stageName;
+exports.readableWindow = readableWindow;
+const balance_1 = require("../config/balance");
+function difficulty(elapsed, step) { return (0, balance_1.clamp)(Math.max(elapsed / 110, step / 52), 0, 6); }
+function stageName(elapsed) { return elapsed < 30 ? '初入青岚' : elapsed < 120 ? '借风过涧' : elapsed < 240 ? '箭雨连峰' : elapsed < 420 ? '破阵登云' : '云海无尽'; }
+function readableWindow(base, level) { return Math.max(balance_1.B.minimumDecision, base - level * 0.085); }
+
+},
+"systems/FXSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FXSystem = void 0;
+const balance_1 = require("../config/balance");
+class FXSystem {
+    constructor() {
+        this.particles = Array.from({ length: balance_1.B.maxParticles }, () => ({ x: 0, y: 0, vx: 0, vy: 0, life: 0, max: 1, size: 1, color: '#fff', type: 'spark' }));
+        this.floats = Array.from({ length: balance_1.B.maxFloats }, () => ({ x: 0, y: 0, text: '', color: '#fff', size: 20, life: 0, max: 1 }));
+    }
+    burst(x, y, color, n = 16, type = 'spark') { for (let i = 0; i < n; i++) {
+        const p = this.particles.find(p => p.life <= 0);
+        if (!p)
+            break;
+        const a = Math.random() * Math.PI * 2, v = 35 + Math.random() * 220;
+        p.x = x;
+        p.y = y;
+        p.vx = Math.cos(a) * v;
+        p.vy = Math.sin(a) * v - 30;
+        p.life = .30 + Math.random() * .36;
+        p.max = p.life;
+        p.size = 2 + Math.random() * 3;
+        p.color = color;
+        p.type = type;
+    } }
+    ring(x, y, color) { const p = this.particles.find(p => p.life <= 0); if (!p)
+        return; Object.assign(p, { x, y, vx: 0, vy: 0, life: .35, max: .35, size: 8, color, type: 'ring' }); }
+    text(x, y, text, color, size = 25, life = .85) { const f = this.floats.find(f => f.life <= 0) || this.floats[0]; Object.assign(f, { x, y, text, color, size, life, max: life }); }
+    update(dt) { for (const p of this.particles)
+        if (p.life > 0) {
+            p.life -= dt;
+            p.x += p.vx * dt;
+            p.y += p.vy * dt;
+            if (p.type !== 'ring')
+                p.vy += (p.type === 'dust' ? 40 : 160) * dt;
+        } for (const f of this.floats)
+        if (f.life > 0) {
+            f.life -= dt;
+            f.y -= 25 * dt;
+        } }
+    reset() { for (const p of this.particles)
+        p.life = 0; for (const f of this.floats)
+        f.life = 0; }
+}
+exports.FXSystem = FXSystem;
+
+},
+"systems/HapticSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HapticSystem = void 0;
+class HapticSystem {
+    constructor() {
+        this.enabled = true;
+    }
+    pulse(kind) {
+        if (!this.enabled || typeof navigator.vibrate !== 'function')
+            return;
+        const p = { charge: 7, full: 12, throw: 12, hit: 15, perfect: [15, 18, 22], hurt: [28, 20, 25], land: 9 };
+        try {
+            navigator.vibrate(p[kind]);
+        }
+        catch { /* Optional hardware capability. */ }
+    }
+}
+exports.HapticSystem = HapticSystem;
+
+},
+"systems/ScoreSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.emptyStats = emptyStats;
+exports.comboPoints = comboPoints;
+exports.awardJump = awardJump;
+exports.recordKill = recordKill;
+const balance_1 = require("../config/balance");
+function emptyStats() {
+    return { distance: 0, kills: 0, perfect: 0, combo: 0, maxCombo: 0, score: 0, shots: 0, misses: 0, double: 0, damage: 0, healed: 0, dodges: 0, skips: 0 };
+}
+/** Current jump value for a combo count: 1, 2, 4, 8, 16, 32, then capped at 32. */
+function comboPoints(combo) {
+    if (combo <= 0)
+        return 1;
+    return Math.min(balance_1.B.comboScoreCap, 2 ** Math.max(0, combo - 1));
+}
+/** A successful departure is the only normal way to earn score. */
+function awardJump(stats, skippedFirst = false) {
+    stats.combo += 1;
+    stats.maxCombo = Math.max(stats.maxCombo, stats.combo);
+    const jump = comboPoints(stats.combo);
+    const skip = skippedFirst ? balance_1.B.skipPlatformBonus : 0;
+    if (skippedFirst)
+        stats.skips += 1;
+    const total = jump + skip;
+    stats.score += total;
+    return { jump, skip, total, combo: stats.combo };
+}
+/** Combat remains tactically important, but kills/headshots no longer inflate score. */
+function recordKill(stats, head) {
+    stats.kills += 1;
+    if (head)
+        stats.perfect += 1;
+}
+
+},
+"systems/StorageSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StorageSystem = void 0;
+const defaults = { distance: 0, kills: 0, combo: 0, score: 0, sound: true, vibration: true, motion: true, runs: 0, tutorial: false };
+const KEY = 'one-spear-v2';
+class StorageSystem {
+    constructor() {
+        this.available = true;
+        this.data = { ...defaults };
+        try {
+            const current = localStorage.getItem(KEY);
+            const raw = JSON.parse(current || '{}');
+            if (current) {
+                for (const k of Object.keys(defaults))
+                    if (typeof raw[k] === typeof defaults[k] && (typeof raw[k] !== 'number' || Number.isFinite(raw[k]) && raw[k] >= 0))
+                        this.data[k] = raw[k];
+            }
+            else {
+                const old = JSON.parse(localStorage.getItem('one-spear-v1') || '{}');
+                for (const k of ['sound', 'vibration', 'motion'])
+                    if (typeof old[k] === 'boolean')
+                        this.data[k] = old[k];
+            }
+        }
+        catch {
+            this.available = false;
+        }
+    }
+    save() { try {
+        localStorage.setItem(KEY, JSON.stringify(this.data));
+    }
+    catch {
+        this.available = false;
+    } }
+    finish(s) { this.data.distance = Math.max(this.data.distance, s.distance); this.data.kills = Math.max(this.data.kills, s.kills); this.data.combo = Math.max(this.data.combo, s.maxCombo); this.data.score = Math.max(this.data.score, s.score); this.data.runs++; this.data.tutorial = true; this.save(); }
+}
+exports.StorageSystem = StorageSystem;
+
+},
+"systems/TargetingSystem.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rangeForPower = rangeForPower;
+exports.idealPower = idealPower;
+exports.powerAt = powerAt;
+exports.makeShot = makeShot;
+exports.shotPoint = shotPoint;
+exports.alignPierce = alignPierce;
+const balance_1 = require("../config/balance");
+function rangeForPower(power) {
+    return Math.max(0, ((0, balance_1.clamp)(power, 0, 1) - balance_1.B.chargePowerOffset) * balance_1.B.chargeRangeScale);
+}
+function idealPower(fromX, p) {
+    return (0, balance_1.clamp)(balance_1.B.chargePowerOffset + (p.x - fromX) / balance_1.B.chargeRangeScale, balance_1.B.powerMin, 1);
+}
+function powerAt(seconds) {
+    // One stable mapping for the whole run: hold time -> power -> horizontal reach. No post-full bounce.
+    return (0, balance_1.clamp)(seconds / balance_1.B.chargeSeconds, 0, 1);
+}
+function makeShot(from, p, power, elapsed, tutorial) {
+    const live = p.enemies.filter(e => e.alive);
+    const target = live[live.length - 1];
+    const ideal = idealPower(from.x, p), err = power - ideal;
+    const tolerance = balance_1.B.hitBand + (tutorial ? balance_1.B.tutorialHitBonus : 0);
+    const perfect = Math.abs(err) <= balance_1.B.perfectBand;
+    let quality = Math.abs(err) > tolerance ? 'miss' : target ? (perfect ? 'perfect' : 'body') : 'anchor';
+    const intendedRange = rangeForPower(power);
+    const flightDx = quality === 'miss' ? intendedRange : Math.max(0, p.x - from.x);
+    const duration = (0, balance_1.clamp)(0.24 + flightDx / 3150, balance_1.B.flightMin, balance_1.B.flightMax);
+    let endX = target ? target.x + 17 : p.anchorX;
+    let endY = target ? target.y - 55 : p.anchorY;
+    if (target?.kind === 'runner')
+        endX = target.baseX + Math.sin((elapsed + duration) * 2.1 + target.phase) * 23 + 17;
+    if (quality === 'body')
+        endY += 25;
+    if (quality === 'miss') {
+        // A miss still obeys the same hand-feel rule: twice the effective charge reach means twice the horizontal spear reach.
+        endX = from.x + intendedRange;
+        endY -= err * balance_1.B.powerErrorY;
+    }
+    const vx = (endX - from.x) / duration, vy = (endY - from.y - 0.5 * balance_1.B.gravity * duration * duration) / duration;
+    return { from: { ...from }, pos: { ...from }, prev: { ...from }, vx, vy, elapsed: 0, duration, end: { x: endX, y: endY }, platformId: p.id, power, quality, hits: [], kills: 0, heads: 0, anchored: false, blocked: false, aimX: endX };
+}
+function shotPoint(s, t) { return { x: s.from.x + s.vx * t, y: s.from.y + s.vy * t + 0.5 * balance_1.B.gravity * t * t }; }
+function alignPierce(p, from) {
+    if (p.enemies.length < 2)
+        return;
+    const s = makeShot(from, p, idealPower(from.x, p), 0, false);
+    for (const e of p.enemies) {
+        const t = (e.x - from.x) / s.vx;
+        e.y = shotPoint(s, t).y + 55;
+    }
+}
+
+},
+"systems/WorldGenerator.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WorldGenerator = exports.PATTERNS = void 0;
+exports.mergeVisiblePlatforms = mergeVisiblePlatforms;
+const balance_1 = require("../config/balance");
+const math_1 = require("../utils/math");
+const DifficultySystem_1 = require("./DifficultySystem");
+exports.PATTERNS = [
+    { id: 'first', name: '起手双峰', min: 0, kinds: ['normal', 'heal'], foes: [['archer'], ['archer']] },
+    { id: 'fork', name: '近稳远利', min: 0, kinds: ['normal', 'risk'], foes: [['archer'], ['archer']] },
+    { id: 'breath', name: '风中歇脚', min: 0, kinds: ['safe', 'normal'], foes: [[], ['archer']] },
+    { id: 'medicine', name: '远崖灵药', min: 0, kinds: ['normal', 'heal'], foes: [['archer'], ['archer']] },
+    { id: 'choices', name: '三岔青岚', min: 24, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['archer'], ['archer']] },
+    { id: 'pierce', name: '一线双弓', min: 40, kinds: ['normal', 'pierce', 'heal'], foes: [['archer'], ['archer', 'archer'], ['archer']] },
+    { id: 'fast', name: '疾箭争先', min: 70, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['quick'], ['archer']] },
+    { id: 'run', name: '流影游弓', min: 95, kinds: ['normal', 'risk', 'safe'], foes: [['archer'], ['runner'], []] },
+    { id: 'elite', name: '逐风夺药', min: 115, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['elite'], ['quick']] },
+    { id: 'doubleHeal', name: '穿阵取药', min: 125, kinds: ['safe', 'pierce', 'heal'], foes: [[], ['archer', 'archer'], ['runner']] },
+    { id: 'rush', name: '先手还是贪心', min: 150, kinds: ['normal', 'risk', 'pierce'], foes: [['quick'], ['runner'], ['archer', 'archer']] },
+    { id: 'rest', name: '悬泉喘息', min: 175, kinds: ['safe', 'heal', 'risk'], foes: [[], ['quick'], ['elite']] },
+    { id: 'armor', name: '破甲登高', min: 215, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['armor'], ['runner']] },
+    { id: 'shield', name: '盾开一瞬', min: 270, kinds: ['normal', 'heal', 'risk'], foes: [['archer'], ['shield'], ['elite']] },
+    { id: 'gauntlet', name: '铁卫与游弓', min: 290, kinds: ['safe', 'risk', 'heal'], foes: [[], ['armor'], ['runner']] },
+    { id: 'triple', name: '三箭归一', min: 340, kinds: ['normal', 'pierce', 'heal'], foes: [['quick'], ['archer', 'archer', 'archer'], ['shield']] },
+    { id: 'choiceHard', name: '护药盾阵', min: 365, kinds: ['normal', 'heal', 'risk'], foes: [['archer'], ['shield'], ['armor']] },
+    { id: 'crossfire', name: '错峰箭雨', min: 390, kinds: ['normal', 'risk', 'pierce'], foes: [['archer'], ['quick'], ['archer', 'quick']] },
+    { id: 'wind', name: '极限换崖', min: 420, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['elite'], ['shield']] },
+    { id: 'summit', name: '云上猎手', min: 450, kinds: ['safe', 'pierce', 'risk'], foes: [[], ['archer', 'quick', 'archer'], ['elite']] }
+];
+function mergeVisiblePlatforms(existing, landed, fresh, desired) {
+    const carry = existing.filter(p => p.id !== landed.id && !p.visited && p.x > landed.x + 72).sort((a, b) => a.x - b.x);
+    const out = carry.slice(0, desired);
+    const used = new Set(out.map(p => p.id));
+    let lastX = out.length ? out[out.length - 1].x : landed.x;
+    const ordered = [...fresh].sort((a, b) => a.x - b.x);
+    const beyond = ordered.filter(p => !used.has(p.id) && p.x > lastX + 105);
+    const rest = ordered.filter(p => !used.has(p.id) && !beyond.includes(p));
+    for (const p of [...beyond, ...rest]) {
+        if (out.length >= desired)
+            break;
+        if (out.some(v => Math.abs(v.x - p.x) < 82))
+            continue;
+        out.push(p);
+        used.add(p.id);
+        lastX = Math.max(lastX, p.x);
+    }
+    for (const p of ordered) {
+        if (out.length >= desired)
+            break;
+        if (!used.has(p.id)) {
+            out.push(p);
+            used.add(p.id);
+        }
+    }
+    return out.sort((a, b) => a.x - b.x).slice(0, desired);
+}
+class WorldGenerator {
+    constructor(seed) {
+        this.seed = seed;
+        this.id = 1;
+        this.enemyId = 1;
+        this.pattern = '起手双峰';
+        this.patternId = 'first';
+        this.last = [];
+        this.rng = new math_1.RNG(seed);
+    }
+    tutorial(ctx) {
+        const specs = [
+            { kind: 'normal', foes: ['archer'], gap: 390, y: 475, width: 136, label: '第1跳 · 单人台' },
+            { kind: 'pierce', foes: ['archer', 'archer'], gap: 485, y: 405, width: 190, label: '第2跳 · 双人台' },
+            { kind: 'heal', foes: [], gap: 555, y: 505, width: 148, label: '第3跳 · 灵药 +32' }
+        ];
+        const spec = specs[ctx.step];
+        const x = ctx.x + spec.gap, y = spec.y, id = this.id++;
+        const plat = { id, x, y, width: spec.width, kind: spec.kind, enemies: [], heal: spec.kind === 'heal' ? balance_1.B.heal : 0, value: spec.kind === 'pierce' ? 1.5 : 1, label: spec.label, tier: 0, visited: false, shake: 0, seed: this.rng.int(1, 99999), anchorX: x + 12, anchorY: y - 47 };
+        spec.foes.forEach((f, j) => {
+            const ex = x + (j - (spec.foes.length - 1) / 2) * 48;
+            const period = ((0, DifficultySystem_1.readableWindow)(balance_1.B.enemies[f].windup, ctx.level) + 2.8 + j * .16) * balance_1.B.enemyAttackIntervalScale;
+            plat.enemies.push({ id: this.enemyId++, kind: f, x: ex, y: y - 6, baseX: ex, hp: balance_1.B.enemies[f].hp, alive: true, timer: balance_1.B.firstRangedAttackDelay, period, firstAttack: true, phase: this.rng.range(0, 3), hit: 0, open: true, deadAt: 0, platformId: id, tier: 0 });
+        });
+        this.pattern = spec.label;
+        this.patternId = 'tutorial-' + (ctx.step + 1);
+        return [plat];
+    }
+    make(ctx) {
+        if (ctx.step < 3 && ctx.bossPhase === 0)
+            return this.tutorial(ctx);
+        let p;
+        const pool = exports.PATTERNS.filter(v => v.min <= ctx.elapsed && !this.last.slice(-3).includes(v.id));
+        p = pool.length ? this.rng.pick(pool) : exports.PATTERNS[0];
+        if (ctx.combo >= 6 && ctx.elapsed > 40 && this.rng.next() < 0.35)
+            p = exports.PATTERNS[5];
+        if (ctx.bossPhase > 0)
+            p = { id: 'boss', name: '逐风追猎 · ' + ctx.bossPhase + '/3', min: 0, kinds: ['normal', 'boss', 'heal'], foes: [['archer'], ['elite'], ['quick']] };
+        this.last.push(p.id);
+        if (this.last.length > 6)
+            this.last.shift();
+        this.pattern = p.name;
+        this.patternId = p.id;
+        const n = (ctx.elapsed < balance_1.B.unlock.tripleRoute && ctx.bossPhase === 0) ? 2 : 3;
+        const heights = [this.rng.range(400, 510), this.rng.range(290, 365), this.rng.range(515, 572)];
+        if (n === 2) {
+            heights[0] = this.rng.range(445, 515);
+            heights[1] = this.rng.range(310, 405);
+        }
+        const result = [];
+        for (let i = 0; i < n; i++) {
+            let kind = p.kinds[i % p.kinds.length];
+            let foes = [...p.foes[i % p.foes.length]];
+            if (i === 0) { // Explicitly safe-to-solve escape route: no armor/shield/elite gate.
+                foes = kind === 'safe' ? [] : ['archer'];
+                if (kind === 'risk' || kind === 'boss')
+                    kind = 'normal';
+            }
+            const x = ctx.x + balance_1.B.spawnGaps[i] + this.rng.range(-14, 14);
+            const y = (0, balance_1.clamp)(heights[i], 285, 574);
+            const width = foes.length > 1 ? 185 + (foes.length - 2) * 38 : kind === 'boss' ? 154 : 128;
+            const id = this.id++;
+            const plat = { id, x, y, width, kind, enemies: [], heal: kind === 'heal' ? balance_1.B.heal : 0, value: kind === 'risk' ? 1.8 : kind === 'pierce' ? 1.5 : 1 + i * .2, label: '', tier: i, visited: false, shake: 0, seed: this.rng.int(1, 99999), anchorX: x + 12, anchorY: y - 47 };
+            foes.forEach((f, j) => {
+                const ex = x + (j - (foes.length - 1) / 2) * 48;
+                const period = ((0, DifficultySystem_1.readableWindow)(balance_1.B.enemies[f].windup, ctx.level) + i * balance_1.B.enemyStagger + j * .16) * balance_1.B.enemyAttackIntervalScale;
+                const e = { id: this.enemyId++, kind: f, x: ex, y: y - 6, baseX: ex, hp: balance_1.B.enemies[f].hp, alive: true, timer: balance_1.B.firstRangedAttackDelay, period, firstAttack: true, phase: this.rng.range(0, 3), hit: 0, open: true, deadAt: 0, platformId: id, tier: i };
+                plat.enemies.push(e);
+            });
+            result.push(plat);
+        }
+        // Mercy is applied before a group appears, never by changing a visible enemy or projectile.
+        const forceMercy = ctx.hp <= balance_1.B.lowHP && this.rng.next() < balance_1.B.lowHPHealWeight || ctx.misses >= balance_1.B.mercyMisses;
+        if (forceMercy && ctx.bossPhase === 0) {
+            result[n - 1].kind = 'heal';
+            result[n - 1].heal = balance_1.B.heal;
+            if (ctx.hp <= 19 && ctx.misses >= 2) {
+                result[0].kind = 'safe';
+                result[0].enemies = [];
+            }
+        }
+        for (const v of result) {
+            const words = { normal: '稳妥路线', heal: '灵药 +32', risk: '险路 ×1.8', safe: '无敌歇脚', pierce: '一线 ' + v.enemies.length + ' 杀', boss: '追击逐风将' };
+            v.label = words[v.kind];
+        }
+        return result;
+    }
+}
+exports.WorldGenerator = WorldGenerator;
+
+},
+"utils/math.js":function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.smooth = exports.easeOut = exports.RNG = void 0;
+exports.hashSeed = hashSeed;
+exports.distance = distance;
+exports.segmentCircle = segmentCircle;
+class RNG {
+    constructor(seed) { this.state = seed >>> 0 || 1; }
+    next() { let t = this.state += 0x6D2B79F5; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+    range(a, b) { return a + this.next() * (b - a); }
+    int(a, b) { return Math.floor(this.range(a, b + 1)); }
+    pick(xs) { return xs[Math.floor(this.next() * xs.length)]; }
+}
+exports.RNG = RNG;
+function hashSeed(s) { let n = 2166136261; for (let i = 0; i < s.length; i++) {
+    n ^= s.charCodeAt(i);
+    n = Math.imul(n, 16777619);
+} return n >>> 0; }
+function distance(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+function segmentCircle(a, b, c, radius) {
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const t = Math.max(0, Math.min(1, ((c.x - a.x) * dx + (c.y - a.y) * dy) / (dx * dx + dy * dy || 1)));
+    return Math.hypot(a.x + dx * t - c.x, a.y + dy * t - c.y) <= radius;
+}
+const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+exports.easeOut = easeOut;
+const smooth = (t) => t * t * (3 - 2 * t);
+exports.smooth = smooth;
+
+}});</script></body></html>
