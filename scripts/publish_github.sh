@@ -30,7 +30,7 @@ fi
 
 git add .
 if ! git diff --cached --quiet; then
-  git commit -m "Initial mobile-adapted game release v1.4.1"
+  git commit -m "Initial game release v1.5.1"
 fi
 
 gh repo create "$REPO_NAME" "--$VISIBILITY" --source=. --remote=origin --push

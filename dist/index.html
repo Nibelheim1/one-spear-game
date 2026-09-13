@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#10242c"><meta name="description" content="一矛到底 · 青岚渡。按住蓄力、轻移选路、松手投出绳枪。原创单指无尽挑战。"><title>一矛到底 · 青岚渡</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#10242c"><meta name="description" content="一矛到底 · 青岚渡。全屏任意位置按住蓄力，松手决定飞行距离。原创单指无尽挑战。"><title>一矛到底 · 青岚渡</title>
 <style>
-*{box-sizing:border-box}:root{--vvw:100vw;--vvh:100vh;--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}html,body{margin:0;width:100%;height:100%;min-width:100%;min-height:100%;overflow:hidden;overscroll-behavior:none;background:#091a23;color:#e8dec0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%}body{position:fixed;inset:0;width:var(--vvw);height:var(--vvh)}#game-root{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);background:radial-gradient(ellipse at 50% 38%,#27494a 0,#122d35 44%,#091a23 100%)}#game-root:before,#game-root:after{content:"";position:absolute;top:0;bottom:0;width:max(0px,calc((var(--vvw) - var(--vvh)*1.7777778)/2));min-width:0;pointer-events:none;opacity:.46;background:linear-gradient(90deg,rgba(7,22,29,.96),rgba(30,66,72,.32));z-index:0}#game-root:before{left:0}#game-root:after{right:0;transform:scaleX(-1)}canvas{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:16/9;touch-action:none;outline:none;-webkit-tap-highlight-color:transparent;box-shadow:0 0 42px rgba(0,0,0,.18)}#rotate{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);z-index:5;background:radial-gradient(ellipse at 50% 30%,#244942,#0b1e29 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:max(24px,var(--safe-top)) max(24px,var(--safe-right)) max(24px,var(--safe-bottom)) max(24px,var(--safe-left))}#rotate[hidden]{display:none}.phone{width:50px;height:86px;border:2px solid #c8c498;border-radius:10px;transform:rotate(90deg);margin-bottom:clamp(30px,9vh,52px);position:relative}.phone:after{content:"";position:absolute;bottom:7px;left:21px;width:5px;height:5px;border:1px solid #c8c498;border-radius:50%}#rotate h2{margin:0 0 12px;font-size:clamp(20px,5.8vw,25px);font-weight:500;letter-spacing:.16em}#rotate p{margin:0;font-size:clamp(13px,3.8vw,15px);line-height:1.9;color:#a0b3a0}noscript{position:fixed;inset:0;padding:50px;background:#142e36;z-index:20}@media (orientation:landscape) and (max-height:430px){#game-root{padding-top:max(2px,var(--safe-top));padding-bottom:max(2px,var(--safe-bottom))}canvas{box-shadow:none}}@supports(height:100dvh){:root{--vvw:100dvw;--vvh:100dvh}}
-</style><script>(function(){function syncViewport(){var v=window.visualViewport;var w=Math.max(1,Math.round(v?v.width:window.innerWidth));var h=Math.max(1,Math.round(v?v.height:window.innerHeight));document.documentElement.style.setProperty('--vvw',w+'px');document.documentElement.style.setProperty('--vvh',h+'px');}syncViewport();window.addEventListener('resize',syncViewport,{passive:true});window.addEventListener('orientationchange',syncViewport,{passive:true});if(window.visualViewport){window.visualViewport.addEventListener('resize',syncViewport,{passive:true});window.visualViewport.addEventListener('scroll',syncViewport,{passive:true});}})();</script></head><body><div id="game-root"></div><div id="rotate" hidden><div class="phone"></div><h2>横过来，天地更大</h2><p>横屏即可开始飞渡<br>当前进度已保留</p></div><noscript>游戏需要启用 JavaScript。请在支持 Canvas 的现代浏览器中打开。</noscript><script>(function(mods){'use strict';const cache={};function norm(p){const a=[];for(const s of p.split('/')){if(s==='..')a.pop();else if(s&&s!=='.')a.push(s);}let id=a.join('/');return id.endsWith('.js')?id:id+'.js';}function load(id){id=norm(id);if(cache[id])return cache[id].exports;if(!mods[id])throw new Error('Missing module: '+id);const m={exports:{}};cache[id]=m;mods[id](r=>load(id.slice(0,id.lastIndexOf('/')+1)+r),m,m.exports);return m.exports;}load('offline.js');})({"config/balance.js":function(require,module,exports){
+*{box-sizing:border-box}:root{--vvw:100vw;--vvh:100vh;--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}html,body{margin:0;width:100%;height:100%;min-width:100%;min-height:100%;overflow:hidden;overscroll-behavior:none;background:#091a23;color:#e8dec0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%}body{position:fixed;inset:0;width:var(--vvw);height:var(--vvh)}#game-root{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);background:radial-gradient(ellipse at 50% 38%,#27494a 0,#122d35 44%,#091a23 100%)}#game-root:before,#game-root:after{content:"";position:absolute;top:0;bottom:0;width:max(0px,calc((var(--vvw) - var(--vvh)*1.7777778)/2));min-width:0;pointer-events:none;opacity:.46;background:linear-gradient(90deg,rgba(7,22,29,.96),rgba(30,66,72,.32));z-index:0}#game-root:before{left:0}#game-root:after{right:0;transform:scaleX(-1)}canvas{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:16/9;touch-action:none;outline:none;-webkit-tap-highlight-color:transparent;box-shadow:0 0 42px rgba(0,0,0,.18);transform-origin:50% 50%}noscript{position:fixed;inset:0;padding:50px;background:#142e36;z-index:20}@media (orientation:landscape) and (max-height:430px){#game-root{padding-top:max(2px,var(--safe-top));padding-bottom:max(2px,var(--safe-bottom))}canvas{box-shadow:none}}@media (orientation:portrait){#game-root{padding:0}#game-root:before,#game-root:after{display:none}canvas{width:min(calc(100vh - var(--safe-top) - var(--safe-bottom)),177.7778vw);height:auto;max-width:none;max-height:none;transform:rotate(90deg);box-shadow:0 0 42px rgba(0,0,0,.18)}}@supports(height:100dvh){:root{--vvw:100dvw;--vvh:100dvh}@media (orientation:portrait){canvas{width:min(calc(100dvh - var(--safe-top) - var(--safe-bottom)),177.7778dvw)}}}
+</style><script>(function(){function syncViewport(){var v=window.visualViewport;var w=Math.max(1,Math.round(v?v.width:window.innerWidth));var h=Math.max(1,Math.round(v?v.height:window.innerHeight));document.documentElement.style.setProperty('--vvw',w+'px');document.documentElement.style.setProperty('--vvh',h+'px');}syncViewport();window.addEventListener('resize',syncViewport,{passive:true});window.addEventListener('orientationchange',syncViewport,{passive:true});if(window.visualViewport){window.visualViewport.addEventListener('resize',syncViewport,{passive:true});window.visualViewport.addEventListener('scroll',syncViewport,{passive:true});}})();</script></head><body><div id="game-root"></div><noscript>游戏需要启用 JavaScript。请在支持 Canvas 的现代浏览器中打开。</noscript><script>(function(mods){'use strict';const cache={};function norm(p){const a=[];for(const s of p.split('/')){if(s==='..')a.pop();else if(s&&s!=='.')a.push(s);}let id=a.join('/');return id.endsWith('.js')?id:id+'.js';}function load(id){id=norm(id);if(cache[id])return cache[id].exports;if(!mods[id])throw new Error('Missing module: '+id);const m={exports:{}};cache[id]=m;mods[id](r=>load(id.slice(0,id.lastIndexOf('/')+1)+r),m,m.exports);return m.exports;}load('offline.js');})({"config/balance.js":function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.lerp = exports.clamp = exports.B = void 0;
@@ -10,10 +10,9 @@ exports.lerp = exports.clamp = exports.B = void 0;
 exports.B = {
     width: 1280, height: 720,
     hp: 100, heal: 32, reviveHP: 36,
-    chargeSeconds: 1.28, powerMin: 0.10,
-    chargePowerOffset: 0.27, chargeRangeScale: 1490,
-    perfectBand: 0.036, hitBand: 0.115, tutorialHitBonus: 0.055,
-    dragStep: 68, dragHysteresis: 18,
+    chargeSeconds: 1.28, powerMin: 0,
+    chargeRangeBase: 120, chargeRangeScale: 770,
+    perfectBand: 0.030, hitBand: 0.115, tutorialHitBonus: 0.065,
     gravity: 950, flightMin: 0.29, flightMax: 0.51,
     powerErrorY: 165,
     headRadius: 12, bodyRadius: 22, magnet: 11,
@@ -28,7 +27,7 @@ exports.B = {
     comboScoreCap: 32, skipPlatformBonus: 32,
     distancePerPixel: 0.10, healWeight: 0.22, lowHPHealWeight: 0.72,
     lowHP: 36, mercyMisses: 2, peakEvery: 11,
-    spawnGaps: [355, 580, 805], spawnHeights: [490, 330, 545],
+    spawnGaps: [370, 590, 810], spawnHeights: [490, 330, 545],
     unlock: { tripleRoute: 24, runner: 95, fast: 70, double: 40, armor: 215, shield: 270, elite: 115, triple: 340 },
     enemies: {
         archer: { name: '弓手', damage: 19, melee: 10, windup: 3.00, hp: 1, score: 100, color: '#dd7966' },
@@ -109,7 +108,6 @@ class Game {
         this.consecutiveMiss = 0;
         this.paused = false;
         this.pauseReason = '';
-        this.portrait = false;
         this.help = false;
         this.reviveUsed = false;
         this.rewarded = false;
@@ -231,17 +229,36 @@ class Game {
     }
     tutorialPrompt() {
         const text = [
-            '第1跳 · 单人台：按住蓄力，力度合适后松手',
-            '第2跳 · 双人台：一矛穿透两人；漏一个，落地会被捅',
-            '第3跳 · 回血台：扎中锚点飞过去，落地自动回血',
+            '第1跳 · 单人台：屏幕任意位置按住，松手投矛',
+            '第2跳 · 双人台：按久一点飞得更远，一矛穿透两人',
+            '第3跳 · 回血台：继续长按控制距离，落地自动回血',
             '你已经完全学会了，提示就取消了哦！祝少侠好运！'
         ][Math.min(this.step, 3)];
         this.say(text, this.step < 3 ? 3.6 : 3.0);
     }
-    get target() { return this.platforms[this.selected] || this.platforms[0]; }
-    get ideal() { return (0, TargetingSystem_1.idealPower)(this.player.x + 17, this.target); }
+    resolveTarget(power = this.power) {
+        const fromX = this.player.x + 17;
+        const candidates = this.platforms.filter(p => !p.visited && p.x > fromX + 70).sort((a, b) => a.x - b.x);
+        if (!candidates.length)
+            return null;
+        if (this.step < 3)
+            return { platform: candidates[0], rank: 0, delta: Math.abs((candidates[0].x - fromX) - (0, TargetingSystem_1.rangeForPower)(power)) };
+        const reach = (0, TargetingSystem_1.rangeForPower)(power);
+        let best = candidates[0], bestRank = 0, bestDelta = Infinity;
+        candidates.forEach((p, rank) => {
+            const delta = Math.abs((p.x - fromX) - reach);
+            if (delta < bestDelta) {
+                best = p;
+                bestRank = rank;
+                bestDelta = delta;
+            }
+        });
+        return { platform: best, rank: bestRank, delta: bestDelta };
+    }
+    get target() { return this.resolveTarget(this.power)?.platform || this.platforms[0]; }
+    get ideal() { const p = this.target; return p ? (0, TargetingSystem_1.idealPower)(this.player.x + 17, p) : 0; }
     get stage() { return (0, DifficultySystem_1.stageName)(this.elapsed); }
-    get canAct() { return !this.paused && !this.portrait && !this.help && (this.state === 'ready' || this.state === 'charging'); }
+    get canAct() { return !this.paused && !this.help && (this.state === 'ready' || this.state === 'charging'); }
     say(text, time = 1.5) { this.notice = text; this.noticeTime = time; this.lastEvent = text; }
     buttonAt(x, y) { const slop = 14; return [...this.ui].reverse().find(b => x >= b.x - slop && x <= b.x + b.w + slop && y >= b.y - slop && y <= b.y + b.h + slop); }
     down(x, y) {
@@ -253,48 +270,26 @@ class Game {
         }
         if (!this.canAct || this.activePointer)
             return;
-        // Direct targeting is optional; hold-anywhere always has a useful default.
-        for (let i = 0; i < this.platforms.length; i++) {
-            const p = this.platforms[i];
-            if (Math.hypot(x - (p.x - this.cameraX), y - (p.y - 58)) < 70) {
-                this.selected = i;
-                break;
-            }
-        }
+        // Gameplay is deliberately one-dimensional: every non-UI point on the screen is the same charge button.
+        // Pointer position never chooses a platform; hold time alone determines effective horizontal reach.
         this.activePointer = true;
         this.state = 'charging';
         this.chargeTime = 0;
         this.power = 0;
-        this.dragStart = { x, y };
-        this.downSelected = this.selected;
         this.fullPulse = false;
         this.perfectPulse = false;
         this.haptic.pulse('charge');
     }
     move(x, y) {
-        if (!this.activePointer || this.state !== 'charging' || !this.canAct)
-            return;
-        const dy = y - this.dragStart.y, dx = x - this.dragStart.x;
-        const order = this.platforms.map((p, i) => ({ y: p.y, i })).sort((a, b) => a.y - b.y);
-        const origin = order.findIndex(e => e.i === this.downSelected);
-        let index = this.downSelected;
-        if (Math.abs(dy) >= balance_1.B.dragStep) {
-            const shift = Math.sign(dy) * Math.max(1, Math.floor((Math.abs(dy) + balance_1.B.dragHysteresis) / balance_1.B.dragStep));
-            index = order[(0, balance_1.clamp)(origin + shift, 0, order.length - 1)].i;
-        }
-        else if (Math.abs(dx) >= balance_1.B.dragStep * 1.15)
-            index = (0, balance_1.clamp)(this.downSelected + Math.sign(dx), 0, this.platforms.length - 1);
-        if (index !== this.selected) {
-            this.selected = index;
-            this.audio.play('select');
-            this.perfectPulse = false;
-        }
+        // Intentionally ignored. Dragging must never change the destination or the charge curve.
+        // This keeps the game as casual as a single full-screen button.
+        void x; void y;
     }
     up() {
         if (!this.activePointer)
             return;
         this.activePointer = false;
-        if (this.state !== 'charging' || this.paused || this.portrait || this.help) {
+        if (this.state !== 'charging' || this.paused || this.help) {
             this.cancel();
             return;
         }
@@ -305,8 +300,10 @@ class Game {
         this.chargeTime = 0;
         this.power = 0;
     } }
-    select(direction) { if (!this.canAct)
-        return; this.selected = (this.selected + direction + this.platforms.length) % this.platforms.length; this.audio.play('select'); }
+    select(direction) {
+        // Legacy keyboard hook retained for compatibility; route selection is no longer an input.
+        void direction;
+    }
     togglePause(reason = '已暂停') { if (this.state === 'menu' || this.state === 'result')
         return; this.cancel(); this.paused = !this.paused; this.pauseReason = reason; if (this.paused)
         this.audio.suspend();
@@ -317,8 +314,6 @@ class Game {
         this.paused = true;
         this.pauseReason = '已暂停 · 返回后继续';
     } this.audio.suspend(); }
-    setPortrait(value) { if (value && !this.portrait)
-        this.cancel(); this.portrait = value; }
     async action(id) {
         switch (id) {
             case 'start':
@@ -419,7 +414,11 @@ class Game {
         this.audio.stopCharge();
         this.stats.shots++;
         this.comboIdle = 0;
-        this.shot = (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, this.target, this.power, this.elapsed, this.step < 3);
+        const resolved = this.resolveTarget(this.power);
+        if (!resolved)
+            return;
+        this.selected = this.platforms.findIndex(p => p.id === resolved.platform.id);
+        this.shot = (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, resolved.platform, this.power, this.elapsed, this.step < 3);
         this.state = 'throwing';
         this.timer = 0;
         this.freeze = .018;
@@ -614,7 +613,7 @@ class Game {
             this.fx.update(realDt);
             return;
         }
-        if (this.paused || this.portrait || this.help)
+        if (this.paused || this.help)
             return;
         const dt = Math.min(realDt, .0334) * this.timeScale;
         this.fx.update(dt);
@@ -647,7 +646,7 @@ class Game {
                 this.fullPulse = true;
                 this.haptic.pulse('full');
             }
-            if (Math.abs(this.power - this.ideal) < balance_1.B.perfectBand && !this.perfectPulse) {
+            if (this.step < 3 && Math.abs(this.power - this.ideal) < balance_1.B.perfectBand && !this.perfectPulse) {
                 this.perfectPulse = true;
                 this.haptic.pulse('full');
             }
@@ -800,8 +799,8 @@ class Game {
         this.cameraX = (0, balance_1.lerp)(this.cameraX, Math.max(0, this.player.x - 320), Math.min(1, dt * (this.state === 'pulling' ? 10 : 14)));
         this.maxActive = Math.max(this.maxActive, this.platforms.reduce((n, p) => n + p.enemies.length, 0) + this.history.length + this.arrows.length + this.fx.particles.filter(p => p.life > 0).length);
     }
-    preview(power = this.power) { return (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, this.target, power, this.elapsed, this.step < 3); }
-    snapshot() { return { state: this.state, hp: this.hp, seed: this.seed, step: this.step, elapsed: this.elapsed, level: this.level, selected: this.selected, ideal: this.ideal, power: this.power, cameraX: this.cameraX, player: { ...this.player }, stats: { ...this.stats }, pattern: this.generator.pattern, patternId: this.generator.patternId, platforms: this.platforms.map(p => ({ id: p.id, x: p.x, y: p.y, kind: p.kind, heal: p.heal, enemies: p.enemies.map(e => ({ id: e.id, kind: e.kind, hp: e.hp, open: e.open, timer: e.timer, firstAttack: !!e.firstAttack, alive: e.alive })) })), objects: { platforms: this.platforms.length, history: this.history.length, arrows: this.arrows.length, particles: this.fx.particles.filter(p => p.life > 0).length, maxActive: this.maxActive }, melee: { platformId: this.meleePlatform?.id ?? null, survivors: this.meleePlatform?.enemies.filter(e => e.alive).length ?? 0, timer: this.meleeTimer }, fps: this.fps, paused: this.paused, portrait: this.portrait, reviveUsed: this.reviveUsed, activeShooterId: this.activeShooterId }; }
+    preview(power = this.power) { const r = this.resolveTarget(power); return r ? (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, r.platform, power, this.elapsed, this.step < 3) : null; }
+    snapshot() { return { state: this.state, hp: this.hp, seed: this.seed, step: this.step, elapsed: this.elapsed, level: this.level, selected: this.selected, ideal: this.ideal, power: this.power, cameraX: this.cameraX, player: { ...this.player }, stats: { ...this.stats }, pattern: this.generator.pattern, patternId: this.generator.patternId, platforms: this.platforms.map(p => ({ id: p.id, x: p.x, y: p.y, kind: p.kind, heal: p.heal, enemies: p.enemies.map(e => ({ id: e.id, kind: e.kind, hp: e.hp, open: e.open, timer: e.timer, firstAttack: !!e.firstAttack, alive: e.alive })) })), objects: { platforms: this.platforms.length, history: this.history.length, arrows: this.arrows.length, particles: this.fx.particles.filter(p => p.life > 0).length, maxActive: this.maxActive }, melee: { platformId: this.meleePlatform?.id ?? null, survivors: this.meleePlatform?.enemies.filter(e => e.alive).length ?? 0, timer: this.meleeTimer }, fps: this.fps, paused: this.paused, portrait: false, forcedLandscape: true, reviveUsed: this.reviveUsed, activeShooterId: this.activeShooterId, autoTargetId: this.resolveTarget(this.power)?.platform.id ?? null, autoTargetRank: this.resolveTarget(this.power)?.rank ?? -1, intendedRange: (0, TargetingSystem_1.rangeForPower)(this.power) }; }
     destroy() { this.audio.destroy(); for (const fn of this.listeners)
         fn(); }
 }
@@ -817,7 +816,7 @@ function attachControls(canvas, game) {
     let pointer = null;
     const bindings = [];
     function on(target, name, fn, options) { target.addEventListener(name, fn, options); bindings.push(() => target.removeEventListener(name, fn, options)); }
-    function point(e) { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) * 1280 / r.width, y: (e.clientY - r.top) * 720 / r.height }; }
+    function point(e) { const r = canvas.getBoundingClientRect(); const rotated = r.height > r.width; if (rotated) return { x: (e.clientY - r.top) * 1280 / r.height, y: (r.right - e.clientX) * 720 / r.width }; return { x: (e.clientX - r.left) * 1280 / r.width, y: (e.clientY - r.top) * 720 / r.height }; }
     on(canvas, 'pointerdown', ((e) => { if (pointer !== null || !e.isPrimary || e.button > 0)
         return; e.preventDefault(); pointer = e.pointerId; try {
         canvas.setPointerCapture(pointer);
@@ -842,14 +841,6 @@ function attachControls(canvas, game) {
             else
                 game.down(700, 600);
         }
-        if (e.code === 'ArrowUp' || e.code === 'KeyW') {
-            e.preventDefault();
-            game.select(1);
-        }
-        if (e.code === 'ArrowDown' || e.code === 'KeyS') {
-            e.preventDefault();
-            game.select(-1);
-        }
         if (e.code === 'Escape' || e.code === 'KeyP')
             game.togglePause();
         if (e.code === 'KeyR' && (game.debug || game.state === 'result'))
@@ -873,12 +864,6 @@ function attachControls(canvas, game) {
         game.onHide();
     } });
     on(window, 'blur', () => { pointer = null; game.onHide(); });
-    const orient = () => { const vv = window.visualViewport; const w = vv ? vv.width : innerWidth, h = vv ? vv.height : innerHeight; const portrait = h > w; game.setPortrait(portrait); const overlay = document.getElementById('rotate'); if (overlay)
-        overlay.hidden = !portrait; };
-    on(window, 'resize', orient);
-    on(window, 'orientationchange', orient);
-    if (window.visualViewport) on(window.visualViewport, 'resize', orient);
-    orient();
     if (game.debug)
         window.__SPEAR__ = { game, snapshot: () => game.snapshot() };
     return () => { for (const fn of bindings)
@@ -895,7 +880,7 @@ const controls_1 = require("./game/controls");
 const canvas = document.createElement('canvas');
 canvas.width = 1280;
 canvas.height = 720;
-canvas.setAttribute('aria-label', '一矛到底游戏画面：按住蓄力，上下轻拖选路，松手投矛');
+canvas.setAttribute('aria-label', '一矛到底游戏画面：屏幕任意位置按住蓄力，按得越久飞得越远，松手投矛');
 document.getElementById('game-root').appendChild(canvas);
 const ctx = canvas.getContext('2d', { alpha: false });
 const game = new Game_1.Game(), renderer = new Renderer_1.Renderer(ctx), cleanup = (0, controls_1.attachControls)(canvas, game);
@@ -1412,7 +1397,7 @@ class Renderer {
             this.text(melee ? 'MELEE' : rangedActive ? e.timer.toFixed(1) : 'WAIT', x, y - 119, 12, P.paper, 'center');
     }
     reticle(g) {
-        if (!g.canAct)
+        if (!g.canAct || g.step >= 3)
             return;
         const p = g.target, e = p.enemies.find(e => e.alive);
         const x = (e ? e.x : p.anchorX) - g.cameraX, y = e ? e.y - 55 : p.anchorY;
@@ -1566,8 +1551,8 @@ class Renderer {
             const x = 430, y = 655, w = 420;
             this.round(x - 26, 608, w + 52, 82, 10, 'rgba(11,30,37,.55)', 'rgba(149,177,151,.18)');
             const col = g.target.kind === 'heal' ? P.jade : g.target.kind === 'risk' ? P.coral : P.paper;
-            this.text(charging ? '瞄准 · ' + g.target.label : '按住蓄力', x, 629, 16, charging ? col : P.paper);
-            this.text(charging ? (Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? '精准！松手' : Math.abs(g.power - g.ideal) <= balance_1.B.hitBand ? '可命中 · 松手' : '对齐亮区') : '轻移选路  ·  松手投枪', x + w, 629, 14, charging && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? P.gold : P.muted, 'right');
+            this.text(charging ? '蓄力 · ' + g.target.label : '任意位置按住蓄力', x, 629, 16, charging ? col : P.paper);
+            this.text(charging ? (Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? '精准！松手' : Math.abs(g.power - g.ideal) <= balance_1.B.hitBand ? '可命中 · 松手' : '继续按住 · 越久越远') : '只看按住时间  ·  松手投枪', x + w, 629, 14, charging && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? P.gold : P.muted, 'right');
             this.round(x, y, w, 10, 5, '#314643');
             const hit = balance_1.B.hitBand + balance_1.B.tutorialHitBonus, sweet = g.ideal;
             this.round(x + Math.max(0, sweet - hit) * w, y, Math.min(1, sweet + hit) * w - Math.max(0, sweet - hit) * w, 10, 3, '#537f6b');
@@ -1646,7 +1631,7 @@ class Renderer {
         this.text('青 岚 渡', 83, 309, 29, '#a9c7b1', 'left', '400', true);
         this.line(220, 309, 389, 309, '#688e7e');
         this.text('把每一次命中，变成下一次飞跃。', 84, 375, 22, '#b8c7b0');
-        this.text('按住蓄力   ·   轻移选路   ·   松手飞渡', 85, 419, 16, '#8fa99a');
+        this.text('任意位置按住   ·   按得越久飞得越远   ·   松手飞渡', 85, 419, 16, '#8fa99a');
         this.button(g, 'start', '入山 · 开始挑战', 82, 468, 330, 66, true);
         this.button(g, 'help', '怎么玩', 432, 468, 136, 66);
         if (g.storage.data.score > 0) {
@@ -1683,7 +1668,7 @@ class Renderer {
         c.fillRect(0, 0, 1280, 720);
         this.round(242, 98, 796, 524, 16, '#102c34', '#688a78');
         this.text('只用一根手指', 640, 156, 31, P.paper, 'center', '500', true);
-        const items = [['01', '按住', '前三跳显示力度条教学；三跳后彻底收起，凭手感蓄力。'], ['02', '轻移', '向上 / 向下轻拖，切换高低路线；不拖也能玩。'], ['03', '松手', '蓄力越久有效飞距越远；扎中借绳飞渡，投空则坠崖。']];
+        const items = [['01', '按住', '屏幕任意位置都一样；前三跳显示力度条，之后完全凭手感。'], ['02', '距离', '不需要点平台，也不需要拖动；按得越久，标枪有效射程越远。'], ['03', '松手', '系统只做轻量角度修正；距离没按对就会投空并坠崖。']];
         items.forEach((a, i) => { const y = 223 + i * 79; this.diamond(306, y, 22, P.gold, true); this.text(a[0], 306, y, 14, P.gold, 'center'); this.text(a[1], 351, y - 11, 21, P.paper, 'left', '600'); this.text(a[2], 351, y + 20, 16, P.muted); });
         this.line(292, 433, 988, 433, '#35594f');
         this.text('成功飞渡：1 → 2 → 4 → 8 → 16 → 32；敌人先出手，连跳重新从 1 开始。', 640, 458, 15, P.gold, 'center');
@@ -1730,8 +1715,8 @@ class Renderer {
             for (const p of g.history)
                 this.drawPlatform(p, g, false, true);
             for (const p of g.platforms)
-                this.drawPlatform(p, g, p.id === g.target.id);
-            this.reticle(g);
+                this.drawPlatform(p, g, g.step < 3 && p.id === g.target.id);
+            if (g.step < 3) this.reticle(g);
             if (g.meleePlatform)
                 for (const e of g.meleePlatform.enemies)
                     this.enemy(e, g);
@@ -2131,10 +2116,11 @@ exports.shotPoint = shotPoint;
 exports.alignPierce = alignPierce;
 const balance_1 = require("../config/balance");
 function rangeForPower(power) {
-    return Math.max(0, ((0, balance_1.clamp)(power, 0, 1) - balance_1.B.chargePowerOffset) * balance_1.B.chargeRangeScale);
+    // Stable muscle memory: horizontal reach is strictly linear in hold power for the entire run.
+    return balance_1.B.chargeRangeBase + (0, balance_1.clamp)(power, 0, 1) * balance_1.B.chargeRangeScale;
 }
 function idealPower(fromX, p) {
-    return (0, balance_1.clamp)(balance_1.B.chargePowerOffset + (p.x - fromX) / balance_1.B.chargeRangeScale, balance_1.B.powerMin, 1);
+    return (0, balance_1.clamp)(((p.x - fromX) - balance_1.B.chargeRangeBase) / balance_1.B.chargeRangeScale, balance_1.B.powerMin, 1);
 }
 function powerAt(seconds) {
     // One stable mapping for the whole run: hold time -> power -> horizontal reach. No post-full bounce.
@@ -2245,9 +2231,9 @@ class WorldGenerator {
     }
     tutorial(ctx) {
         const specs = [
-            { kind: 'normal', foes: ['archer'], gap: 390, y: 475, width: 136, label: '第1跳 · 单人台' },
-            { kind: 'pierce', foes: ['archer', 'archer'], gap: 485, y: 405, width: 190, label: '第2跳 · 双人台' },
-            { kind: 'heal', foes: [], gap: 555, y: 505, width: 148, label: '第3跳 · 灵药 +32' }
+            { kind: 'normal', foes: ['archer'], gap: 370, y: 475, width: 136, label: '第1跳 · 轻按近台' },
+            { kind: 'pierce', foes: ['archer', 'archer'], gap: 590, y: 405, width: 190, label: '第2跳 · 中蓄双人台' },
+            { kind: 'heal', foes: [], gap: 810, y: 505, width: 148, label: '第3跳 · 长蓄回血台' }
         ];
         const spec = specs[ctx.step];
         const x = ctx.x + spec.gap, y = spec.y, id = this.id++;

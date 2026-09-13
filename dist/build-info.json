@@ -1,0 +1,7 @@
+{
+  "name": "one-spear-game",
+  "version": "1.5.1",
+  "build": "dist",
+  "entry": "index.html",
+  "standalone": true
+}
