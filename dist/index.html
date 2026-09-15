@@ -439,7 +439,6 @@ class Game {
         this.state = 'throwing';
         this.timer = 0;
         this.freeze = .018;
-        this.audio.play('throw');
         this.haptic.pulse('throw');
         this.shake = Math.max(this.shake, 2);
         this.helpStep = Math.max(this.helpStep, 1);
@@ -1992,10 +1991,6 @@ class AudioSystem {
         if (k !== 'charge')
             this.stopCharge();
         switch (k) {
-            case 'throw':
-                this.noise(.12, .27);
-                this.tone(540, .12, 'triangle', .15, 0, 110);
-                break;
             case 'fly':
                 this.tone(290, .16, 'sine', .06, 0, 90);
                 break;
