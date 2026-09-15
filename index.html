@@ -1908,11 +1908,11 @@ class AudioSystem {
         this.chargeGain.connect(this.master);
         this.chargeHarmGain.connect(this.master);
         const layers = [
-            { at: 0.00, base: 165, harm: 330, baseGain: .60, harmGain: .22 },
-            { at: 0.30, base: 196, harm: 392, baseGain: .68, harmGain: .26, cue: 440 },
-            { at: 0.60, base: 247, harm: 494, baseGain: .76, harmGain: .30, cue: 554 },
-            { at: 0.90, base: 294, harm: 588, baseGain: .84, harmGain: .34, cue: 659 },
-            { at: 1.20, base: 349, harm: 698, baseGain: .92, harmGain: .38, cue: 880 },
+            { at: 0.00, base: 165, harm: 330, baseGain: .75, harmGain: .25 },
+            { at: 0.30, base: 196, harm: 392, baseGain: .83, harmGain: .29, cue: 440 },
+            { at: 0.60, base: 247, harm: 494, baseGain: .91, harmGain: .33, cue: 554 },
+            { at: 0.90, base: 294, harm: 588, baseGain: .99, harmGain: .37, cue: 659 },
+            { at: 1.20, base: 349, harm: 698, baseGain: 1.07, harmGain: .41, cue: 880 },
         ];
         const ramp = .028;
         const first = layers[0];
