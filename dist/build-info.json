@@ -1,7 +1,8 @@
 {
   "name": "one-spear-game",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "build": "dist",
   "entry": "index.html",
-  "standalone": true
+  "asset_mode": "local",
+  "notes": "Visual fatigue reduction: calmer background, hierarchical platform saturation, neutral HUD, tiered score flashes; gameplay remains v1.9.0"
 }

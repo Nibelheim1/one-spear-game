@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#10242c"><meta name="description" content="一矛到底 · 青岚渡。全屏任意位置按住蓄力，松手决定飞行距离。原创单指无尽挑战。"><title>一矛到底 · 青岚渡</title>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#5e9fb2"><meta name="description" content="一矛到底 · 跃动竞技场。全屏任意位置按住蓄力，松手决定飞行距离。多巴胺浮空竞技挑战。"><title>一矛到底 · 跃动竞技场</title>
 <style>
-*{box-sizing:border-box}:root{--vvw:100vw;--vvh:100vh;--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}html,body{margin:0;width:100%;height:100%;min-width:100%;min-height:100%;overflow:hidden;overscroll-behavior:none;background:#091a23;color:#e8dec0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%}body{position:fixed;inset:0;width:var(--vvw);height:var(--vvh)}#game-root{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);background:radial-gradient(ellipse at 50% 38%,#27494a 0,#122d35 44%,#091a23 100%)}#game-root:before,#game-root:after{content:"";position:absolute;top:0;bottom:0;width:max(0px,calc((var(--vvw) - var(--vvh)*1.7777778)/2));min-width:0;pointer-events:none;opacity:.46;background:linear-gradient(90deg,rgba(7,22,29,.96),rgba(30,66,72,.32));z-index:0}#game-root:before{left:0}#game-root:after{right:0;transform:scaleX(-1)}canvas{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:16/9;touch-action:none;outline:none;-webkit-tap-highlight-color:transparent;box-shadow:0 0 42px rgba(0,0,0,.18);transform-origin:50% 50%}noscript{position:fixed;inset:0;padding:50px;background:#142e36;z-index:20}@media (orientation:landscape) and (max-height:430px){#game-root{padding-top:max(2px,var(--safe-top));padding-bottom:max(2px,var(--safe-bottom))}canvas{box-shadow:none}}@media (orientation:portrait){#game-root{padding:0}#game-root:before,#game-root:after{display:none}canvas{width:min(calc(100vh - var(--safe-top) - var(--safe-bottom)),177.7778vw);height:auto;max-width:none;max-height:none;transform:rotate(90deg);box-shadow:0 0 42px rgba(0,0,0,.18)}}@supports(height:100dvh){:root{--vvw:100dvw;--vvh:100dvh}@media (orientation:portrait){canvas{width:min(calc(100dvh - var(--safe-top) - var(--safe-bottom)),177.7778dvw)}}}
+*{box-sizing:border-box}:root{--vvw:100vw;--vvh:100vh;--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}html,body{margin:0;width:100%;height:100%;min-width:100%;min-height:100%;overflow:hidden;overscroll-behavior:none;background:#5b96aa;color:#fffaf2;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%}body{position:fixed;inset:0;width:var(--vvw);height:var(--vvh)}#game-root{position:fixed;left:0;top:0;width:var(--vvw);height:var(--vvh);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);background:radial-gradient(ellipse at 50% 35%,#a5d9e2 0,#6daec0 48%,#686f9d 100%)}#game-root:before,#game-root:after{content:"";position:absolute;top:0;bottom:0;width:max(0px,calc((var(--vvw) - var(--vvh)*1.7777778)/2));min-width:0;pointer-events:none;opacity:.24;background:linear-gradient(90deg,rgba(72,150,174,.66),rgba(94,101,151,.10));z-index:0}#game-root:before{left:0}#game-root:after{right:0;transform:scaleX(-1)}canvas{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:16/9;touch-action:none;outline:none;-webkit-tap-highlight-color:transparent;box-shadow:0 0 28px rgba(0,0,0,.14);transform-origin:50% 50%}noscript{position:fixed;inset:0;padding:50px;background:#5b96aa;z-index:20}@media (orientation:landscape) and (max-height:430px){#game-root{padding-top:max(2px,var(--safe-top));padding-bottom:max(2px,var(--safe-bottom))}canvas{box-shadow:none}}@media (orientation:portrait){#game-root{padding:0}#game-root:before,#game-root:after{display:none}canvas{width:min(calc(100vh - var(--safe-top) - var(--safe-bottom)),177.7778vw);height:auto;max-width:none;max-height:none;transform:rotate(90deg);box-shadow:0 0 28px rgba(0,0,0,.14)}}@supports(height:100dvh){:root{--vvw:100dvw;--vvh:100dvh}@media (orientation:portrait){canvas{width:min(calc(100dvh - var(--safe-top) - var(--safe-bottom)),177.7778dvw)}}}
 </style><script>(function(){function syncViewport(){var v=window.visualViewport;var w=Math.max(1,Math.round(v?v.width:window.innerWidth));var h=Math.max(1,Math.round(v?v.height:window.innerHeight));document.documentElement.style.setProperty('--vvw',w+'px');document.documentElement.style.setProperty('--vvh',h+'px');}syncViewport();window.addEventListener('resize',syncViewport,{passive:true});window.addEventListener('orientationchange',syncViewport,{passive:true});if(window.visualViewport){window.visualViewport.addEventListener('resize',syncViewport,{passive:true});window.visualViewport.addEventListener('scroll',syncViewport,{passive:true});}})();</script></head><body><div id="game-root"></div><noscript>游戏需要启用 JavaScript。请在支持 Canvas 的现代浏览器中打开。</noscript><script>(function(mods){'use strict';const cache={};function norm(p){const a=[];for(const s of p.split('/')){if(s==='..')a.pop();else if(s&&s!=='.')a.push(s);}let id=a.join('/');return id.endsWith('.js')?id:id+'.js';}function load(id){id=norm(id);if(cache[id])return cache[id].exports;if(!mods[id])throw new Error('Missing module: '+id);const m={exports:{}};cache[id]=m;mods[id](r=>load(id.slice(0,id.lastIndexOf('/')+1)+r),m,m.exports);return m.exports;}load('offline.js');})({"config/balance.js":function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -9,10 +9,10 @@ exports.lerp = exports.clamp = exports.B = void 0;
 /** Gameplay numbers live here. Durations use seconds; positions use logical pixels. */
 exports.B = {
     width: 1280, height: 720,
-    hp: 100, heal: 32, reviveHP: 36,
+    hp: 100, heal: 100, reviveHP: 36,
     chargeSeconds: 1.28, powerMin: 0,
     chargeRangeBase: 120, chargeRangeScale: 770,
-    perfectBand: 0.030, hitBand: 0.115, tutorialHitBonus: 0.065,
+    perfectBand: 0.035, killBand: 0.075, hitBand: 0.115, tutorialHitBonus: [0.060, 0.035, 0.015],
     gravity: 950, flightMin: 0.29, flightMax: 0.51,
     powerErrorY: 165,
     headRadius: 12, bodyRadius: 22, magnet: 11,
@@ -20,28 +20,31 @@ exports.B = {
     ropeMin: 0.29, ropeMax: 0.52, ropeArc: 74,
     fallDuration: 0.82, fallForwardMin: 90, fallForwardMax: 620, fallLift: 68,
     settle: 0.10, landingGrace: 0.82,
-    meleeFirstDelay: 0.16, meleeInterval: 0.17, meleeInvuln: 0.10,
-    decisionWindow: 3.05, minimumDecision: 2.2, enemyStagger: 0.38, enemyAttackIntervalScale: 0.50, firstRangedAttackDelay: 2.00,
+    meleeFirstDelay: 0.34, meleeInterval: 0.30, meleeInvuln: 0.12,
+    decisionWindow: 3.05, minimumDecision: 2.2, minimumAttackPeriod: 1.25, enemyStagger: 0.38, enemyAttackIntervalScale: 0.50, firstRangedAttackDelay: 2.00,
     arrowFlight: 0.70, arrowDodgeThreshold: 100, damageInvuln: 0.50,
     maxEnemies: 7, maxParticles: 150, maxFloats: 22, maxHistory: 5,
     comboScoreCap: 32, skipPlatformBonus: 32,
-    distancePerPixel: 0.10, healWeight: 0.22, lowHPHealWeight: 0.72,
-    lowHP: 36, mercyMisses: 2, peakEvery: 11,
-    spawnGaps: [370, 590, 810], spawnHeights: [490, 330, 545],
+    platformScoreFive: 5, platformScoreTen: 10, platformScoreTwenty: 20,
+    movingUnlockDistance: 2000, movingRange: 34, movingSpeed: 42, movingCooldownJumps: 5,
+    movingChance2000: 0.08, movingChance3000: 0.11, movingChance5000: 0.14, movingChance8000: 0.16,
+    distancePerPixel: 0.10, healChanceHigh: 0.12, healChanceMid: 0.20, lowHPHealWeight: 0.42, criticalHealWeight: 0.60, damageMercyHealWeight: 0.50,
+    lowHP: 36, criticalHP: 20, damageMercyJumps: 2, peakEvery: 11,
+    spawnGaps: [370, 590, 836], spawnHeights: [490, 330, 545],
     unlock: { tripleRoute: 24, runner: 95, fast: 70, double: 40, armor: 215, shield: 270, elite: 115, triple: 340 },
     enemies: {
-        archer: { name: '弓手', damage: 19, melee: 10, windup: 3.00, hp: 1, score: 100, color: '#dd7966' },
-        quick: { name: '疾射', damage: 14, melee: 9, windup: 2.35, hp: 1, score: 120, color: '#e8ad5d' },
-        armor: { name: '铁卫', damage: 27, melee: 14, windup: 3.25, hp: 2, score: 160, color: '#b8bbb5' },
-        shield: { name: '盾卫', damage: 23, melee: 12, windup: 3.00, hp: 1, score: 170, color: '#d4aa61' },
-        runner: { name: '游弓', damage: 17, melee: 10, windup: 2.80, hp: 1, score: 140, color: '#c59cdd' },
-        elite: { name: '逐风将', damage: 30, melee: 16, windup: 2.60, hp: 2, score: 250, color: '#fa6559' }
+        archer: { name: '弓手', damage: 16, melee: 6, windup: 3.00, hp: 1, score: 2, color: '#dd7966' },
+        quick: { name: '疾射', damage: 12, melee: 5, windup: 2.35, hp: 1, score: 2, color: '#e8ad5d' },
+        armor: { name: '铁卫', damage: 22, melee: 7, windup: 3.25, hp: 1, score: 3, color: '#b8bbb5' },
+        shield: { name: '盾卫', damage: 19, melee: 7, windup: 3.00, hp: 1, score: 3, color: '#d4aa61' },
+        runner: { name: '游弓', damage: 15, melee: 6, windup: 2.80, hp: 1, score: 2, color: '#c59cdd' },
+        elite: { name: '逐风将', damage: 24, melee: 8, windup: 2.60, hp: 1, score: 5, color: '#fa6559' }
     },
     shieldPeriod: 2.8, shieldOpen: 1.3,
     palette: {
-        sky: '#101f29', deep: '#0a1922', ink: '#0c252d', mountain: '#1e4248',
-        paper: '#f1e6c8', muted: '#9cae9f', jade: '#79d5bc', gold: '#f2c66e',
-        coral: '#e97765', stone: '#526963', stoneLight: '#8b9b83'
+        sky: '#6baec0', deep: '#1c2c50', ink: '#24365d', mountain: '#70749d',
+        paper: '#fffaf2', muted: '#bfd2e3', jade: '#63cfa2', gold: '#edc94e',
+        coral: '#df7081', stone: '#587db0', stoneLight: '#8cc9d5'
     }
 };
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -106,6 +109,8 @@ class Game {
         this.landSquash = 0;
         this.comboIdle = 0;
         this.consecutiveMiss = 0;
+        this.recentDamageJumps = 0;
+        this.damagedThisJump = false;
         this.paused = false;
         this.pauseReason = '';
         this.help = false;
@@ -120,10 +125,13 @@ class Game {
         this.bannerTime = 0;
         this.helpStep = 0;
         this.scoreFlashTime = 0;
+        this.scoreFlashDuration = 1.05;
         this.scoreFlashJump = 0;
         this.scoreFlashSkip = 0;
         this.scoreFlashCombo = 0;
+        this.scoreFlashBase = 1;
         this.pullTarget = null;
+        this.standingPlatform = null;
         this.activeShooterId = null;
         this.meleePlatform = null;
         this.meleeTimer = 0;
@@ -157,9 +165,10 @@ class Game {
         this.generator = new WorldGenerator_1.WorldGenerator(this.seed);
         this.platforms = [];
         this.history = [];
+        this.standingPlatform = null;
         this.player = { x: 310, y: 503 };
         this.cameraX = 0;
-        this.history.push({ id: 0, x: 310, y: 507, width: 185, kind: 'safe', enemies: [], heal: 0, value: 1, label: '青岚渡', tier: 0, visited: true, shake: 0, seed: 3, anchorX: 310, anchorY: 465 });
+        this.history.push({ id: 0, x: 310, y: 507, width: 245, kind: 'start', enemies: [], heal: 0, baseScore: 1, value: 1, label: '主舞台', tier: 0, visited: true, shake: 0, seed: 3, anchorX: 310, anchorY: 465 });
         this.nextGroup();
     }
     start(sameSeed = false) {
@@ -185,9 +194,12 @@ class Game {
         this.landSquash = 0;
         this.comboIdle = 0;
         this.consecutiveMiss = 0;
+        this.recentDamageJumps = 0;
+        this.damagedThisJump = false;
         this.activeShooterId = null;
         this.meleePlatform = null;
         this.meleeTimer = 0;
+        this.standingPlatform = null;
         this.reviveUsed = false;
         this.rewarded = false;
         this.adPending = false;
@@ -202,11 +214,13 @@ class Game {
         this.notice = '';
         this.noticeTime = 0;
         this.scoreFlashTime = 0;
+        this.scoreFlashDuration = 1.05;
         this.scoreFlashJump = 0;
         this.scoreFlashSkip = 0;
         this.scoreFlashCombo = 0;
+        this.scoreFlashBase = 1;
         this.prepareWorld();
-        this.banner = '青 岚 渡';
+        this.banner = '跃 动 竞 技 场';
         this.bannerTime = 1.8;
         this.tutorialPrompt();
         this.audio.unlock();
@@ -219,7 +233,7 @@ class Game {
             this.banner = '逐风将 · 三崖追猎';
             this.bannerTime = 2.0;
         }
-        const fresh = this.generator.make({ x: this.player.x, y: this.player.y, elapsed: this.elapsed, step: this.step, hp: this.hp, combo: this.stats.combo, level: this.level, misses: this.consecutiveMiss, bossPhase: this.bossPhase });
+        const fresh = this.generator.make({ x: this.player.x, y: this.player.y, elapsed: this.elapsed, step: this.step, hp: this.hp, combo: this.stats.combo, level: this.level, misses: this.consecutiveMiss, damagePressure: this.recentDamageJumps, distance: this.stats.distance, bossPhase: this.bossPhase });
         for (const p of fresh)
             (0, TargetingSystem_1.alignPierce)(p, { x: this.player.x + 17, y: this.player.y - 54 });
         // Platforms that were already visible are real world objects, not a disposable preview.
@@ -229,9 +243,9 @@ class Game {
     }
     tutorialPrompt() {
         const text = [
-            '第1跳 · 单人台：屏幕任意位置按住，松手投矛',
-            '第2跳 · 双人台：按久一点飞得更远，一矛穿透两人',
-            '第3跳 · 回血台：继续长按控制距离，落地自动回血',
+            '第1跳 · 单人台：GREAT 可击杀普通敌人；PERFECT 才续 Combo',
+            '第2跳 · 双人台：连续 PERFECT 才有 Combo；GREAT 可杀但不续连击',
+            '第3跳 · 回血台：普通命中只挂绳不杀敌；落地后要立刻继续跳',
             '你已经完全学会了，提示就取消了哦！祝少侠好运！'
         ][Math.min(this.step, 3)];
         this.say(text, this.step < 3 ? 3.6 : 3.0);
@@ -278,6 +292,7 @@ class Game {
         this.power = 0;
         this.fullPulse = false;
         this.perfectPulse = false;
+        this.audio.startCharge();
         this.haptic.pulse('charge');
     }
     move(x, y) {
@@ -379,6 +394,8 @@ class Game {
                         this.arrows = [];
                         this.meleePlatform = null;
                         this.meleeTimer = 0;
+                        this.recentDamageJumps = 0;
+                        this.damagedThisJump = false;
                         this.grace = 2;
                         this.invuln = 1.2;
                         if (!this.platforms.length)
@@ -418,7 +435,7 @@ class Game {
         if (!resolved)
             return;
         this.selected = this.platforms.findIndex(p => p.id === resolved.platform.id);
-        this.shot = (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, resolved.platform, this.power, this.elapsed, this.step < 3);
+        this.shot = (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, resolved.platform, this.power, this.elapsed, this.step < 3 ? this.step : -1);
         this.state = 'throwing';
         this.timer = 0;
         this.freeze = .018;
@@ -437,20 +454,26 @@ class Game {
             return;
         }
         if (!hit.kill) {
-            this.fx.burst(e.x, e.y - 30, '#adbbbd', 13);
-            this.audio.play('block');
-            this.fx.text(e.x, e.y - 91, '未清场 · 落地危险', balance_1.B.palette.coral, 22);
+            this.fx.burst(e.x, e.y - 30, '#7fdfff', 12);
+            this.freeze = balance_1.B.hitStop;
+            this.shake = Math.max(this.shake, 2.2);
+            this.haptic.pulse('hit');
+            this.audio.play('hit');
+            if ((this.shot?.hits.length ?? 0) === 1) {
+                const text = hit.quality === 'great' ? 'GREAT · 强敌需 PERFECT' : '普通命中 · 敌人存活';
+                this.fx.text(e.x, e.y - 91, text, balance_1.B.palette.coral, 21);
+            }
             return;
         }
-        (0, ScoreSystem_1.recordKill)(this.stats, hit.head);
-        this.fx.burst(e.x, e.y - 48, hit.head ? balance_1.B.palette.gold : balance_1.B.palette.coral, hit.head ? 26 : 13);
-        this.fx.ring(e.x, e.y - 45, hit.head ? balance_1.B.palette.gold : balance_1.B.palette.coral);
-        if ((this.shot?.kills ?? 1) === 1)
-            this.fx.text(this.target.x, e.y - 115, hit.head ? 'PERFECT' : '击破', hit.head ? balance_1.B.palette.gold : balance_1.B.palette.paper, hit.head ? 32 : 23);
-        this.freeze = hit.head ? balance_1.B.perfectStop : balance_1.B.hitStop;
-        this.shake = Math.max(this.shake, hit.head ? 5 : 2.4);
-        this.haptic.pulse(hit.head ? 'perfect' : 'hit');
-        this.audio.play(hit.head ? 'perfect' : 'hit');
+        const perfectKill = hit.quality === 'perfect';
+        const killBonus = (0, ScoreSystem_1.recordKill)(this.stats, perfectKill, balance_1.B.enemies[e.kind].score);
+        this.fx.burst(e.x, e.y - 48, perfectKill ? balance_1.B.palette.gold : '#70efff', perfectKill ? 26 : 17);
+        this.fx.ring(e.x, e.y - 45, perfectKill ? balance_1.B.palette.gold : '#70efff');
+        this.fx.text(e.x, e.y - 115, (perfectKill ? 'PERFECT' : 'GREAT') + ' +' + killBonus, perfectKill ? balance_1.B.palette.gold : '#70efff', perfectKill ? 30 : 25);
+        this.freeze = perfectKill ? balance_1.B.perfectStop : balance_1.B.hitStop;
+        this.shake = Math.max(this.shake, perfectKill ? 5 : 3);
+        this.haptic.pulse(perfectKill ? 'perfect' : 'hit');
+        this.audio.play(perfectKill ? 'perfect' : 'hit');
     }
     beginPull() {
         const p = this.platforms.find(v => v.id === this.shot?.platformId);
@@ -469,11 +492,25 @@ class Game {
         this.fx.ring(this.shot.pos.x, this.shot.pos.y, balance_1.B.palette.jade);
         const ordered = this.platforms.filter(v => !v.visited && v.x > this.player.x + 72).sort((a, b) => a.x - b.x);
         const targetRank = ordered.findIndex(v => v.id === p.id);
-        const award = (0, ScoreSystem_1.awardJump)(this.stats, targetRank === 1);
+        const perfectJump = !!p.moving || (this.shot.quality === 'perfect' && this.shot.heads > 0);
+        const award = (0, ScoreSystem_1.awardJump)(this.stats, targetRank === 1, perfectJump, p.baseScore || 1);
         this.scoreFlashJump = award.jump;
         this.scoreFlashSkip = award.skip;
         this.scoreFlashCombo = award.combo;
-        this.scoreFlashTime = 1.05;
+        this.scoreFlashBase = award.base;
+        this.scoreFlashDuration = (award.skip > 0 || award.base >= 20 || award.combo >= 5) ? 1.02 : (award.base >= 10 || award.combo >= 3 ? .88 : .72);
+        this.scoreFlashTime = this.scoreFlashDuration;
+        if (p.moving) {
+            this.banner = '流 动 台 · PERFECT';
+            this.bannerTime = 1.05;
+            this.fx.text(p.x, p.y - 118, '移动台 PERFECT', balance_1.B.palette.gold, 29, 1.0);
+            this.audio.play('perfect');
+            this.haptic.pulse('perfect');
+        }
+        if (award.broke) {
+            this.fx.text(this.player.x + 45, this.player.y - 124, 'PERFECT COMBO 中断', balance_1.B.palette.coral, 25, .8);
+            this.lastEvent = '未出 PERFECT · Combo 归零';
+        }
         if (award.combo >= 2)
             this.audio.play('combo', award.jump);
         if (award.skip) {
@@ -497,6 +534,7 @@ class Game {
         if (!p)
             return;
         this.player = { ...this.playerTo };
+        this.standingPlatform = p;
         p.visited = true;
         p.shake = .24;
         this.history.push(p);
@@ -511,15 +549,15 @@ class Game {
         this.haptic.pulse('land');
         this.shake = Math.max(this.shake, 2);
         if (p.heal) {
-            const hp = Math.min(balance_1.B.hp, this.hp + p.heal), delta = hp - this.hp;
-            this.hp = hp;
+            const delta = Math.max(0, balance_1.B.hp - this.hp);
+            this.hp = balance_1.B.hp;
             p.heal = 0;
             this.stats.healed += delta;
-            this.fx.text(this.player.x, this.player.y - 110, delta ? '生命 +' + delta : '生命充盈', balance_1.B.palette.jade, 29, 1.1);
+            this.fx.text(this.player.x, this.player.y - 110, delta ? '生命回满' : '生命充盈', balance_1.B.palette.jade, 31, 1.1);
             this.audio.play('heal');
-            this.fx.burst(this.player.x, this.player.y - 30, balance_1.B.palette.jade, 20, 'leaf');
-            if (this.hp <= 55)
-                this.say('接住了 · 继续向前', 1.25);
+            this.fx.burst(this.player.x, this.player.y - 30, balance_1.B.palette.jade, 24, 'leaf');
+            if (delta > 0)
+                this.say('满血回归 · 继续向前', 1.25);
         }
         if (p.kind === 'boss') {
             this.bossPhase--;
@@ -546,6 +584,8 @@ class Game {
         this.pullTarget = null;
         this.state = 'settling';
         this.timer = 0;
+        this.recentDamageJumps = this.damagedThisJump ? Math.min(3, this.recentDamageJumps + 1) : Math.max(0, this.recentDamageJumps - 1);
+        this.damagedThisJump = false;
         this.nextGroup(p);
         if (this.step <= 3) {
             if (survivors.length && this.step === 2)
@@ -554,18 +594,11 @@ class Game {
                 this.tutorialPrompt();
         }
     }
-    breakCombo(reason = '敌人已经出手') {
-        if (this.stats.combo <= 0)
-            return;
-        this.stats.combo = 0;
-        this.fx.text(this.player.x, this.player.y - 128, '连跳中断', balance_1.B.palette.coral, 29, .72);
-        this.lastEvent = reason + ' · 连跳归 1';
-    }
     miss(reason = '投空 · 人已跃出') {
         this.stats.misses++;
         this.stats.combo = 0;
         this.consecutiveMiss++;
-        this.deathReason = '标枪落空 · 坠下悬崖';
+        this.deathReason = '标枪落空 · 坠出赛场';
         this.meleePlatform = null;
         this.meleeTimer = 0;
         const dx = (0, balance_1.clamp)((0, TargetingSystem_1.rangeForPower)(this.shot?.power ?? this.power) * .70, balance_1.B.fallForwardMin, balance_1.B.fallForwardMax);
@@ -581,7 +614,7 @@ class Game {
     hurt(damage, source, mode = 'ranged') {
         if (this.invuln > 0 || this.state === 'dead' || this.state === 'result' || this.state === 'menu' || this.state === 'falling')
             return;
-        this.breakCombo(source + '发动攻击');
+        this.damagedThisJump = true;
         this.hp = Math.max(0, this.hp - damage);
         this.stats.damage += damage;
         this.invuln = mode === 'melee' ? balance_1.B.meleeInvuln : balance_1.B.damageInvuln;
@@ -635,6 +668,23 @@ class Game {
         }
         this.elapsed += dt;
         this.level = (0, DifficultySystem_1.difficulty)(this.elapsed, this.step);
+        // Moving challenge platforms use a deterministic constant-speed horizontal ping-pong.
+        // There is deliberately no vertical motion: the game's skill axis stays one-dimensional.
+        const movingPlatforms = [...this.platforms];
+        if (this.standingPlatform?.moving && !movingPlatforms.includes(this.standingPlatform))
+            movingPlatforms.push(this.standingPlatform);
+        for (const p of movingPlatforms) {
+            if (!p.moving) continue;
+            let nx = p.x + p.moveDir * p.moveSpeed * dt;
+            if (nx > p.moveMax) { nx = p.moveMax - (nx - p.moveMax); p.moveDir = -1; }
+            else if (nx < p.moveMin) { nx = p.moveMin + (p.moveMin - nx); p.moveDir = 1; }
+            p.x = nx;
+            p.anchorX = p.x + 12;
+        }
+        if (this.standingPlatform?.moving && ['ready', 'charging', 'throwing', 'settling'].includes(this.state)) {
+            this.player.x = this.standingPlatform.x - 25;
+            this.player.y = this.standingPlatform.y - 4;
+        }
         this.invuln = Math.max(0, this.invuln - dt);
         this.grace = Math.max(0, this.grace - dt);
         this.comboIdle += dt;
@@ -686,7 +736,6 @@ class Game {
                     if (before > .5 && e.timer <= .5)
                         this.audio.play('warn');
                     if (e.timer <= 0) {
-                        this.breakCombo(balance_1.B.enemies[e.kind].name + '已出手');
                         if (this.arrows.length < 12)
                             this.arrows.push({ x: e.x - 18, y: e.y - 38, fromX: e.x - 18, fromY: e.y - 38, toX: this.player.x, toY: this.player.y - 32, time: 0, duration: balance_1.B.arrowFlight + (e.x - this.player.x) / 3800, damage: balance_1.B.enemies[e.kind].damage, enemy: balance_1.B.enemies[e.kind].name, active: true });
                         e.firstAttack = false;
@@ -726,10 +775,10 @@ class Game {
                 this.meleeTimer -= dt;
                 if (this.meleeTimer <= 0) {
                     this.meleeTimer = balance_1.B.meleeInterval;
-                    const damage = survivors.reduce((sum, e) => sum + balance_1.B.enemies[e.kind].melee, 0);
+                    const meleeWeights = [1, .65, .45];
+                    const damage = Math.round(survivors.reduce((sum, e, i) => sum + balance_1.B.enemies[e.kind].melee * meleeWeights[Math.min(i, meleeWeights.length - 1)], 0));
                     for (const e of survivors)
                         e.hit = .16;
-                    this.breakCombo(`${survivors.length}名残敌已出手`);
                     this.fx.burst(this.player.x - 6, this.player.y - 35, balance_1.B.palette.coral, 12);
                     this.hurt(damage, `${survivors.length}名残敌`, 'melee');
                 }
@@ -783,6 +832,11 @@ class Game {
         }
         else if (this.state === 'pulling') {
             this.timer += dt;
+            if (this.pullTarget?.moving) {
+                this.playerTo.x = this.pullTarget.x - 25;
+                this.playerTo.y = this.pullTarget.y - 4;
+                if (this.shot) { this.shot.pos.x = this.pullTarget.anchorX; this.shot.pos.y = this.pullTarget.anchorY; }
+            }
             const t = (0, balance_1.clamp)(this.timer / this.ropeDuration, 0, 1), e = (0, math_1.smooth)(t);
             this.player.x = (0, balance_1.lerp)(this.playerFrom.x, this.playerTo.x, e);
             this.player.y = (0, balance_1.lerp)(this.playerFrom.y, this.playerTo.y, e) - Math.sin(t * Math.PI) * balance_1.B.ropeArc;
@@ -799,8 +853,8 @@ class Game {
         this.cameraX = (0, balance_1.lerp)(this.cameraX, Math.max(0, this.player.x - 320), Math.min(1, dt * (this.state === 'pulling' ? 10 : 14)));
         this.maxActive = Math.max(this.maxActive, this.platforms.reduce((n, p) => n + p.enemies.length, 0) + this.history.length + this.arrows.length + this.fx.particles.filter(p => p.life > 0).length);
     }
-    preview(power = this.power) { const r = this.resolveTarget(power); return r ? (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, r.platform, power, this.elapsed, this.step < 3) : null; }
-    snapshot() { return { state: this.state, hp: this.hp, seed: this.seed, step: this.step, elapsed: this.elapsed, level: this.level, selected: this.selected, ideal: this.ideal, power: this.power, cameraX: this.cameraX, player: { ...this.player }, stats: { ...this.stats }, pattern: this.generator.pattern, patternId: this.generator.patternId, platforms: this.platforms.map(p => ({ id: p.id, x: p.x, y: p.y, kind: p.kind, heal: p.heal, enemies: p.enemies.map(e => ({ id: e.id, kind: e.kind, hp: e.hp, open: e.open, timer: e.timer, firstAttack: !!e.firstAttack, alive: e.alive })) })), objects: { platforms: this.platforms.length, history: this.history.length, arrows: this.arrows.length, particles: this.fx.particles.filter(p => p.life > 0).length, maxActive: this.maxActive }, melee: { platformId: this.meleePlatform?.id ?? null, survivors: this.meleePlatform?.enemies.filter(e => e.alive).length ?? 0, timer: this.meleeTimer }, fps: this.fps, paused: this.paused, portrait: false, forcedLandscape: true, reviveUsed: this.reviveUsed, activeShooterId: this.activeShooterId, autoTargetId: this.resolveTarget(this.power)?.platform.id ?? null, autoTargetRank: this.resolveTarget(this.power)?.rank ?? -1, intendedRange: (0, TargetingSystem_1.rangeForPower)(this.power) }; }
+    preview(power = this.power) { const r = this.resolveTarget(power); return r ? (0, TargetingSystem_1.makeShot)({ x: this.player.x + 17, y: this.player.y - 54 }, r.platform, power, this.elapsed, this.step < 3 ? this.step : -1) : null; }
+    snapshot() { return { state: this.state, hp: this.hp, seed: this.seed, step: this.step, elapsed: this.elapsed, level: this.level, selected: this.selected, ideal: this.ideal, power: this.power, cameraX: this.cameraX, player: { ...this.player }, stats: { ...this.stats }, pattern: this.generator.pattern, patternId: this.generator.patternId, platforms: this.platforms.map(p => ({ id: p.id, x: p.x, y: p.y, kind: p.kind, heal: p.heal, baseScore: p.baseScore || 1, enemies: p.enemies.map(e => ({ id: e.id, kind: e.kind, hp: e.hp, open: e.open, timer: e.timer, firstAttack: !!e.firstAttack, alive: e.alive })) })), objects: { platforms: this.platforms.length, history: this.history.length, arrows: this.arrows.length, particles: this.fx.particles.filter(p => p.life > 0).length, maxActive: this.maxActive }, melee: { platformId: this.meleePlatform?.id ?? null, survivors: this.meleePlatform?.enemies.filter(e => e.alive).length ?? 0, timer: this.meleeTimer }, fps: this.fps, paused: this.paused, portrait: false, forcedLandscape: true, reviveUsed: this.reviveUsed, activeShooterId: this.activeShooterId, recentDamageJumps: this.recentDamageJumps, autoTargetId: this.resolveTarget(this.power)?.platform.id ?? null, autoTargetRank: this.resolveTarget(this.power)?.rank ?? -1, intendedRange: (0, TargetingSystem_1.rangeForPower)(this.power) }; }
     destroy() { this.audio.destroy(); for (const fn of this.listeners)
         fn(); }
 }
@@ -907,10 +961,124 @@ class Renderer {
         this.layers = [];
         this.rockCache = new Map();
         this.ctx = ctx;
+        this.assets = {};
+        const files = {
+            arena: 'assets/background/arena_bg.png',
+            logo: 'assets/ui/logo.png',
+            heart: 'assets/ui/heart.png',
+            crown: 'assets/ui/crown.png',
+            hero_idle: 'assets/hero/idle.png',
+            hero_charge: 'assets/hero/charge.png',
+            hero_throw: 'assets/hero/throw.png',
+            hero_pull: 'assets/hero/pull.png',
+            hero_land: 'assets/hero/land.png',
+            hero_hurt: 'assets/hero/hurt.png',
+            hero_fall: 'assets/hero/fall.png',
+            hero_victory: 'assets/hero/victory.png',
+            enemy_melee: 'assets/enemies/melee_idle.png',
+            enemy_attack: 'assets/enemies/melee_attack.png',
+            enemy_shield: 'assets/enemies/shield_idle.png',
+            enemy_defend: 'assets/enemies/shield_defend.png',
+            enemy_ranged: 'assets/enemies/ranged_aim.png',
+            plat_start: 'assets/platforms/start.png',
+            plat_round: 'assets/platforms/round_blue.png',
+            plat_rect: 'assets/platforms/rect_cyan.png',
+            plat_pink: 'assets/platforms/tall_pink.png',
+            plat_heal: 'assets/platforms/heal_green.png',
+            plat_wide: 'assets/platforms/wide_purple.png',
+            plat_danger: 'assets/platforms/danger_red.png',
+            plat_crown: 'assets/platforms/crown_gold.png',
+            deco_blimp: 'assets/decor/blimp.png',
+            deco_health: 'assets/decor/health_bottle.png',
+            deco_anchor: 'assets/decor/anchor.png'
+        };
+        for (const [k, src] of Object.entries(files)) {
+            const im = new Image();
+            im.decoding = 'async';
+            im.src = src;
+            this.assets[k] = im;
+        }
+        this.themes = [
+            { wash: 'rgba(237,201,78,.026)', accent: '#e5c34d', accent2: '#d96d98' },
+            { wash: 'rgba(110,196,211,.028)', accent: '#72c3d2', accent2: '#d98a59' },
+            { wash: 'rgba(211,111,160,.024)', accent: '#d577a5', accent2: '#78c796' },
+            { wash: 'rgba(124,116,198,.026)', accent: '#8178c6', accent2: '#e5c34d' },
+            { wash: 'rgba(99,207,162,.022)', accent: '#70c59f', accent2: '#6ab7cf' }
+        ];
         this.sky = this.makeSky();
         this.layers = [this.makeMountains(0), this.makeMountains(1), this.makeMountains(2)];
     }
     canvas(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+    asset(name) {
+        const im = this.assets[name];
+        return im && im.complete && im.naturalWidth ? im : null;
+    }
+    drawSprite(name, x, y, w, h, alpha = 1, flip = false) {
+        const im = this.asset(name);
+        if (!im) return false;
+        const c = this.ctx;
+        c.save();
+        c.globalAlpha *= alpha;
+        if (flip) {
+            c.translate(x + w, y);
+            c.scale(-1, 1);
+            c.drawImage(im, 0, 0, w, h);
+        } else c.drawImage(im, x, y, w, h);
+        c.restore();
+        return true;
+    }
+    drawBottom(name, cx, bottom, height, alpha = 1, flip = false) {
+        const im = this.asset(name);
+        if (!im) return false;
+        const w = height * im.naturalWidth / im.naturalHeight;
+        return this.drawSprite(name, cx - w / 2, bottom - height, w, height, alpha, flip);
+    }
+    outlinedText(t, x, y, size, fill = '#fff', stroke = '#15204f', align = 'center', weight = '800', line = 6) {
+        const c = this.ctx;
+        c.font = `${weight} ${size}px ${FONT}`;
+        c.textAlign = align;
+        c.textBaseline = 'middle';
+        c.lineJoin = 'round';
+        c.strokeStyle = stroke;
+        c.lineWidth = line;
+        c.strokeText(t, x, y);
+        c.fillStyle = fill;
+        c.fillText(t, x, y);
+    }
+    theme(g) { return this.themes[Math.floor((g.step || 0) / 4) % this.themes.length]; }
+    platformAsset(p) {
+        if (p.kind === 'start') return 'plat_start';
+        if (p.kind === 'moving') return 'plat_round';
+        if ((p.baseScore || 1) >= 20) return 'plat_crown';
+        if (p.kind === 'heal') return 'plat_heal';
+        if (p.kind === 'risk') return p.seed % 2 ? 'plat_danger' : 'plat_pink';
+        if (p.kind === 'safe') return 'plat_wide';
+        if (p.kind === 'pierce') return p.enemies.length >= 3 ? 'plat_wide' : 'plat_rect';
+        if (p.kind === 'boss') return 'plat_crown';
+        if ((p.baseScore || 1) >= 10) return 'plat_pink';
+        if ((p.baseScore || 1) >= 5) return 'plat_rect';
+        return 'plat_round';
+    }
+    platformTopRatio(name) {
+        return name === 'plat_pink' ? .105 : name === 'plat_wide' ? .13 : name === 'plat_heal' ? .14 : name === 'plat_danger' ? .11 : name === 'plat_start' ? .24 : .13;
+    }
+    burst(x, y, r, c1 = '#ffd83d', c2 = '#ff4fa7', points = 16) {
+        const c = this.ctx;
+        c.save();
+        c.beginPath();
+        for (let i = 0; i < points * 2; i++) {
+            const a = -Math.PI / 2 + i * Math.PI / points;
+            const rr = i % 2 ? r * .68 : r * (1 + .08 * Math.sin(i * 1.7));
+            const px = x + Math.cos(a) * rr, py = y + Math.sin(a) * rr;
+            i ? c.lineTo(px, py) : c.moveTo(px, py);
+        }
+        c.closePath();
+        const grd = c.createLinearGradient(x-r, y-r, x+r, y+r);
+        grd.addColorStop(0, c1); grd.addColorStop(1, c2);
+        c.fillStyle = grd; c.fill();
+        c.strokeStyle = '#17205b'; c.lineWidth = 5; c.stroke();
+        c.restore();
+    }
     makeSky() {
         const c = this.canvas(1280, 720), g = c.getContext('2d');
         let a = g.createLinearGradient(0, 0, 0, 720);
@@ -1010,41 +1178,64 @@ class Renderer {
         c.fillStyle = color;
         c.fill();
     } }
-    button(g, id, label, x, y, w, h, primary = false) { g.ui.push({ id, x, y, w, h }); this.round(x, y, w, h, 8, primary ? '#d6c491' : 'rgba(12,33,40,.85)', primary ? '#f3dfaa' : '#617871'); if (primary) {
-        this.diamond(x + 26, y + h / 2, 4, '#38514e');
-        this.text(label, x + w / 2 + 5, y + h / 2, 21, '#172f34', 'center', '600');
-        this.line(x + 14, y + 6, x + w - 14, y + 6, 'rgba(255,249,217,.32)');
+    button(g, id, label, x, y, w, h, primary = false) {
+        g.ui.push({ id, x, y, w, h });
+        const c = this.ctx;
+        const grd = c.createLinearGradient(x, y, x + w, y + h);
+        if (primary) { grd.addColorStop(0, '#f0d56a'); grd.addColorStop(.58, '#e9b64f'); grd.addColorStop(1, '#df8b62'); }
+        else { grd.addColorStop(0, 'rgba(25,40,73,.94)'); grd.addColorStop(1, 'rgba(43,54,91,.92)'); }
+        this.round(x, y, w, h, 14, grd, primary ? 'rgba(255,242,190,.88)' : 'rgba(140,201,213,.55)');
+        c.save(); c.shadowColor = primary ? 'rgba(234,184,79,.20)' : 'rgba(92,160,180,.14)'; c.shadowBlur = 8;
+        this.outlinedText(label, x + w / 2, y + h / 2, primary ? 22 : 18, primary ? '#1c2c50' : '#f7fbff', primary ? '#fff0c0' : '#1c2c50', 'center', '800', primary ? 2 : 3);
+        c.restore();
     }
-    else
-        this.text(label, x + w / 2, y + h / 2, 18, P.paper, 'center'); }
-    iconButton(g, id, label, x, y) { g.ui.push({ id, x: x - 23, y: y - 23, w: 46, h: 46 }); this.round(x - 21, y - 21, 42, 42, 9, 'rgba(11,30,37,.62)', 'rgba(187,205,174,.24)'); this.text(label, x, y - 1, 21, P.paper, 'center'); }
+    iconButton(g, id, label, x, y) {
+        g.ui.push({ id, x: x - 25, y: y - 25, w: 50, h: 50 });
+        const c = this.ctx;
+        const grd = c.createLinearGradient(x - 22, y - 22, x + 22, y + 22);
+        grd.addColorStop(0, 'rgba(25,40,73,.94)'); grd.addColorStop(1, 'rgba(45,55,90,.92)');
+        this.round(x - 22, y - 22, 44, 44, 11, grd, 'rgba(140,201,213,.48)');
+        this.outlinedText(label, x, y, 20, '#f7fbff', '#1c2c50', 'center', '800', 2);
+    }
     background(g) {
         const c = this.ctx;
-        c.drawImage(this.sky, 0, 0);
-        for (let i = 0; i < 3; i++) {
-            const shift = (g.cameraX * (.10 + i * .09)) % 1920;
-            c.globalAlpha = i === 0 ? .65 : .90;
-            c.drawImage(this.layers[i], -shift, 0);
-            c.drawImage(this.layers[i], 1920 - shift, 0);
+        const bg = this.asset('arena');
+        if (bg) {
+            c.save();
+            c.globalAlpha = .96;
+            c.drawImage(bg, 0, 0, 1280, 720);
+            c.restore();
+        } else {
+            const a = c.createLinearGradient(0, 0, 0, 720);
+            a.addColorStop(0, '#79bdcb'); a.addColorStop(.62, '#88c5cf'); a.addColorStop(1, '#71779f');
+            c.fillStyle = a; c.fillRect(0, 0, 1280, 720);
         }
-        c.globalAlpha = 1;
-        for (let i = 0; i < 5; i++) {
-            const y = 340 + i * 72, x = ((g.visualTime * (4 + i * .8) + i * 437) % 1660) - 200;
-            let a = c.createLinearGradient(x - 180, y, x + 330, y);
-            a.addColorStop(0, 'rgba(158,185,161,0)');
-            a.addColorStop(.5, `rgba(158,185,161,${.055 - i * .006})`);
-            a.addColorStop(1, 'rgba(158,185,161,0)');
-            c.fillStyle = a;
+        // A cool veil gives the eye a stable resting field; dopamine colors are reserved for gameplay rewards.
+        const calm = c.createLinearGradient(0, 0, 0, 720);
+        calm.addColorStop(0, 'rgba(25,45,76,.08)'); calm.addColorStop(.55, 'rgba(30,58,82,.055)'); calm.addColorStop(1, 'rgba(27,41,73,.12)');
+        c.fillStyle = calm; c.fillRect(0, 0, 1280, 720);
+        const th = this.theme(g);
+        c.fillStyle = th.wash;
+        c.fillRect(0, 0, 1280, 720);
+        // Ambient show lights are deliberately sparse; high-energy color is saved for actual scoring moments.
+        for (let i = 0; i < 3; i++) {
+            const x = ((g.visualTime * (18 + i * 4) + i * 430) % 1740) - 260;
+            const grd = c.createLinearGradient(x, 0, x + 260, 0);
+            grd.addColorStop(0, 'rgba(255,255,255,0)');
+            grd.addColorStop(.5, i % 2 ? 'rgba(213,111,160,.025)' : 'rgba(229,195,77,.026)');
+            grd.addColorStop(1, 'rgba(255,255,255,0)');
+            c.fillStyle = grd;
             c.beginPath();
-            c.ellipse(x + 60, y, 430, 12 + i * 5, 0, 0, Math.PI * 2);
+            c.moveTo(x, 0); c.lineTo(x + 78, 0); c.lineTo(x + 330, 610); c.lineTo(x + 225, 610); c.closePath();
             c.fill();
         }
-        // Passing birds are decorative, and never consume seeded gameplay randomness.
-        for (let i = 0; i < 4; i++) {
-            const bx = ((i * 94 + g.visualTime * 13) % 1500) - 80, by = 180 + Math.sin(i) * 38;
-            this.line(bx - 5, by + Math.sin(g.visualTime * 3 + i) * 2, bx, by, 'rgba(12,31,36,.55)', 1.3);
-            this.line(bx, by, bx + 5, by + Math.sin(g.visualTime * 3 + i) * 2, 'rgba(12,31,36,.55)', 1.3);
+        // Horizontal direction cue stays visible without becoming a second visual subject.
+        c.globalAlpha = .06;
+        for (let i = 0; i < 6; i++) {
+            const xx = ((i * 245 - g.cameraX * .07) % 1710) - 190;
+            this.line(xx, 458 + (i % 3) * 30, xx + 72, 458 + (i % 3) * 30, i % 2 ? '#c879a5' : '#d9bd66', 2);
         }
+        c.globalAlpha = 1;
     }
     pine(c, x, y, s, col) { c.save(); c.translate(x, y); c.scale(s, s); c.strokeStyle = col; c.lineWidth = 6; c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(-12, -37, 2, -79); c.stroke(); for (let i = 0; i < 5; i++) {
         const py = -25 - i * 15, px = (i % 2 ? -7 : 3);
@@ -1135,273 +1326,127 @@ class Renderer {
     }
     drawPlatform(p, g, selected, history = false) {
         const c = this.ctx, x = p.x - g.cameraX, y = p.y;
+        if (x < -360 || x > 1580) return;
         const shake = p.shake > 0 ? Math.sin(g.visualTime * 80) * p.shake * 9 : 0;
-        if (x < -300 || x > 1510)
-            return;
+        const assetName = history ? (p.kind === 'safe' ? 'plat_wide' : this.platformAsset(p)) : this.platformAsset(p);
+        const im = this.asset(assetName);
         c.save();
         c.translate(0, shake);
-        c.drawImage(this.rock(p), x - p.width / 2 - 45, y - 10);
-        if (p.enemies.length > 1) { // Each enemy stands on a real small step following the spear's visible line.
-            for (const e of p.enemies) {
-                const sy = e.y + 6;
-                this.round(e.baseX - g.cameraX - 19, sy, 38, Math.max(5, y - sy + 10), 2, '#718774');
-                this.line(e.baseX - g.cameraX - 18, sy, e.baseX - g.cameraX + 19, sy, '#a9b79b', 1.4);
-            }
-            this.line(x - p.width / 2 + 7, y - 2, x + p.width / 2 - 7, y - 2, '#ac9470', 2);
+        let dispW = Math.max(105, p.width + (assetName === 'plat_wide' ? 46 : assetName === 'plat_pink' ? 36 : 30));
+        if (p.kind === 'risk') dispW *= .92;
+        if (p.kind === 'safe') dispW *= 1.08;
+        if (im) {
+            const dispH = dispW * im.naturalHeight / im.naturalWidth;
+            const top = this.platformTopRatio(assetName);
+            const baseScore = p.baseScore || 1;
+            const highlight = p.kind === 'moving' || p.kind === 'heal' || baseScore >= 20;
+            const medium = p.kind === 'risk' || p.kind === 'boss' || p.kind === 'pierce' || baseScore >= 10;
+            const soft = baseScore >= 5;
+            c.save();
+            c.globalAlpha = history ? .58 : 1;
+            c.filter = history ? 'saturate(0.52) brightness(0.88)' : highlight ? 'saturate(1.02) brightness(1.02)' : medium ? 'saturate(0.90) brightness(0.98)' : soft ? 'saturate(0.82) brightness(0.97)' : 'saturate(0.70) brightness(0.95)';
+            c.drawImage(im, x - dispW / 2, y - dispH * top, dispW, dispH);
+            c.restore();
+        } else {
+            this.round(x - p.width / 2, y - 8, p.width, 18, 7, '#2e7cd3', '#70efff');
         }
         if (!history) {
-            const col = p.kind === 'heal' ? P.jade : p.kind === 'risk' || p.kind === 'boss' ? P.coral : p.kind === 'pierce' ? P.gold : P.muted;
+            const col = p.kind === 'heal' ? '#50f5a9' : p.kind === 'moving' ? '#54e9ff' : p.kind === 'risk' || p.kind === 'boss' ? '#ff5a72' : p.kind === 'pierce' ? '#ffd83d' : '#54e9ff';
             if (selected) {
-                c.strokeStyle = col;
-                c.lineWidth = 2;
-                c.globalAlpha = .6;
-                c.beginPath();
-                c.ellipse(x, y + 6, p.width / 2 + 14, 10, 0, 0, Math.PI * 2);
-                c.stroke();
+                c.globalAlpha = .62;
+                c.strokeStyle = '#f0dda0'; c.lineWidth = 3;
+                c.beginPath(); c.ellipse(x, y + 2, p.width / 2 + 24, 14, 0, 0, Math.PI * 2); c.stroke();
                 c.globalAlpha = 1;
             }
-            if (p.kind === 'risk' || p.kind === 'boss') {
-                this.line(x + p.width / 2 - 13, y - 6, x + p.width / 2 - 13, y - 70, '#a99a76', 3);
-                c.fillStyle = p.kind === 'boss' ? '#ba5148' : '#976245';
-                c.beginPath();
-                c.moveTo(x + p.width / 2 - 13, y - 70);
-                c.quadraticCurveTo(x + p.width / 2 + 17, y - 76, x + p.width / 2 + 27, y - 59);
-                c.lineTo(x + p.width / 2 - 13, y - 47);
-                c.closePath();
-                c.fill();
-                this.diamond(x + p.width / 2 + 1, y - 61, 4, '#e0c892');
+            if (p.heal) this.potion(x + p.width / 2 - 20, y - 28, g.visualTime);
+            if (!p.enemies.some(e => e.alive)) this.anchor(p.anchorX - g.cameraX, p.anchorY, g.visualTime);
+            // Functional chips are intentionally compact: the platform itself carries most of the meaning.
+            const baseScore = p.baseScore || 1;
+            const label = p.kind === 'heal' ? '回满血' : p.kind === 'moving' ? '↔ 流动台' : p.kind === 'risk' ? '高风险' : p.kind === 'pierce' ? (p.enemies.length + '人台') : p.kind === 'boss' ? '精英' : '';
+            if (label || baseScore > 1) {
+                const text = label ? (label + (baseScore > 1 ? ' · ' + baseScore + '分' : '')) : (baseScore + '分台');
+                const w = Math.max(74, 30 + text.length * 15);
+                this.round(x - w/2, y + 20, w, 26, 8, 'rgba(25,39,70,.80)', baseScore >= 20 ? 'rgba(237,201,78,.90)' : 'rgba(140,201,213,.55)');
+                this.outlinedText(text, x, y + 33, 13, baseScore >= 10 ? '#edc94e' : '#eef7fb', '#1c2c50', 'center', '800', 2);
             }
-            if (p.heal)
-                this.potion(x + p.width / 2 - 28, y - 26, g.visualTime);
-            if (!p.enemies.some(e => e.alive)) {
-                this.anchor(p.anchorX - g.cameraX, p.anchorY, g.visualTime);
-            }
-            const labelY = y + 38;
-            const w = p.kind === 'boss' ? 155 : p.kind === 'pierce' ? 126 : 128;
-            this.round(x - w / 2, labelY - 13, w, 27, 5, selected ? 'rgba(20,48,48,.95)' : 'rgba(12,30,36,.77)', selected ? col : 'rgba(132,159,139,.2)');
-            this.text(p.label, x, labelY, 14, col, 'center', selected ? '600' : '400');
-            const tag = ['近', '高', '远'][p.tier], cx = x - p.width / 2 - 4, cy = y - 103;
-            this.diamond(cx, cy, 13, selected ? col : '#67847b', true);
-            this.text(tag, cx, cy, 11, selected ? P.paper : P.muted, 'center');
         }
         c.restore();
     }
-    potion(x, y, t) { const c = this.ctx; const bob = Math.sin(t * 3) * 3; c.save(); c.translate(x, y + bob); const aura = c.createRadialGradient(0, 0, 3, 0, 0, 31); aura.addColorStop(0, 'rgba(103,216,178,.25)'); aura.addColorStop(1, 'rgba(103,216,178,0)'); c.fillStyle = aura; c.fillRect(-32, -32, 64, 64); c.fillStyle = '#79d7b1'; c.beginPath(); c.moveTo(-5, -16); c.lineTo(5, -16); c.lineTo(5, -8); c.bezierCurveTo(16, -4, 16, 9, 8, 14); c.quadraticCurveTo(0, 18, -8, 14); c.bezierCurveTo(-16, 9, -16, -4, -5, -8); c.closePath(); c.fill(); c.strokeStyle = '#d6efd0'; c.lineWidth = 1.2; c.stroke(); this.round(-7, -20, 14, 6, 2, '#d9c384'); c.fillStyle = '#194c43'; c.fillRect(-2, -4, 4, 14); c.fillRect(-7, 1, 14, 4); c.restore(); }
-    anchor(x, y, t) { const c = this.ctx; this.line(x, y + 46, x, y + 9, '#708b79', 4); this.diamond(x, y, 13, P.jade, true); this.diamond(x, y, 5, '#bce0bc'); c.strokeStyle = 'rgba(121,213,188,.25)'; c.lineWidth = 1; c.beginPath(); c.arc(x, y, 20 + Math.sin(t * 3) * 2, 0, Math.PI * 2); c.stroke(); }
+    potion(x, y, t) {
+        const bob = Math.sin(t * 3) * 3;
+        if (this.drawBottom('deco_health', x, y + 18 + bob, 44)) return;
+        const c = this.ctx; c.fillStyle = '#50f5a9'; c.beginPath(); c.arc(x, y + bob, 14, 0, Math.PI*2); c.fill();
+    }
+    anchor(x, y, t) {
+        if (this.drawBottom('deco_anchor', x, y + 22, 43, .9)) return;
+        const c = this.ctx; c.strokeStyle = '#52efff'; c.lineWidth = 3; c.beginPath(); c.arc(x,y,14,0,Math.PI*2); c.stroke();
+    }
     actor(x, y, isPlayer, g, e, scale = 1) {
         const c = this.ctx;
-        c.save();
-        c.translate(x, y);
-        c.scale(scale, scale);
-        const falling = isPlayer && g.state === 'falling', moving = isPlayer && (g.state === 'pulling' || falling), charge = isPlayer && g.state === 'charging', dead = e && !e.alive, melee = !isPlayer && !!e && g.meleePlatform?.id === e.platformId && e.alive;
-        if (dead) {
-            const t = (0, balance_1.clamp)(e.deadAt / .38, 0, 1);
-            c.globalAlpha = 1 - t;
-            c.translate(18 * t, 21 * t);
-            c.rotate(t * 1.35);
-            if (t >= 1) {
-                c.restore();
-                return;
-            }
-        }
-        if (isPlayer && g.invuln > 0)
-            c.globalAlpha = Math.floor(g.visualTime * 16) % 2 ? .55 : 1;
-        if (isPlayer && g.state === 'dead') {
-            c.rotate(Math.min(1, g.timer) * 1.5);
-            c.globalAlpha = Math.max(.15, 1 - g.timer);
-        }
-        if (isPlayer && g.landSquash > 0)
-            c.scale(1 + g.landSquash * .65, 1 - g.landSquash * .7);
-        if (falling)
-            c.rotate(.35 + (0, balance_1.clamp)(g.timer / balance_1.B.fallDuration, 0, 1) * 1.05);
-        else if (moving)
-            c.rotate(.25);
-        if (charge)
-            c.rotate(-g.power * .07);
-        const body = isPlayer ? '#e9dec0' : e?.kind === 'armor' ? '#b7c3b1' : e?.kind === 'runner' ? '#a89cb1' : '#c18472';
-        const cloak = isPlayer ? '#cf6c56' : e?.kind === 'elite' ? '#893d3d' : '#3a4846';
-        // Fabric pennant: its motion is tied to charge/pull rather than a static stick figure.
-        c.fillStyle = cloak;
-        c.beginPath();
-        c.moveTo(-4, -47);
-        c.quadraticCurveTo(-26 - (moving ? 20 : 0), -40 + Math.sin(g.visualTime * 7) * 4, -37 - (moving ? 40 : 0), -26);
-        c.lineTo(-26 - (moving ? 29 : 0), -22 + Math.sin(g.visualTime * 6) * 4);
-        c.quadraticCurveTo(-14, -23, -3, -35);
-        c.closePath();
-        c.fill();
-        c.strokeStyle = isPlayer ? '#253e3e' : '#243436';
-        c.lineWidth = 7;
-        c.lineCap = 'round';
-        c.beginPath();
-        c.moveTo(-6, -21);
-        c.lineTo(moving ? -13 : -10, moving ? -5 : -3);
-        c.lineTo(moving ? -4 : -17, 0);
-        c.moveTo(5, -20);
-        c.lineTo(moving ? 21 : 10, moving ? -8 : -3);
-        c.lineTo(moving ? 28 : 19, 0);
-        c.stroke();
-        c.fillStyle = body;
-        c.beginPath();
-        c.moveTo(-12, -47);
-        c.lineTo(8, -48);
-        c.lineTo(17, -22);
-        c.quadraticCurveTo(-1, -13, -18, -23);
-        c.closePath();
-        c.fill();
-        c.fillStyle = isPlayer ? '#668377' : '#59665d';
-        c.beginPath();
-        c.moveTo(-6, -45);
-        c.lineTo(4, -47);
-        c.lineTo(10, -23);
-        c.lineTo(-5, -23);
-        c.closePath();
-        c.fill();
-        this.line(-14, -26, 13, -26, '#a88456', 4);
-        if (e?.kind === 'armor' || e?.kind === 'elite') {
-            this.round(-13, -45, 26, 21, 5, '#748d87', '#bfbaa0');
-            this.line(-9, -34, 10, -34, '#d8d1b0');
-        }
-        c.fillStyle = e?.hit ? '#fff0c3' : '#dfc69f';
-        c.beginPath();
-        c.arc(-1, -55, 10, 0, Math.PI * 2);
-        c.fill();
-        c.fillStyle = isPlayer ? '#253934' : '#414744';
-        c.beginPath();
-        c.ellipse(-1, -61, 10, 6, 0, Math.PI, Math.PI * 2);
-        c.fill();
         if (isPlayer) {
-            c.fillStyle = '#d9cba0';
-            c.beginPath();
-            c.moveTo(-23, -60);
-            c.quadraticCurveTo(-10, -64, -2, -79);
-            c.quadraticCurveTo(10, -66, 20, -60);
-            c.closePath();
-            c.fill();
-            this.line(-22, -60, 19, -60, '#f3e4b9', 2);
-            this.line(-9, -58, 7, -58, '#5b6557', 2);
-        }
-        else {
-            this.line(-10, -58, 8, -58, cloak, 3);
-            if (e?.kind === 'elite') {
-                c.fillStyle = P.coral;
-                c.beginPath();
-                c.moveTo(-4, -65);
-                c.lineTo(3, -84);
-                c.lineTo(7, -63);
-                c.fill();
+            let name = 'hero_idle', h = 104 * scale;
+            if (g.state === 'charging') { name = 'hero_charge'; h = 102 * scale; }
+            else if (g.state === 'throwing' || g.state === 'retracting') { name = 'hero_throw'; h = 99 * scale; }
+            else if (g.state === 'pulling') { name = 'hero_pull'; h = 92 * scale; }
+            else if (g.state === 'falling' || g.state === 'dead') { name = 'hero_fall'; h = 106 * scale; }
+            else if (g.landSquash > .06) { name = 'hero_land'; h = 106 * scale; }
+            else if (g.invuln > 0 && g.flash > 0) { name = 'hero_hurt'; h = 104 * scale; }
+            c.save();
+            if (g.invuln > 0) c.globalAlpha = Math.floor(g.visualTime * 16) % 2 ? .55 : 1;
+            if (this.drawBottom(name, x, y + 7, h)) { c.restore(); return; }
+            c.restore();
+        } else if (e) {
+            const melee = g.meleePlatform?.id === e.platformId && e.alive;
+            let name = 'enemy_melee';
+            if (melee) name = 'enemy_attack';
+            else if (e.kind === 'shield') name = e.open ? 'enemy_shield' : 'enemy_defend';
+            else if (['archer','quick','runner'].includes(e.kind)) name = 'enemy_ranged';
+            const h = (e.kind === 'elite' ? 92 : e.kind === 'armor' ? 86 : 80) * scale;
+            c.save();
+            if (!e.alive) {
+                const t = (0, balance_1.clamp)(e.deadAt / .38, 0, 1);
+                c.globalAlpha = 1 - t;
+                c.translate(14 * t, 18 * t);
+                c.rotate(t * .85);
             }
-            this.line(3, -56, 5, -56, '#202e2b', 2);
+            if (this.drawBottom(name, x, y + 8, h)) { c.restore(); return; }
+            c.restore();
         }
-        c.strokeStyle = body;
-        c.lineWidth = 5;
-        c.beginPath();
-        if (isPlayer) {
-            c.moveTo(6, -44);
-            c.lineTo(charge ? -5 - g.power * 11 : 17, -47);
-            c.lineTo(charge ? 4 - g.power * 11 : 20, -53);
-            c.moveTo(-10, -41);
-            c.lineTo(moving ? 15 : -12, -32);
-        }
-        else if (melee) {
-            const jab = Math.sin(g.visualTime * 31 + e.id) * 5;
-            c.moveTo(-9, -43);
-            c.lineTo(-29 - jab, -34);
-            c.moveTo(6, -43);
-            c.lineTo(-21 - jab, -31);
-        }
-        else {
-            c.moveTo(-9, -43);
-            c.lineTo(-28, -38);
-            c.moveTo(6, -43);
-            c.lineTo(-15, -34);
-        }
-        c.stroke();
-        if (isPlayer && !['throwing', 'pulling', 'falling', 'retracting', 'dead'].includes(g.state)) {
-            const px = charge ? -g.power * 16 : 0;
-            this.line(-20 + px, -53, 51 + px, -57, '#b5915c', 3);
-            this.line(44 + px, -56, 58 + px, -59, '#e3e6cd', 4);
-        }
-        if (!isPlayer && e) {
-            if (melee) {
-                const jab = Math.sin(g.visualTime * 31 + e.id) * 5;
-                this.line(-28 - jab, -35, -49 - jab, -28, '#d7d1b7', 3);
-                c.fillStyle = P.coral;
-                c.beginPath();
-                c.moveTo(-53 - jab, -28);
-                c.lineTo(-44 - jab, -33);
-                c.lineTo(-45 - jab, -24);
-                c.closePath();
-                c.fill();
-            }
-            else if (e.kind === 'shield' && !e.open) {
-                c.fillStyle = '#af8b55';
-                c.beginPath();
-                c.ellipse(-24, -33, 12, 24, 0, 0, Math.PI * 2);
-                c.fill();
-                c.strokeStyle = '#d6c28b';
-                c.lineWidth = 2;
-                c.stroke();
-                this.diamond(-24, -33, 5, '#364d45');
-            }
-            else {
-                const rangedActive = e.id === g.activeShooterId;
-                const draw = rangedActive ? Math.min(8, (1 - e.timer / e.period) * 12) : 0;
-                c.strokeStyle = rangedActive && e.timer < .5 ? P.coral : '#bdab82';
-                c.lineWidth = 2;
-                c.beginPath();
-                c.ellipse(-30, -38, 11, 24, 0, Math.PI * .5, Math.PI * 1.5);
-                c.stroke();
-                this.line(-30, -62, -19 + draw, -38, rangedActive ? '#cfc3a1' : '#867f70');
-                this.line(-19 + draw, -38, -30, -14, rangedActive ? '#cfc3a1' : '#867f70');
-            }
-        }
+        // Minimal fallback while image assets finish decoding.
+        c.save(); c.translate(x, y);
+        c.fillStyle = isPlayer ? '#fff5e5' : '#e64d68';
+        c.beginPath(); c.arc(0, -32, isPlayer ? 16 : 14, 0, Math.PI*2); c.fill();
         c.restore();
     }
     enemy(e, g) {
         const x = e.x - g.cameraX, y = e.y;
         this.actor(x, y, false, g, e);
-        if (!e.alive)
-            return;
-        const c = this.ctx, melee = g.meleePlatform?.id === e.platformId, rangedActive = !melee && e.id === g.activeShooterId, ratio = rangedActive ? (0, balance_1.clamp)(1 - e.timer / e.period, 0, 1) : 0, urgent = rangedActive && e.timer < .5;
-        const cy = y - 96;
-        c.fillStyle = 'rgba(10,29,35,.82)';
-        c.beginPath();
-        c.arc(x, cy, 15, 0, Math.PI * 2);
-        c.fill();
-        c.strokeStyle = 'rgba(207,177,145,.22)';
-        c.lineWidth = 3;
-        c.beginPath();
-        c.arc(x, cy, 13, 0, Math.PI * 2);
-        c.stroke();
+        if (!e.alive) return;
+        const c = this.ctx, melee = g.meleePlatform?.id === e.platformId, rangedActive = !melee && e.id === g.activeShooterId;
+        const ratio = rangedActive ? (0, balance_1.clamp)(1 - e.timer / (e.firstAttack ? balance_1.B.firstRangedAttackDelay : e.period), 0, 1) : 0;
+        const urgent = rangedActive && e.timer < .5, cy = y - 88;
+        c.save();
+        c.shadowBlur = melee || urgent ? 15 : 8;
+        c.shadowColor = melee || urgent ? '#ff486d' : '#46eaff';
+        c.fillStyle = 'rgba(18,25,70,.92)';
+        c.beginPath(); c.arc(x, cy, 15, 0, Math.PI * 2); c.fill();
+        c.strokeStyle = melee ? '#ff5579' : rangedActive ? (urgent ? '#ffd83d' : '#46eaff') : 'rgba(255,255,255,.38)';
+        c.lineWidth = 3; c.beginPath(); c.arc(x, cy, 13, 0, Math.PI*2); c.stroke();
         if (melee || rangedActive) {
-            c.strokeStyle = melee ? P.coral : urgent ? P.coral : ratio > .55 ? '#dfad77' : '#9bb29a';
-            c.lineWidth = 3;
-            c.beginPath();
-            c.arc(x, cy, 13, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (melee ? (.55 + .35 * Math.sin(g.visualTime * 15)) : ratio));
-            c.stroke();
+            c.strokeStyle = melee ? '#ff5579' : urgent ? '#ffd83d' : '#50f5ad';
+            c.lineWidth = 4; c.beginPath(); c.arc(x, cy, 19, -Math.PI/2, -Math.PI/2 + Math.PI*2*(melee ? (.55 + .3*Math.sin(g.visualTime*15)) : ratio)); c.stroke();
         }
-        const enemyGlyph = e.kind === 'shield' ? (e.open ? '开' : '守') : e.kind === 'armor' ? '甲' : e.kind === 'elite' ? '将' : '弓';
-        this.text(melee ? '刀' : urgent ? '!' : enemyGlyph, x, cy, 12, melee || urgent ? P.coral : rangedActive ? P.paper : P.muted, 'center', '600');
-        if (melee || urgent) {
-            c.strokeStyle = `rgba(240,123,97,${.3 + Math.sin(g.visualTime * 21) * .18})`;
-            c.lineWidth = 1;
-            c.beginPath();
-            c.arc(x, cy, 21, 0, Math.PI * 2);
-            c.stroke();
-        }
-        if (e.hp > 1) {
-            for (let i = 0; i < e.hp; i++)
-                this.diamond(x - 5 + i * 10, y - 77, 3, '#cec39e');
-        }
-        if (g.debug)
-            this.text(melee ? 'MELEE' : rangedActive ? e.timer.toFixed(1) : 'WAIT', x, y - 119, 12, P.paper, 'center');
+        this.outlinedText(melee ? '!' : rangedActive ? (urgent ? '!' : '?') : '·', x, cy, melee || urgent ? 18 : 15, melee || urgent ? '#ffd83d' : '#fff', '#17205b', 'center', '900', 3);
+        c.restore();
+        if (e.hp > 1) for (let i = 0; i < e.hp; i++) this.diamond(x - 5 + i * 10, y - 73, 3, '#ffd83d');
+        if (g.debug) this.text(melee ? 'MELEE' : rangedActive ? e.timer.toFixed(1) : 'WAIT', x, y - 112, 12, '#fff', 'center');
     }
     reticle(g) {
         if (!g.canAct || g.step >= 3)
             return;
         const p = g.target, e = p.enemies.find(e => e.alive);
         const x = (e ? e.x : p.anchorX) - g.cameraX, y = e ? e.y - 55 : p.anchorY;
-        const guided = g.step < 3, precise = guided && g.state === 'charging' && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand, hit = guided && g.state === 'charging' && Math.abs(g.power - g.ideal) <= balance_1.B.hitBand;
+        const guided = g.step < 3, tutorialTolerance = balance_1.B.hitBand + (balance_1.B.tutorialHitBonus[g.step] ?? 0), precise = guided && g.state === 'charging' && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand, hit = guided && g.state === 'charging' && Math.abs(g.power - g.ideal) <= tutorialTolerance;
         const col = precise ? P.gold : hit ? P.jade : '#c0c7a7', r = precise ? 25 : 29 + Math.sin(g.visualTime * 4) * 2, c = this.ctx;
         c.strokeStyle = col;
         c.lineWidth = 1.8;
@@ -1434,14 +1479,14 @@ class Renderer {
         }
         const px = g.player.x + 13 - g.cameraX, py = g.player.y - 43, ex = sx - g.cameraX, ey = sy;
         c.lineCap = 'round';
-        c.strokeStyle = 'rgba(7,23,28,.66)';
-        c.lineWidth = 4.5;
+        c.strokeStyle = 'rgba(22,28,82,.76)';
+        c.lineWidth = 6;
         c.beginPath();
         c.moveTo(px, py);
         c.quadraticCurveTo((px + ex) / 2, (py + ey) / 2 + (g.state === 'pulling' ? 0 : 28), ex, ey);
         c.stroke();
-        c.strokeStyle = g.stats.combo >= 5 ? '#e4c27e' : '#bbac7e';
-        c.lineWidth = 2;
+        c.strokeStyle = g.stats.combo >= 5 ? '#ffd83d' : '#f0c95a';
+        c.lineWidth = 3;
         c.beginPath();
         c.moveTo(px, py);
         c.quadraticCurveTo((px + ex) / 2, (py + ey) / 2 + (g.state === 'pulling' ? 0 : 28), ex, ey);
@@ -1455,8 +1500,8 @@ class Renderer {
         c.save();
         c.translate(ex, ey);
         c.rotate(angle);
-        this.line(-36, 0, 2, 0, '#cab280', 3);
-        c.fillStyle = P.paper;
+        this.line(-36, 0, 2, 0, '#ffd83d', 4);
+        c.fillStyle = '#5be9ff';
         c.beginPath();
         c.moveTo(11, 0);
         c.lineTo(-3, -5);
@@ -1499,203 +1544,214 @@ class Renderer {
         c.globalAlpha = 1;
     }
     hud(g) {
-        const c = this.ctx;
-        const top = c.createLinearGradient(0, 0, 0, 152);
-        top.addColorStop(0, 'rgba(8,23,31,.9)');
-        top.addColorStop(1, 'rgba(8,23,31,0)');
-        c.fillStyle = top;
-        c.fillRect(0, 0, 1280, 152);
-        this.diamond(45, 43, 8, P.jade, true);
-        this.text('气 血', 66, 43, 15, P.muted);
-        this.text(String(g.hp).padStart(3, '0'), 263, 43, 25, g.hp <= balance_1.B.lowHP ? P.coral : P.paper, 'right', '500');
-        this.round(41, 66, 221, 8, 4, '#344843');
-        if (g.hp > 0)
-            this.round(41, 66, 221 * g.hp / balance_1.B.hp, 8, 4, g.hp <= balance_1.B.lowHP ? P.coral : P.jade);
-        this.text(g.stage, 41, 96, 13, '#869e92');
+        const c = this.ctx, th = this.theme(g);
+        // Top-left vitality panel.
+        const hpGrad = c.createLinearGradient(28, 18, 324, 92);
+        hpGrad.addColorStop(0, 'rgba(24,40,70,.92)'); hpGrad.addColorStop(1, 'rgba(39,53,83,.89)');
+        this.round(26, 18, 294, 74, 17, hpGrad, 'rgba(140,201,213,.55)');
+        const heart = this.asset('heart');
+        if (heart) c.drawImage(heart, 38, 29, 43, 43);
+        else this.outlinedText('♥', 58, 50, 34, '#ff4e78', '#17205b', 'center', '900', 3);
+        this.outlinedText('生命', 91, 43, 18, '#fff', '#17205b', 'left', '800', 3);
+        this.outlinedText(`${g.hp}/${balance_1.B.hp}`, 299, 43, 20, g.hp <= balance_1.B.lowHP ? '#ffd83d' : '#fff', '#17205b', 'right', '800', 3);
+        this.round(90, 64, 205, 12, 6, 'rgba(10,23,49,.68)', 'rgba(140,201,213,.44)');
+        const hpColor = g.hp <= balance_1.B.lowHP ? '#df7081' : '#63cfa2';
+        if (g.hp > 0) this.round(92, 66, 201 * g.hp / balance_1.B.hp, 8, 4, hpColor);
+        // Combo panel.
         if (g.stats.combo > 0) {
-            this.text(String(g.stats.combo).padStart(2, '0'), 41, 145, 35, P.gold, 'left', '600');
-            this.text('连跳', 94, 147, 16, P.paper);
-            this.text('下一跳 +' + (0, ScoreSystem_1.comboPoints)(g.stats.combo + 1), 94, 172, 12, P.gold);
+            const comboGrad = c.createLinearGradient(26, 104, 200, 176);
+            comboGrad.addColorStop(0, 'rgba(29,43,75,.93)'); comboGrad.addColorStop(1, 'rgba(54,50,91,.91)');
+            this.round(26, 104, 176, 68, 15, comboGrad, 'rgba(213,111,160,.66)');
+            this.round(26, 104, 6, 68, 3, '#d577a5');
+            this.outlinedText(String(g.stats.combo).padStart(2, '0'), 50, 137, 37, '#edc94e', '#1c2c50', 'left', '900', 4);
+            this.outlinedText('PERFECT', 112, 130, 15, '#fff', '#17205b', 'left', '800', 3);
+            this.text('下次 PERFECT 连击档 ' + (0, ScoreSystem_1.comboPoints)(g.stats.combo + 1), 112, 153, 11, '#bffaff');
         }
-        this.text('青 岚 渡', 640, 42, 17, '#aebda5', 'center', '400', true);
-        this.line(562, 43, 597, 43, '#597b71');
-        this.line(683, 43, 718, 43, '#597b71');
-        this.round(920, 12, 184, 86, 12, 'rgba(8,24,31,.82)', 'rgba(242,198,110,.48)');
-        this.text('总 分', 942, 34, 14, P.muted, 'left', '600', true);
-        this.text(String(g.stats.score), 1082, 72, 52, P.gold, 'right', '700');
-        this.text(`${g.stats.distance} 米  /  ${g.stats.kills} 击破`, 1084, 116, 14, P.muted, 'right');
-        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 1145, 44);
-        this.iconButton(g, 'pause', 'Ⅱ', 1210, 44);
+        // Small brand mark in the top center.
+        const logo = this.asset('logo');
+        if (logo) {
+            c.save(); c.globalAlpha = .78; c.filter = 'saturate(.82) brightness(.98)'; c.drawImage(logo, 508, 5, 264, 102); c.restore();
+        } else this.outlinedText('一矛到底', 640, 48, 30, '#ffd83d', '#17205b', 'center', '900', 5);
+        // Total score is deliberately the most prominent persistent HUD number.
+        const scoreGrad = c.createLinearGradient(910, 17, 1135, 104);
+        scoreGrad.addColorStop(0, 'rgba(24,39,69,.94)'); scoreGrad.addColorStop(1, 'rgba(47,51,82,.92)');
+        this.round(910, 17, 220, 87, 17, scoreGrad, 'rgba(237,201,78,.68)');
+        const crown = this.asset('crown');
+        if (crown) c.drawImage(crown, 924, 15, 43, 40);
+        this.outlinedText('总分', 958, 37, 14, '#fff', '#17205b', 'left', '800', 3);
+        this.outlinedText(String(g.stats.score), 1111, 70, 50, '#edc94e', '#1c2c50', 'right', '900', 4);
+        this.text(`${g.stats.distance}m · ${g.stats.kills}击破`, 1110, 93, 12, '#ccecff', 'right', '700');
+        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 1170, 46);
+        this.iconButton(g, 'pause', 'Ⅱ', 1225, 46);
+        // Current arena phase is secondary but still gives progression flavor.
+        this.round(535, 110, 210, 30, 10, 'rgba(27,41,70,.66)', 'rgba(140,201,213,.42)');
+        this.text(g.stage, 640, 125, 13, '#fff', 'center', '700');
         if (g.bannerTime > 0) {
+            c.save();
             c.globalAlpha = (0, balance_1.clamp)(g.bannerTime / .25, 0, 1);
-            this.text(g.banner, 640, g.step === 0 ? 150 : 151, g.step === 0 ? 30 : 35, P.gold, 'center', '500', true);
-            c.globalAlpha = 1;
+            this.burst(640, 176, g.step === 0 ? 92 : 112, '#ffd83d', '#ff4f9f', 14);
+            this.outlinedText(g.banner, 640, 176, g.step === 0 ? 23 : 27, '#fff', '#17205b', 'center', '900', 5);
+            c.restore();
         }
         if (g.scoreFlashTime > 0) {
-            const t = (0, balance_1.clamp)(g.scoreFlashTime / 1.05, 0, 1), alpha = Math.min(1, g.scoreFlashTime / .18), rise = (1 - t) * 24, size = 58 + 24 * t;
-            c.globalAlpha = alpha;
-            this.text('+' + g.scoreFlashJump, 640, 215 - rise, size, P.paper, 'center', '700');
-            this.text(g.scoreFlashCombo >= 6 ? '连跳封顶 32' : '连跳 ' + g.scoreFlashCombo, 640, 267 - rise, 20, P.gold, 'center', '600');
-            if (g.scoreFlashSkip > 0)
-                this.text('越台  +32', 640, 313 - rise, 42, P.gold, 'center', '700');
-            c.globalAlpha = 1;
+            const t = (0, balance_1.clamp)(g.scoreFlashTime / (g.scoreFlashDuration || 1.05), 0, 1);
+            const alpha = Math.min(1, g.scoreFlashTime / .18), rise = (1 - t) * 28;
+            const high = g.scoreFlashSkip > 0 || g.scoreFlashBase >= 20 || g.scoreFlashCombo >= 5;
+            const medium = !high && (g.scoreFlashBase >= 10 || g.scoreFlashCombo >= 3);
+            c.save(); c.globalAlpha = alpha;
+            if (high) {
+                this.burst(640, 240 - rise, 92 + 8 * t, th.accent, th.accent2, 14);
+            } else if (medium) {
+                c.globalAlpha *= .58;
+                this.burst(640, 240 - rise, 70 + 5 * t, th.accent, th.accent2, 12);
+                c.globalAlpha /= .58;
+            } else {
+                this.round(550, 194 - rise, 180, 80, 22, 'rgba(24,39,70,.70)', 'rgba(237,201,78,.40)');
+            }
+            this.outlinedText('+' + g.scoreFlashJump, 640, 230 - rise, high ? 76 : medium ? 68 : 58, '#fff8df', '#1c2c50', 'center', '900', high ? 7 : 5);
+            this.outlinedText(g.scoreFlashCombo > 0 ? (g.scoreFlashCombo >= 6 ? 'PERFECT COMBO · 32' : 'PERFECT ×' + g.scoreFlashCombo) : (g.scoreFlashBase > 1 ? g.scoreFlashBase + '分台' : '普通飞渡'), 640, 278 - rise, high ? 20 : 18, high ? '#edc94e' : '#e7eef5', '#1c2c50', 'center', '900', 3);
+            if (g.scoreFlashSkip > 0) {
+                this.round(525, 307 - rise, 230, 52, 16, 'rgba(24,39,70,.91)', 'rgba(237,201,78,.78)');
+                this.outlinedText('越台  +32', 640, 333 - rise, 31, '#8fd9e4', '#1c2c50', 'center', '900', 4);
+            }
+            c.restore();
         }
-        const bottom = c.createLinearGradient(0, 572, 0, 720);
-        bottom.addColorStop(0, 'rgba(8,25,33,0)');
-        bottom.addColorStop(.5, 'rgba(8,25,33,.70)');
-        bottom.addColorStop(1, 'rgba(8,25,33,.94)');
-        c.fillStyle = bottom;
-        c.fillRect(0, 572, 1280, 148);
+        // The first three jumps teach the distance rhythm; all assistive HUD disappears afterward.
         const charging = g.state === 'charging', can = g.canAct, guided = g.step < 3;
         if ((charging || can) && guided) {
-            const x = 430, y = 655, w = 420;
-            this.round(x - 26, 608, w + 52, 82, 10, 'rgba(11,30,37,.55)', 'rgba(149,177,151,.18)');
-            const col = g.target.kind === 'heal' ? P.jade : g.target.kind === 'risk' ? P.coral : P.paper;
-            this.text(charging ? '蓄力 · ' + g.target.label : '任意位置按住蓄力', x, 629, 16, charging ? col : P.paper);
-            this.text(charging ? (Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? '精准！松手' : Math.abs(g.power - g.ideal) <= balance_1.B.hitBand ? '可命中 · 松手' : '继续按住 · 越久越远') : '只看按住时间  ·  松手投枪', x + w, 629, 14, charging && Math.abs(g.power - g.ideal) <= balance_1.B.perfectBand ? P.gold : P.muted, 'right');
-            this.round(x, y, w, 10, 5, '#314643');
-            const hit = balance_1.B.hitBand + balance_1.B.tutorialHitBonus, sweet = g.ideal;
-            this.round(x + Math.max(0, sweet - hit) * w, y, Math.min(1, sweet + hit) * w - Math.max(0, sweet - hit) * w, 10, 3, '#537f6b');
-            this.round(x + (sweet - balance_1.B.perfectBand) * w, y - 3, balance_1.B.perfectBand * 2 * w, 16, 3, '#ccae68');
-            this.line(x + sweet * w, y - 6, x + sweet * w, y + 16, '#f4e2a7', 2);
+            const x = 421, y = 648, w = 438;
+            this.round(x - 29, 596, w + 58, 96, 18, 'rgba(25,39,70,.84)', 'rgba(140,201,213,.52)');
+            const title = g.step === 0 ? '第1跳 · 轻按近台' : g.step === 1 ? '第2跳 · 多按一会儿到多人台' : '第3跳 · 长按去回血台';
+            this.outlinedText(title, 640, 620, 17, '#fff', '#17205b', 'center', '800', 3);
+            this.round(x, y, w, 15, 8, 'rgba(7,17,58,.78)');
+            const hit = balance_1.B.hitBand + (balance_1.B.tutorialHitBonus[g.step] ?? 0), sweet = g.ideal;
+            this.round(x + Math.max(0, sweet - hit) * w, y, (Math.min(1, sweet + hit)-Math.max(0, sweet-hit))*w, 15, 7, '#55eead');
+            this.round(x + Math.max(0,sweet - balance_1.B.perfectBand) * w, y - 3, Math.min(1,balance_1.B.perfectBand * 2) * w, 21, 7, '#ffd83d');
             if (charging) {
-                this.round(x, y + 16, Math.max(1, g.power * w), 2, 1, '#728e77');
                 const xx = x + g.power * w;
-                c.fillStyle = '#f7ecd1';
-                c.beginPath();
-                c.moveTo(xx, y - 2);
-                c.lineTo(xx - 6, y - 12);
-                c.lineTo(xx + 6, y - 12);
-                c.closePath();
-                c.fill();
-                this.line(xx, y + 1, xx, y + 10, '#fff6d8', 2);
+                this.round(x, y + 22, Math.max(2, g.power * w), 5, 3, th.accent);
+                c.fillStyle = '#fff'; c.beginPath(); c.moveTo(xx, y - 4); c.lineTo(xx - 7, y - 15); c.lineTo(xx + 7, y - 15); c.closePath(); c.fill();
             }
-            else {
-                const pulse = .4 + .25 * Math.sin(g.visualTime * 3);
-                c.globalAlpha = pulse;
-                this.diamond(x - 46, y + 2, 7, P.paper, true);
-                c.globalAlpha = 1;
-            }
+            this.text(charging ? '松手投矛 · 按得越久飞得越远' : '屏幕任意位置都可以按', 640, 680, 13, '#d9f5ff', 'center', '700');
         }
-        else if (g.state === 'pulling') {
-            this.text('借 势 飞 渡', 640, 656, 20, P.jade, 'center', '400', true);
+        if (g.noticeTime > 0) {
+            this.round(356, 650, 568, 48, 14, 'rgba(25,39,70,.88)', 'rgba(237,201,78,.66)');
+            this.outlinedText(g.notice, 640, 674, 16, '#fff', '#17205b', 'center', '800', 3);
         }
-        else if (g.state === 'throwing') {
-            this.text('一 矛 破 风', 640, 656, 20, P.paper, 'center', '400', true);
-        }
-        else if (g.state === 'falling') {
-            this.text('落 空 · 坠 崖', 640, 656, 20, P.coral, 'center', '500', true);
-        }
-        else if (g.state === 'retracting') {
-            this.text('收枪 · 再来一矛', 640, 656, 18, P.muted, 'center');
-        }
-        if (g.noticeTime > 0)
-            this.text(g.notice, 640, 702, 15, P.paper, 'center');
-        else if (g.step < 3) {
-            const tips = ['第1跳：看蓄力条，松手扎中单人台。', '第2跳：多人台尽量一矛穿透清场。', '第3跳：扎中灵药台，落地自动回血。'];
-            this.text(tips[g.step], 640, 702, 13, '#829b8e', 'center');
-        }
-        // Tutorial text fully disappears after the third successful landing.
         if (g.debug) {
-            this.round(15, 206, 274, 152, 6, 'rgba(5,18,25,.84)');
-            this.text('DEBUG  ·  ' + Math.round(g.fps) + ' FPS', 28, 226, 13, P.jade);
-            this.text('SEED ' + g.seed + '  ·  Lv ' + g.level.toFixed(2), 28, 249, 12, P.paper);
-            this.text(g.generator.pattern + '  #' + g.step, 28, 271, 12, P.paper);
-            this.text('HP ' + g.hp + '  q ' + g.power.toFixed(3) + ' / ' + g.ideal.toFixed(3), 28, 293, 12, P.paper);
-            this.text('R重开  H扣血  J回血  K进阶  P暂停', 28, 319, 11, P.muted);
-            this.text('状态 ' + g.state, 28, 341, 11, P.muted);
+            this.round(18, 205, 286, 152, 10, 'rgba(15,24,68,.88)', '#54eaff');
+            this.text('DEBUG · ' + Math.round(g.fps) + ' FPS', 30, 226, 13, '#50f5ad');
+            this.text('SEED ' + g.seed + ' · Lv ' + g.level.toFixed(2), 30, 249, 12, '#fff');
+            this.text(g.generator.pattern + ' #' + g.step, 30, 271, 12, '#fff');
+            this.text('HP ' + g.hp + ' q ' + g.power.toFixed(3) + ' / ' + g.ideal.toFixed(3), 30, 293, 12, '#fff');
+            this.text('R重开 H扣血 J回血 K进阶 P暂停', 30, 319, 11, '#d5e8ff');
+            this.text('状态 ' + g.state, 30, 341, 11, '#d5e8ff');
         }
     }
     menu(g) {
         const c = this.ctx;
         this.background(g);
-        const p = { id: -1, x: 1030, y: 533, width: 255, kind: 'safe', enemies: [], heal: 0, value: 1, label: '', tier: 0, visited: true, shake: 0, seed: 486, anchorX: 1040, anchorY: 475 };
-        const savedCam = g.cameraX;
-        g.cameraX = 0;
-        this.drawPlatform(p, g, false, true);
-        this.pine(c, 1107, 526, 1.13, '#153d38');
-        this.actor(987, 519, true, g, undefined, 1.7);
-        this.line(1013, 432, 1190, 344, '#caba86', 2);
-        this.anchor(1190, 344, g.visualTime);
-        this.drawPlatform({ ...p, id: -2, x: 1190, y: 391, width: 108, seed: 421 }, g, false, true);
-        g.cameraX = savedCam;
-        const shade = c.createLinearGradient(0, 0, 990, 0);
-        shade.addColorStop(0, 'rgba(8,25,34,.96)');
-        shade.addColorStop(.61, 'rgba(8,25,34,.83)');
-        shade.addColorStop(1, 'rgba(8,25,34,0)');
-        c.fillStyle = shade;
-        c.fillRect(0, 0, 1100, 720);
-        this.line(81, 113, 127, 113, P.gold, 1.5);
-        this.spaced('单指绳枪 · 无尽挑战', 145, 113, 14, '#bbbc9d', 2);
-        this.text('一矛到底', 77, 225, 92, '#eee1bb', 'left', '600', true);
-        this.text('青 岚 渡', 83, 309, 29, '#a9c7b1', 'left', '400', true);
-        this.line(220, 309, 389, 309, '#688e7e');
-        this.text('把每一次命中，变成下一次飞跃。', 84, 375, 22, '#b8c7b0');
-        this.text('任意位置按住   ·   按得越久飞得越远   ·   松手飞渡', 85, 419, 16, '#8fa99a');
-        this.button(g, 'start', '入山 · 开始挑战', 82, 468, 330, 66, true);
-        this.button(g, 'help', '怎么玩', 432, 468, 136, 66);
-        if (g.storage.data.score > 0) {
-            this.text('最佳  ' + g.storage.data.distance + ' 米   /   ' + g.storage.data.score + ' 分', 84, 566, 16, P.gold);
+        // Left glass panel keeps text readable while preserving the colorful arena.
+        const panel = c.createLinearGradient(42, 58, 600, 610);
+        panel.addColorStop(0, 'rgba(24,39,69,.92)'); panel.addColorStop(1, 'rgba(47,55,87,.84)');
+        this.round(42, 54, 560, 575, 25, panel, 'rgba(140,201,213,.52)');
+        const logo = this.asset('logo');
+        if (logo) { c.save(); c.filter = 'saturate(.86) brightness(.98)'; c.drawImage(logo, 78, 78, 486, 188); c.restore(); }
+        else this.outlinedText('一矛到底', 322, 150, 70, '#ffd83d', '#17205b', 'center', '900', 8);
+        this.outlinedText('多巴胺浮空竞技挑战', 84, 286, 20, '#fff', '#17205b', 'left', '800', 3);
+        this.text('整个屏幕都是蓄力键。按得越久，飞得越远。', 84, 326, 17, '#d9f5ff');
+        this.text('越台 +32 · PERFECT 连击翻倍 · 一矛穿阵', 84, 358, 15, '#ffd83d', 'left', '800');
+        this.button(g, 'start', '开始挑战', 82, 399, 332, 70, true);
+        this.button(g, 'help', '玩法说明', 430, 399, 132, 70);
+        this.round(82, 493, 480, 88, 15, 'rgba(22,35,65,.76)', 'rgba(213,111,160,.48)');
+        this.text('历史最佳', 102, 516, 13, '#bfefff', 'left', '800');
+        this.outlinedText(g.storage.data.score > 0 ? String(g.storage.data.score) : '—', 102, 550, 34, '#ffd83d', '#17205b', 'left', '900', 5);
+        this.text(g.storage.data.score > 0 ? `${g.storage.data.distance} 米 · 最高 PERFECT ${g.storage.data.combo}` : '第一局，就从 +1 开始。', 242, 551, 14, '#fff', 'left', '700');
+        this.text('一矛到底 · 跃动竞技场  v2.0', 84, 606, 12, '#bfd2e3');
+        // Hero showcase on the right.
+        const start = this.asset('plat_start');
+        if (start) {
+            const w = 520, h = w * start.naturalHeight / start.naturalWidth;
+            c.drawImage(start, 705, 348, w, h);
         }
-        else
-            this.text('险路争先，悬崖取药，一矛穿阵。', 84, 566, 16, '#9fb39d');
-        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 1040, 648);
-        this.iconButton(g, 'vibration', g.storage.data.vibration ? '震' : '静', 1097, 648);
-        this.iconButton(g, 'motion', g.storage.data.motion ? '动' : '稳', 1154, 648);
-        this.iconButton(g, 'fullscreen', '⛶', 1211, 648);
-        this.text('原创程序美术 / 程序音效  ·  v1.3', 84, 651, 12, '#667f78');
-        this.text('ONE SPEAR. ONE MORE.', 84, 677, 11, '#536f69');
+        this.drawBottom('hero_victory', 955, 487, 182);
+        // floating challenge chips
+        this.round(744, 245, 142, 47, 14, 'rgba(46,53,86,.88)', 'rgba(237,201,78,.66)');
+        this.outlinedText('越台 +32', 815, 269, 19, '#fff', '#17205b', 'center', '900', 4);
+        this.round(1030, 265, 160, 47, 14, 'rgba(39,58,84,.88)', 'rgba(140,201,213,.62)');
+        this.outlinedText('COMBO ×2', 1110, 289, 18, '#fff', '#17205b', 'center', '900', 4);
+        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 1050, 648);
+        this.iconButton(g, 'vibration', g.storage.data.vibration ? '震' : '静', 1104, 648);
+        this.iconButton(g, 'motion', g.storage.data.motion ? '动' : '稳', 1158, 648);
+        this.iconButton(g, 'fullscreen', '⛶', 1212, 648);
     }
     pausePanel(g) {
         const c = this.ctx;
-        c.fillStyle = 'rgba(5,18,25,.78)';
-        c.fillRect(0, 0, 1280, 720);
-        this.round(406, 153, 468, 409, 15, '#112d35', '#536f66');
-        this.text(g.pauseReason || '山风暂歇', 640, 209, 29, P.paper, 'center', '400', true);
-        this.text('当前进度不会丢失', 640, 251, 16, P.muted, 'center');
-        this.button(g, 'resume', '继续飞渡', 458, 291, 364, 57, true);
-        this.button(g, 'help', '操作说明', 458, 363, 173, 47);
-        this.button(g, 'restart', '重新挑战', 649, 363, 173, 47);
-        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 518, 466);
-        this.iconButton(g, 'vibration', g.storage.data.vibration ? '震' : '静', 599, 466);
-        this.iconButton(g, 'motion', g.storage.data.motion ? '动' : '稳', 680, 466);
-        this.iconButton(g, 'menu', '⌂', 761, 466);
-        this.text('声音          震动          动效          主菜单', 640, 510, 13, P.muted, 'center');
+        c.fillStyle = 'rgba(16,27,47,.52)'; c.fillRect(0,0,1280,720);
+        const grd = c.createLinearGradient(398,145,886,575);
+        grd.addColorStop(0,'rgba(27,43,73,.97)'); grd.addColorStop(1,'rgba(48,55,86,.97)');
+        this.round(396, 142, 488, 430, 24, grd, 'rgba(140,201,213,.52)');
+        this.outlinedText(g.pauseReason || '挑战暂停', 640, 201, 31, '#fff', '#17205b', 'center', '900', 5);
+        this.text('当前进度已保留', 640, 243, 15, '#d7efff', 'center', '700');
+        this.button(g, 'resume', '继续挑战', 458, 286, 364, 61, true);
+        this.button(g, 'help', '玩法说明', 458, 366, 173, 49);
+        this.button(g, 'restart', '重新挑战', 649, 366, 173, 49);
+        this.iconButton(g, 'sound', g.storage.data.sound ? '♪' : '♩', 518, 474);
+        this.iconButton(g, 'vibration', g.storage.data.vibration ? '震' : '静', 599, 474);
+        this.iconButton(g, 'motion', g.storage.data.motion ? '动' : '稳', 680, 474);
+        this.iconButton(g, 'menu', '⌂', 761, 474);
+        this.text('声音           震动           动效           主菜单', 640, 520, 13, '#d7efff', 'center');
     }
     helpPanel(g) {
         const c = this.ctx;
-        c.fillStyle = 'rgba(5,18,25,.88)';
-        c.fillRect(0, 0, 1280, 720);
-        this.round(242, 98, 796, 524, 16, '#102c34', '#688a78');
-        this.text('只用一根手指', 640, 156, 31, P.paper, 'center', '500', true);
-        const items = [['01', '按住', '屏幕任意位置都一样；前三跳显示力度条，之后完全凭手感。'], ['02', '距离', '不需要点平台，也不需要拖动；按得越久，标枪有效射程越远。'], ['03', '松手', '系统只做轻量角度修正；距离没按对就会投空并坠崖。']];
-        items.forEach((a, i) => { const y = 223 + i * 79; this.diamond(306, y, 22, P.gold, true); this.text(a[0], 306, y, 14, P.gold, 'center'); this.text(a[1], 351, y - 11, 21, P.paper, 'left', '600'); this.text(a[2], 351, y + 20, 16, P.muted); });
-        this.line(292, 433, 988, 433, '#35594f');
-        this.text('成功飞渡：1 → 2 → 4 → 8 → 16 → 32；敌人先出手，连跳重新从 1 开始。', 640, 458, 15, P.gold, 'center');
-        this.text('越过最近台直达第二台：额外 +32。多人台没清完，落地会被残敌连刺。', 640, 491, 15, P.muted, 'center');
-        this.button(g, 'closehelp', '明白了', 499, 543, 282, 52, true);
+        c.fillStyle = 'rgba(16,27,47,.58)'; c.fillRect(0,0,1280,720);
+        const grd = c.createLinearGradient(228,86,1052,634);
+        grd.addColorStop(0,'rgba(28,45,75,.98)'); grd.addColorStop(1,'rgba(49,57,88,.98)');
+        this.round(228, 86, 824, 548, 25, grd, 'rgba(140,201,213,.52)');
+        this.outlinedText('一根手指就够了', 640, 143, 32, '#ffd83d', '#17205b', 'center', '900', 5);
+        const items = [
+            ['1','按住','屏幕任意位置都一样，按住只负责蓄力。'],
+            ['2','控距离','轻按到近台，中蓄到第二台，长按冲更远的平台。'],
+            ['3','松手','系统只修方向，不替你改距离；按错会投空坠崖。']
+        ];
+        items.forEach((a,i)=>{
+            const y=218+i*86;
+            this.burst(306,y,24,i===0?'#ffd83d':i===1?'#51eaff':'#ff5aae',i===0?'#ff7f39':'#8d68ff',10);
+            this.outlinedText(a[0],306,y,20,'#fff','#17205b','center','900',4);
+            this.outlinedText(a[1],354,y-12,21,'#fff','#17205b','left','900',3);
+            this.text(a[2],354,y+20,15,'#dff7ff');
+        });
+        this.line(288, 466, 992, 466, 'rgba(91,234,255,.42)', 2);
+        this.outlinedText('PERFECT 连击：1 → 2 → 4 → 8 → 16 → 32', 640, 499, 18, '#ffd83d', '#17205b', 'center', '900', 4);
+        this.text('只有连续 PERFECT 才维持 Combo；任意非 PERFECT 飞渡都会重置，越台仍额外 +32。', 640, 532, 14, '#fff', 'center', '700');
+        this.text('GREAT 可击杀普通敌人；铁卫/精英仍需 PERFECT。普通命中可飞渡，但残敌会贴身追打。', 640, 558, 14, '#dff7ff', 'center');
+        this.button(g, 'closehelp', '明白了', 500, 583, 280, 48, true);
     }
     results(g) {
         const c = this.ctx;
-        c.fillStyle = 'rgba(5,18,25,.82)';
-        c.fillRect(0, 0, 1280, 720);
-        this.round(317, 74, 646, 577, 16, '#102b33', '#597669');
-        this.text(g.newRecord ? '再登一峰 · 新纪录' : '此程已尽，下次更远', 640, 128, 32, P.paper, 'center', '500', true);
-        this.text(g.deathReason || '气血耗尽', 640, 169, 15, P.coral, 'center');
-        this.text(String(g.stats.score), 640, 229, 58, P.gold, 'center', '500');
-        this.text('本 局 得 分', 640, 273, 13, P.muted, 'center');
-        this.line(369, 302, 911, 302, '#35544c');
-        const vals = [[g.stats.distance + ' 米', '飞渡距离'], [String(g.stats.kills), '击破敌人'], [String(g.stats.maxCombo), '最高连跳'], [String(g.stats.skips), '越台奖励']];
-        vals.forEach((a, i) => { const x = 422 + i * 145; this.text(a[0], x, 341, 28, P.paper, 'center', '500'); this.text(a[1], x, 378, 13, P.muted, 'center'); });
-        this.text(`精准爆头 ${g.stats.perfect} 次  ·  一矛多杀 ${g.stats.double} 次  ·  历史最佳 ${g.storage.data.distance} 米`, 640, 422, 14, P.muted, 'center');
-        this.button(g, 'restart', '再来一矛', 367, 460, 274, 60, true);
-        this.button(g, 'same', '同 Seed 再战', 661, 460, 252, 60);
-        if (!g.reviveUsed)
-            this.button(g, 'revive', g.adPending ? '正在处理…' : '演示续命 +36 HP（无广告）', 367, 536, 546, 47);
-        else
-            this.text('本局续命已用完 · 下一局见', 640, 563, 17, P.muted, 'center');
-        this.text('种子 ' + g.seed + '  /  不用刷新网页', 640, 615, 12, '#729185', 'center');
-        this.iconButton(g, 'menu', '⌂', 916, 123);
+        c.fillStyle = 'rgba(16,27,47,.52)'; c.fillRect(0,0,1280,720);
+        const grd = c.createLinearGradient(300,68,980,655);
+        grd.addColorStop(0,'rgba(28,45,75,.98)'); grd.addColorStop(1,'rgba(51,56,86,.98)');
+        this.round(300, 68, 680, 590, 26, grd, 'rgba(140,201,213,.52)');
+        this.outlinedText(g.newRecord ? '新纪录！' : '挑战结束', 640, 124, 35, g.newRecord ? '#ffd83d' : '#fff', '#17205b', 'center', '900', 6);
+        this.text(g.deathReason || '气血耗尽', 640, 164, 14, '#ff91a8', 'center', '800');
+        this.burst(640, 239, 92, '#ffd83d', '#ff4f9f', 16);
+        this.outlinedText(String(g.stats.score), 640, 232, 66, '#fff9df', '#17205b', 'center', '900', 8);
+        this.outlinedText('本局总分', 640, 286, 17, '#ffd83d', '#17205b', 'center', '800', 3);
+        const vals=[[g.stats.distance+'m','距离'],[String(g.stats.kills),'击破'],[String(g.stats.maxCombo),'最高PERFECT'],[String(g.stats.skips),'越台']];
+        vals.forEach((a,i)=>{
+            const x=420+i*147;
+            this.round(x-58,326,116,72,13,'rgba(24,38,69,.74)',i%2?'rgba(213,111,160,.48)':'rgba(140,201,213,.48)');
+            this.outlinedText(a[0],x,350,26,'#fff','#17205b','center','900',4);
+            this.text(a[1],x,381,12,'#d8f5ff','center','700');
+        });
+        this.text(`精准 ${g.stats.perfect} · 多杀 ${g.stats.double} · 历史最佳 ${g.storage.data.score} 分`,640,430,14,'#dff7ff','center','700');
+        this.button(g,'restart','再来一次',363,466,286,62,true);
+        this.button(g,'same','同 Seed 再战',668,466,249,62);
+        if (!g.reviveUsed) this.button(g,'revive',g.adPending?'处理中…':'演示续命 +36 HP',363,545,554,49);
+        else this.text('本局续命已使用',640,572,15,'#dff7ff','center');
+        this.text('Seed '+g.seed+' · 无需刷新网页',640,620,12,'#bddfff','center');
+        this.iconButton(g,'menu','⌂',925,116);
     }
     render(g) {
         const c = this.ctx;
@@ -1728,9 +1784,9 @@ class Renderer {
                 c.save();
                 c.translate(x, a.y);
                 c.rotate(angle);
-                this.line(-20, 0, 4, 0, '#ed9d7b', 2);
-                this.line(0, -3, 5, 0, '#edc89c', 2);
-                this.line(0, 3, 5, 0, '#edc89c', 2);
+                this.line(-20, 0, 4, 0, '#ff5a78', 3);
+                this.line(0, -3, 5, 0, '#ffd83d', 2);
+                this.line(0, 3, 5, 0, '#ffd83d', 2);
                 c.restore();
             }
             this.rope(g);
@@ -1738,7 +1794,7 @@ class Renderer {
             this.effects(g);
             c.restore();
             if (g.flash > 0) {
-                const alpha = g.flash * .46;
+                const alpha = g.flash * .32;
                 c.strokeStyle = `rgba(213,70,50,${alpha})`;
                 c.lineWidth = 20;
                 c.strokeRect(0, 0, 1280, 720);
@@ -1796,6 +1852,10 @@ class AudioSystem {
         this.enabled = true;
         this.chargeOsc = null;
         this.chargeGain = null;
+        this.chargeHarm = null;
+        this.chargeHarmGain = null;
+        this.chargeCues = [];
+        this.chargeStartedAt = 0;
     }
     unlock() { if (!this.ctx) {
         try {
@@ -1830,25 +1890,104 @@ class AudioSystem {
     noise(duration, volume = .2) { if (!this.enabled || !this.ctx || !this.master)
         return; const n = Math.ceil(this.ctx.sampleRate * duration), b = this.ctx.createBuffer(1, n, this.ctx.sampleRate), a = b.getChannelData(0); for (let i = 0; i < n; i++)
         a[i] = (Math.random() * 2 - 1) * (1 - i / n); const s = this.ctx.createBufferSource(), f = this.ctx.createBiquadFilter(), g = this.ctx.createGain(); f.type = 'lowpass'; f.frequency.value = 2400; g.gain.value = volume; s.buffer = b; s.connect(f); f.connect(g); g.connect(this.master); s.start(); s.onended = () => { s.disconnect(); f.disconnect(); g.disconnect(); }; }
-    charge(p) { if (!this.enabled || !this.ctx || !this.master)
-        return; if (!this.chargeOsc) {
+    // Charge audio is a deterministic time ruler. Every press restarts at layer 0.
+    // Fixed layers: 0.00 / 0.30 / 0.60 / 0.90 / 1.20 s.
+    startCharge() {
+        this.stopCharge();
+        if (!this.enabled || !this.ctx || !this.master)
+            return;
+        const t = this.ctx.currentTime;
+        this.chargeStartedAt = t;
         this.chargeOsc = this.ctx.createOscillator();
         this.chargeGain = this.ctx.createGain();
+        this.chargeHarm = this.ctx.createOscillator();
+        this.chargeHarmGain = this.ctx.createGain();
         this.chargeOsc.type = 'sine';
+        this.chargeHarm.type = 'triangle';
         this.chargeOsc.connect(this.chargeGain);
+        this.chargeHarm.connect(this.chargeHarmGain);
         this.chargeGain.connect(this.master);
-        this.chargeOsc.start();
-    } this.chargeOsc.frequency.setTargetAtTime(100 + p * 230, this.ctx.currentTime, .04); this.chargeGain.gain.setTargetAtTime(.025 + p * .045, this.ctx.currentTime, .04); }
-    stopCharge() { if (this.chargeOsc) {
-        try {
-            this.chargeOsc.stop();
-            this.chargeOsc.disconnect();
-            this.chargeGain?.disconnect();
+        this.chargeHarmGain.connect(this.master);
+        const layers = [
+            { at: 0.00, base: 165, harm: 330, baseGain: .026, harmGain: .006 },
+            { at: 0.30, base: 196, harm: 392, baseGain: .030, harmGain: .009, cue: 440 },
+            { at: 0.60, base: 247, harm: 494, baseGain: .035, harmGain: .013, cue: 554 },
+            { at: 0.90, base: 294, harm: 588, baseGain: .041, harmGain: .017, cue: 659 },
+            { at: 1.20, base: 349, harm: 698, baseGain: .047, harmGain: .022, cue: 880 },
+        ];
+        const ramp = .028;
+        const first = layers[0];
+        this.chargeOsc.frequency.setValueAtTime(first.base, t);
+        this.chargeHarm.frequency.setValueAtTime(first.harm, t);
+        this.chargeGain.gain.setValueAtTime(.001, t);
+        this.chargeHarmGain.gain.setValueAtTime(.001, t);
+        this.chargeGain.gain.exponentialRampToValueAtTime(first.baseGain, t + .025);
+        this.chargeHarmGain.gain.exponentialRampToValueAtTime(first.harmGain, t + .025);
+        for (let i = 1; i < layers.length; i++) {
+            const L = layers[i], prev = layers[i - 1], at = t + L.at;
+            // Hold each layer steady, then cross-fade to the next layer at the fixed cue time.
+            this.chargeOsc.frequency.setValueAtTime(prev.base, at);
+            this.chargeHarm.frequency.setValueAtTime(prev.harm, at);
+            this.chargeGain.gain.setValueAtTime(prev.baseGain, at);
+            this.chargeHarmGain.gain.setValueAtTime(prev.harmGain, at);
+            this.chargeOsc.frequency.exponentialRampToValueAtTime(L.base, at + ramp);
+            this.chargeHarm.frequency.exponentialRampToValueAtTime(L.harm, at + ramp);
+            this.chargeGain.gain.exponentialRampToValueAtTime(L.baseGain, at + ramp);
+            this.chargeHarmGain.gain.exponentialRampToValueAtTime(L.harmGain, at + ramp);
+            const cue = this.ctx.createOscillator(), cueGain = this.ctx.createGain();
+            cue.type = 'triangle';
+            cue.frequency.setValueAtTime(L.cue, at);
+            cue.frequency.exponentialRampToValueAtTime(L.cue * 1.12, at + .065);
+            cueGain.gain.setValueAtTime(.001, at);
+            cueGain.gain.exponentialRampToValueAtTime(.035 + i * .006, at + .008);
+            cueGain.gain.exponentialRampToValueAtTime(.001, at + .075);
+            cue.connect(cueGain);
+            cueGain.connect(this.master);
+            cue.start(at);
+            cue.stop(at + .08);
+            this.chargeCues.push({ osc: cue, gain: cueGain });
         }
-        catch { }
+        this.chargeOsc.start(t);
+        this.chargeHarm.start(t);
+    }
+    charge(_p) {
+        // The entire envelope is scheduled from the press time in startCharge(), so
+        // frame rate cannot shift layer timing. This call remains for API compatibility.
+        if (this.enabled && this.ctx && this.master && !this.chargeOsc)
+            this.startCharge();
+    }
+    stopCharge() {
+        if (!this.ctx) {
+            this.chargeOsc = this.chargeGain = this.chargeHarm = this.chargeHarmGain = null;
+            this.chargeCues = [];
+            return;
+        }
+        const t = this.ctx.currentTime;
+        const stopPair = (osc, gain) => {
+            if (!osc) return;
+            try {
+                if (gain) {
+                    gain.gain.cancelScheduledValues(t);
+                    gain.gain.setValueAtTime(Math.max(.001, gain.gain.value || .001), t);
+                    gain.gain.exponentialRampToValueAtTime(.001, t + .025);
+                }
+                osc.stop(t + .03);
+                osc.onended = () => { try { osc.disconnect(); gain?.disconnect(); } catch { } };
+            } catch { }
+        };
+        stopPair(this.chargeOsc, this.chargeGain);
+        stopPair(this.chargeHarm, this.chargeHarmGain);
+        for (const cue of this.chargeCues) {
+            try { cue.osc.stop(t); } catch { }
+            try { cue.osc.disconnect(); cue.gain.disconnect(); } catch { }
+        }
         this.chargeOsc = null;
         this.chargeGain = null;
-    } }
+        this.chargeHarm = null;
+        this.chargeHarmGain = null;
+        this.chargeCues = [];
+        this.chargeStartedAt = 0;
+    }
     play(k, combo = 0) {
         if (k !== 'charge')
             this.stopCharge();
@@ -1931,20 +2070,21 @@ function hitEnemy(s, e) {
     if (e.kind === 'shield' && !e.open) {
         s.blocked = true;
         e.hit = 0.2;
-        return { enemy: e, head: false, kill: false, blocked: true };
+        return { enemy: e, head: false, kill: false, quality: 'blocked', blocked: true };
     }
     const precise = s.quality === 'perfect' && head;
-    const damage = precise ? 2 : 1;
-    e.hp -= damage;
+    const requiresPerfect = e.kind === 'armor' || e.kind === 'elite';
+    const greatKill = s.quality === 'great' && !requiresPerfect;
+    const lethal = precise || greatKill;
     e.hit = 0.2;
-    if (e.hp <= 0) {
+    if (lethal) {
+        e.hp = 0;
         e.alive = false;
         e.deadAt = 0.001;
         s.kills++;
-        if (precise)
-            s.heads++;
+        if (precise) s.heads++;
     }
-    return { enemy: e, head: precise, kill: e.hp <= 0, blocked: false };
+    return { enemy: e, head: precise, kill: lethal, quality: precise ? 'perfect' : greatKill ? 'great' : s.quality, blocked: false };
 }
 
 },
@@ -1956,7 +2096,7 @@ exports.stageName = stageName;
 exports.readableWindow = readableWindow;
 const balance_1 = require("../config/balance");
 function difficulty(elapsed, step) { return (0, balance_1.clamp)(Math.max(elapsed / 110, step / 52), 0, 6); }
-function stageName(elapsed) { return elapsed < 30 ? '初入青岚' : elapsed < 120 ? '借风过涧' : elapsed < 240 ? '箭雨连峰' : elapsed < 420 ? '破阵登云' : '云海无尽'; }
+function stageName(elapsed) { return elapsed < 30 ? '热身赛 · 起跳区' : elapsed < 120 ? '加速赛 · 霓虹跑道' : elapsed < 240 ? '进阶赛 · 连杀舞台' : elapsed < 420 ? '巅峰赛 · 极限越台' : '无尽赛 · 冲榜时刻'; }
 function readableWindow(base, level) { return Math.max(balance_1.B.minimumDecision, base - level * 0.085); }
 
 },
@@ -2039,29 +2179,45 @@ const balance_1 = require("../config/balance");
 function emptyStats() {
     return { distance: 0, kills: 0, perfect: 0, combo: 0, maxCombo: 0, score: 0, shots: 0, misses: 0, double: 0, damage: 0, healed: 0, dodges: 0, skips: 0 };
 }
-/** Current jump value for a combo count: 1, 2, 4, 8, 16, 32, then capped at 32. */
+/** Current PERFECT-combo value: 1, 2, 4, 8, 16, 32, then capped at 32. */
 function comboPoints(combo) {
     if (combo <= 0)
         return 1;
     return Math.min(balance_1.B.comboScoreCap, 2 ** Math.max(0, combo - 1));
 }
-/** A successful departure is the only normal way to earn score. */
-function awardJump(stats, skippedFirst = false) {
-    stats.combo += 1;
-    stats.maxCombo = Math.max(stats.maxCombo, stats.combo);
-    const jump = comboPoints(stats.combo);
+/**
+ * Platform score is intrinsic (1 / 5 / 10 / 20). PERFECT combo keeps the familiar
+ * 1→2→4→8→16→32 ladder, but only its amount above 1 is added to platform base score.
+ * Therefore normal 1-point platforms preserve exactly the old combo sequence while
+ * premium platforms are naturally valuable without multiplying scores into the hundreds.
+ */
+function awardJump(stats, skippedFirst = false, perfect = false, platformBase = 1) {
+    const previousCombo = stats.combo;
+    if (perfect) {
+        stats.combo += 1;
+        stats.maxCombo = Math.max(stats.maxCombo, stats.combo);
+    }
+    else {
+        stats.combo = 0;
+    }
+    const base = [1, 5, 10, 20].includes(platformBase) ? platformBase : 1;
+    const comboValue = perfect ? comboPoints(stats.combo) : 1;
+    const comboBonus = perfect ? Math.max(0, comboValue - 1) : 0;
+    const jump = base + comboBonus;
     const skip = skippedFirst ? balance_1.B.skipPlatformBonus : 0;
     if (skippedFirst)
         stats.skips += 1;
     const total = jump + skip;
     stats.score += total;
-    return { jump, skip, total, combo: stats.combo };
+    return { jump, base, comboBonus, comboValue, skip, total, combo: stats.combo, broke: !perfect && previousCombo > 0, perfect };
 }
-/** Combat remains tactically important, but kills/headshots no longer inflate score. */
-function recordKill(stats, head) {
+/** Small additive combat rewards keep killing meaningful without overwhelming platform/Combo scoring. */
+function recordKill(stats, perfect, bonus = 0) {
     stats.kills += 1;
-    if (head)
-        stats.perfect += 1;
+    if (perfect) stats.perfect += 1;
+    const points = Math.max(0, bonus | 0);
+    stats.score += points;
+    return points;
 }
 
 },
@@ -2114,6 +2270,7 @@ exports.powerAt = powerAt;
 exports.makeShot = makeShot;
 exports.shotPoint = shotPoint;
 exports.alignPierce = alignPierce;
+exports.projectMovingX = projectMovingX;
 const balance_1 = require("../config/balance");
 function rangeForPower(power) {
     // Stable muscle memory: horizontal reach is strictly linear in hold power for the entire run.
@@ -2126,35 +2283,57 @@ function powerAt(seconds) {
     // One stable mapping for the whole run: hold time -> power -> horizontal reach. No post-full bounce.
     return (0, balance_1.clamp)(seconds / balance_1.B.chargeSeconds, 0, 1);
 }
-function makeShot(from, p, power, elapsed, tutorial) {
+function projectMovingX(p, seconds) {
+    if (!p?.moving) return p.x;
+    let x = p.x, dir = p.moveDir || 1, remain = Math.max(0, p.moveSpeed || balance_1.B.movingSpeed) * Math.max(0, seconds);
+    const min = p.moveMin ?? (p.baseX - balance_1.B.movingRange), max = p.moveMax ?? (p.baseX + balance_1.B.movingRange);
+    for (let guard = 0; remain > 1e-6 && guard < 8; guard++) {
+        const edge = dir > 0 ? max : min, d = Math.abs(edge - x);
+        if (remain <= d) { x += dir * remain; remain = 0; break; }
+        remain -= d; x = edge; dir *= -1;
+    }
+    return x;
+}
+function makeShot(from, p, power, elapsed, tutorialStep = -1) {
     const live = p.enemies.filter(e => e.alive);
     const target = live[live.length - 1];
     const ideal = idealPower(from.x, p), err = power - ideal;
-    const tolerance = balance_1.B.hitBand + (tutorial ? balance_1.B.tutorialHitBonus : 0);
-    const perfect = Math.abs(err) <= balance_1.B.perfectBand;
-    let quality = Math.abs(err) > tolerance ? 'miss' : target ? (perfect ? 'perfect' : 'body') : 'anchor';
+    const tutorialBonus = tutorialStep >= 0 ? (balance_1.B.tutorialHitBonus[tutorialStep] ?? 0) : 0;
+    const tolerance = balance_1.B.hitBand + tutorialBonus;
+    const absErr = Math.abs(err);
+    const perfect = absErr <= balance_1.B.perfectBand;
+    const great = absErr <= balance_1.B.killBand;
+    let quality = absErr > tolerance ? 'miss' : target ? (perfect ? 'perfect' : great ? 'great' : 'body') : 'anchor';
     const intendedRange = rangeForPower(power);
-    const flightDx = quality === 'miss' ? intendedRange : Math.max(0, p.x - from.x);
-    const duration = (0, balance_1.clamp)(0.24 + flightDx / 3150, balance_1.B.flightMin, balance_1.B.flightMax);
-    let endX = target ? target.x + 17 : p.anchorX;
+    let flightDx = quality === 'miss' ? intendedRange : Math.max(0, p.x - from.x);
+    let duration = (0, balance_1.clamp)(0.24 + flightDx / 3150, balance_1.B.flightMin, balance_1.B.flightMax);
+    let projectedPlatformX = p.moving ? projectMovingX(p, duration) : p.x;
+    if (p.moving && quality !== 'miss') {
+        flightDx = Math.max(0, projectedPlatformX - from.x);
+        duration = (0, balance_1.clamp)(0.24 + flightDx / 3150, balance_1.B.flightMin, balance_1.B.flightMax);
+        projectedPlatformX = projectMovingX(p, duration);
+    }
+    let endX = target ? target.x + 17 : p.moving ? projectedPlatformX + 12 : p.anchorX;
     let endY = target ? target.y - 55 : p.anchorY;
     if (target?.kind === 'runner')
         endX = target.baseX + Math.sin((elapsed + duration) * 2.1 + target.phase) * 23 + 17;
     if (quality === 'body')
         endY += 25;
+    else if (quality === 'great')
+        endY += 10;
     if (quality === 'miss') {
         // A miss still obeys the same hand-feel rule: twice the effective charge reach means twice the horizontal spear reach.
         endX = from.x + intendedRange;
         endY -= err * balance_1.B.powerErrorY;
     }
     const vx = (endX - from.x) / duration, vy = (endY - from.y - 0.5 * balance_1.B.gravity * duration * duration) / duration;
-    return { from: { ...from }, pos: { ...from }, prev: { ...from }, vx, vy, elapsed: 0, duration, end: { x: endX, y: endY }, platformId: p.id, power, quality, hits: [], kills: 0, heads: 0, anchored: false, blocked: false, aimX: endX };
+    return { from: { ...from }, pos: { ...from }, prev: { ...from }, vx, vy, elapsed: 0, duration, end: { x: endX, y: endY }, platformId: p.id, power, quality, movingPerfect: !!p.moving, hits: [], kills: 0, heads: 0, anchored: false, blocked: false, aimX: endX };
 }
 function shotPoint(s, t) { return { x: s.from.x + s.vx * t, y: s.from.y + s.vy * t + 0.5 * balance_1.B.gravity * t * t }; }
 function alignPierce(p, from) {
     if (p.enemies.length < 2)
         return;
-    const s = makeShot(from, p, idealPower(from.x, p), 0, false);
+    const s = makeShot(from, p, idealPower(from.x, p), 0, -1);
     for (const e of p.enemies) {
         const t = (e.x - from.x) / s.vx;
         e.y = shotPoint(s, t).y + 55;
@@ -2171,26 +2350,26 @@ const balance_1 = require("../config/balance");
 const math_1 = require("../utils/math");
 const DifficultySystem_1 = require("./DifficultySystem");
 exports.PATTERNS = [
-    { id: 'first', name: '起手双峰', min: 0, kinds: ['normal', 'heal'], foes: [['archer'], ['archer']] },
-    { id: 'fork', name: '近稳远利', min: 0, kinds: ['normal', 'risk'], foes: [['archer'], ['archer']] },
-    { id: 'breath', name: '风中歇脚', min: 0, kinds: ['safe', 'normal'], foes: [[], ['archer']] },
-    { id: 'medicine', name: '远崖灵药', min: 0, kinds: ['normal', 'heal'], foes: [['archer'], ['archer']] },
-    { id: 'choices', name: '三岔青岚', min: 24, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['archer'], ['archer']] },
-    { id: 'pierce', name: '一线双弓', min: 40, kinds: ['normal', 'pierce', 'heal'], foes: [['archer'], ['archer', 'archer'], ['archer']] },
-    { id: 'fast', name: '疾箭争先', min: 70, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['quick'], ['archer']] },
-    { id: 'run', name: '流影游弓', min: 95, kinds: ['normal', 'risk', 'safe'], foes: [['archer'], ['runner'], []] },
-    { id: 'elite', name: '逐风夺药', min: 115, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['elite'], ['quick']] },
-    { id: 'doubleHeal', name: '穿阵取药', min: 125, kinds: ['safe', 'pierce', 'heal'], foes: [[], ['archer', 'archer'], ['runner']] },
-    { id: 'rush', name: '先手还是贪心', min: 150, kinds: ['normal', 'risk', 'pierce'], foes: [['quick'], ['runner'], ['archer', 'archer']] },
-    { id: 'rest', name: '悬泉喘息', min: 175, kinds: ['safe', 'heal', 'risk'], foes: [[], ['quick'], ['elite']] },
-    { id: 'armor', name: '破甲登高', min: 215, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['armor'], ['runner']] },
-    { id: 'shield', name: '盾开一瞬', min: 270, kinds: ['normal', 'heal', 'risk'], foes: [['archer'], ['shield'], ['elite']] },
-    { id: 'gauntlet', name: '铁卫与游弓', min: 290, kinds: ['safe', 'risk', 'heal'], foes: [[], ['armor'], ['runner']] },
-    { id: 'triple', name: '三箭归一', min: 340, kinds: ['normal', 'pierce', 'heal'], foes: [['quick'], ['archer', 'archer', 'archer'], ['shield']] },
+    { id: 'first', name: '起手双台', min: 0, kinds: ['normal', 'heal'], foes: [['archer'], ['archer']] },
+    { id: 'fork', name: '稳跳与冲分', min: 0, kinds: ['normal', 'risk'], foes: [['archer'], ['archer']] },
+    { id: 'breath', name: '安全缓冲', min: 0, kinds: ['safe', 'normal'], foes: [[], ['archer']] },
+    { id: 'medicine', name: '远台补给', min: 0, kinds: ['normal', 'heal'], foes: [['archer'], ['archer']] },
+    { id: 'choices', name: '三路抉择', min: 24, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['archer'], ['archer']] },
+    { id: 'pierce', name: '一矛双杀', min: 40, kinds: ['normal', 'pierce', 'heal'], foes: [['archer'], ['archer', 'archer'], ['archer']] },
+    { id: 'fast', name: '极速抢跳', min: 70, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['quick'], ['archer']] },
+    { id: 'run', name: '移动靶场', min: 95, kinds: ['normal', 'risk', 'safe'], foes: [['archer'], ['runner'], []] },
+    { id: 'elite', name: '精英补给', min: 115, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['elite'], ['quick']] },
+    { id: 'doubleHeal', name: '穿阵回血', min: 125, kinds: ['safe', 'pierce', 'heal'], foes: [[], ['archer', 'archer'], ['runner']] },
+    { id: 'rush', name: '先手还是越台', min: 150, kinds: ['normal', 'risk', 'pierce'], foes: [['quick'], ['runner'], ['archer', 'archer']] },
+    { id: 'rest', name: '中场补给', min: 175, kinds: ['safe', 'heal', 'risk'], foes: [[], ['quick'], ['elite']] },
+    { id: 'armor', name: '重甲挑战', min: 215, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['armor'], ['runner']] },
+    { id: 'shield', name: '盾卫窗口', min: 270, kinds: ['normal', 'heal', 'risk'], foes: [['archer'], ['shield'], ['elite']] },
+    { id: 'gauntlet', name: '混合守关', min: 290, kinds: ['safe', 'risk', 'heal'], foes: [[], ['armor'], ['runner']] },
+    { id: 'triple', name: '一矛三杀', min: 340, kinds: ['normal', 'pierce', 'heal'], foes: [['quick'], ['archer', 'archer', 'archer'], ['shield']] },
     { id: 'choiceHard', name: '护药盾阵', min: 365, kinds: ['normal', 'heal', 'risk'], foes: [['archer'], ['shield'], ['armor']] },
-    { id: 'crossfire', name: '错峰箭雨', min: 390, kinds: ['normal', 'risk', 'pierce'], foes: [['archer'], ['quick'], ['archer', 'quick']] },
-    { id: 'wind', name: '极限换崖', min: 420, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['elite'], ['shield']] },
-    { id: 'summit', name: '云上猎手', min: 450, kinds: ['safe', 'pierce', 'risk'], foes: [[], ['archer', 'quick', 'archer'], ['elite']] }
+    { id: 'crossfire', name: '错峰火力', min: 390, kinds: ['normal', 'risk', 'pierce'], foes: [['archer'], ['quick'], ['archer', 'quick']] },
+    { id: 'wind', name: '极限换台', min: 420, kinds: ['normal', 'risk', 'heal'], foes: [['archer'], ['elite'], ['shield']] },
+    { id: 'summit', name: '终局猎手', min: 450, kinds: ['safe', 'pierce', 'risk'], foes: [[], ['archer', 'quick', 'archer'], ['elite']] }
 ];
 function mergeVisiblePlatforms(existing, landed, fresh, desired) {
     const carry = existing.filter(p => p.id !== landed.id && !p.visited && p.x > landed.x + 72).sort((a, b) => a.x - b.x);
@@ -2219,28 +2398,54 @@ function mergeVisiblePlatforms(existing, landed, fresh, desired) {
     }
     return out.sort((a, b) => a.x - b.x).slice(0, desired);
 }
+function platformBaseScore(kind, tier, rng) {
+    if (kind === 'boss' || kind === 'moving') return balance_1.B.platformScoreTwenty;
+    if (kind === 'risk' || kind === 'pierce') return balance_1.B.platformScoreTen;
+    if (kind === 'heal') return balance_1.B.platformScoreFive;
+    if (kind === 'safe') return 1;
+    // Ordinary platforms occasionally become naturally valuable score platforms.
+    // Farther tiers have a better chance, so reward and distance remain aligned.
+    const r = rng.next();
+    if (tier >= 2) {
+        if (r < 0.02) return balance_1.B.platformScoreTwenty;
+        if (r < 0.12) return balance_1.B.platformScoreTen;
+        if (r < 0.37) return balance_1.B.platformScoreFive;
+    }
+    else if (tier === 1) {
+        if (r < 0.01) return balance_1.B.platformScoreTwenty;
+        if (r < 0.08) return balance_1.B.platformScoreTen;
+        if (r < 0.28) return balance_1.B.platformScoreFive;
+    }
+    else {
+        if (r < 0.01) return balance_1.B.platformScoreTen;
+        if (r < 0.13) return balance_1.B.platformScoreFive;
+    }
+    return 1;
+}
 class WorldGenerator {
     constructor(seed) {
         this.seed = seed;
         this.id = 1;
         this.enemyId = 1;
-        this.pattern = '起手双峰';
+        this.pattern = '起手双台';
         this.patternId = 'first';
         this.last = [];
+        this.lastMovingStep = -999;
         this.rng = new math_1.RNG(seed);
     }
     tutorial(ctx) {
         const specs = [
             { kind: 'normal', foes: ['archer'], gap: 370, y: 475, width: 136, label: '第1跳 · 轻按近台' },
             { kind: 'pierce', foes: ['archer', 'archer'], gap: 590, y: 405, width: 190, label: '第2跳 · 中蓄双人台' },
-            { kind: 'heal', foes: [], gap: 810, y: 505, width: 148, label: '第3跳 · 长蓄回血台' }
+            { kind: 'heal', foes: [], gap: 836, y: 505, width: 148, label: '第3跳 · 长蓄回血台' }
         ];
         const spec = specs[ctx.step];
         const x = ctx.x + spec.gap, y = spec.y, id = this.id++;
-        const plat = { id, x, y, width: spec.width, kind: spec.kind, enemies: [], heal: spec.kind === 'heal' ? balance_1.B.heal : 0, value: spec.kind === 'pierce' ? 1.5 : 1, label: spec.label, tier: 0, visited: false, shake: 0, seed: this.rng.int(1, 99999), anchorX: x + 12, anchorY: y - 47 };
+        const baseScore = spec.kind === 'pierce' ? balance_1.B.platformScoreTen : spec.kind === 'heal' ? balance_1.B.platformScoreFive : 1;
+        const plat = { id, x, y, width: spec.width, kind: spec.kind, enemies: [], heal: spec.kind === 'heal' ? balance_1.B.heal : 0, baseScore, value: baseScore, label: spec.label, tier: 0, visited: false, shake: 0, seed: this.rng.int(1, 99999), anchorX: x + 12, anchorY: y - 47 };
         spec.foes.forEach((f, j) => {
             const ex = x + (j - (spec.foes.length - 1) / 2) * 48;
-            const period = ((0, DifficultySystem_1.readableWindow)(balance_1.B.enemies[f].windup, ctx.level) + 2.8 + j * .16) * balance_1.B.enemyAttackIntervalScale;
+            const period = Math.max(balance_1.B.minimumAttackPeriod, ((0, DifficultySystem_1.readableWindow)(balance_1.B.enemies[f].windup, ctx.level) + 2.8 + j * .16) * balance_1.B.enemyAttackIntervalScale);
             plat.enemies.push({ id: this.enemyId++, kind: f, x: ex, y: y - 6, baseX: ex, hp: balance_1.B.enemies[f].hp, alive: true, timer: balance_1.B.firstRangedAttackDelay, period, firstAttack: true, phase: this.rng.range(0, 3), hit: 0, open: true, deadAt: 0, platformId: id, tier: 0 });
         });
         this.pattern = spec.label;
@@ -2256,7 +2461,7 @@ class WorldGenerator {
         if (ctx.combo >= 6 && ctx.elapsed > 40 && this.rng.next() < 0.35)
             p = exports.PATTERNS[5];
         if (ctx.bossPhase > 0)
-            p = { id: 'boss', name: '逐风追猎 · ' + ctx.bossPhase + '/3', min: 0, kinds: ['normal', 'boss', 'heal'], foes: [['archer'], ['elite'], ['quick']] };
+            p = { id: 'boss', name: '精英追猎 · ' + ctx.bossPhase + '/3', min: 0, kinds: ['normal', 'boss', 'heal'], foes: [['archer'], ['elite'], ['quick']] };
         this.last.push(p.id);
         if (this.last.length > 6)
             this.last.shift();
@@ -2279,29 +2484,83 @@ class WorldGenerator {
             }
             const x = ctx.x + balance_1.B.spawnGaps[i] + this.rng.range(-14, 14);
             const y = (0, balance_1.clamp)(heights[i], 285, 574);
-            const width = foes.length > 1 ? 185 + (foes.length - 2) * 38 : kind === 'boss' ? 154 : 128;
+            let width;
+            if (foes.length > 1) width = 190 + (foes.length - 2) * 42 + this.rng.range(-8, 18);
+            else if (kind === 'safe') width = 198 + this.rng.range(-18, 34);
+            else if (kind === 'heal') width = 126 + this.rng.range(-10, 18);
+            else if (kind === 'risk') width = 102 + this.rng.range(-10, 16);
+            else if (kind === 'pierce') width = 176 + this.rng.range(-8, 20);
+            else if (kind === 'boss') width = 152 + this.rng.range(-8, 16);
+            else width = 116 + i * 14 + this.rng.range(-12, 18);
             const id = this.id++;
-            const plat = { id, x, y, width, kind, enemies: [], heal: kind === 'heal' ? balance_1.B.heal : 0, value: kind === 'risk' ? 1.8 : kind === 'pierce' ? 1.5 : 1 + i * .2, label: '', tier: i, visited: false, shake: 0, seed: this.rng.int(1, 99999), anchorX: x + 12, anchorY: y - 47 };
+            const baseScore = platformBaseScore(kind, i, this.rng);
+            const plat = { id, x, y, width, kind, enemies: [], heal: kind === 'heal' ? balance_1.B.heal : 0, baseScore, value: baseScore, label: '', tier: i, visited: false, shake: 0, seed: this.rng.int(1, 99999), anchorX: x + 12, anchorY: y - 47 };
             foes.forEach((f, j) => {
                 const ex = x + (j - (foes.length - 1) / 2) * 48;
-                const period = ((0, DifficultySystem_1.readableWindow)(balance_1.B.enemies[f].windup, ctx.level) + i * balance_1.B.enemyStagger + j * .16) * balance_1.B.enemyAttackIntervalScale;
+                const period = Math.max(balance_1.B.minimumAttackPeriod, ((0, DifficultySystem_1.readableWindow)(balance_1.B.enemies[f].windup, ctx.level) + i * balance_1.B.enemyStagger + j * .16) * balance_1.B.enemyAttackIntervalScale);
                 const e = { id: this.enemyId++, kind: f, x: ex, y: y - 6, baseX: ex, hp: balance_1.B.enemies[f].hp, alive: true, timer: balance_1.B.firstRangedAttackDelay, period, firstAttack: true, phase: this.rng.range(0, 3), hit: 0, open: true, deadAt: 0, platformId: id, tier: i };
                 plat.enemies.push(e);
             });
             result.push(plat);
         }
-        // Mercy is applied before a group appears, never by changing a visible enemy or projectile.
-        const forceMercy = ctx.hp <= balance_1.B.lowHP && this.rng.next() < balance_1.B.lowHPHealWeight || ctx.misses >= balance_1.B.mercyMisses;
-        if (forceMercy && ctx.bossPhase === 0) {
-            result[n - 1].kind = 'heal';
-            result[n - 1].heal = balance_1.B.heal;
-            if (ctx.hp <= 19 && ctx.misses >= 2) {
+        // Recovery routes are controlled by HP state, not by the raw number of heal templates.
+        // This keeps healing scarce at high HP and meaningfully more likely when survival pressure is real.
+        let healChance = ctx.hp <= balance_1.B.criticalHP ? balance_1.B.criticalHealWeight
+            : ctx.hp <= balance_1.B.lowHP ? balance_1.B.lowHPHealWeight
+            : ctx.hp <= 70 ? balance_1.B.healChanceMid
+            : balance_1.B.healChanceHigh;
+        if ((ctx.damagePressure || 0) >= balance_1.B.damageMercyJumps)
+            healChance = Math.max(healChance, balance_1.B.damageMercyHealWeight);
+        const wantHeal = ctx.bossPhase === 0 && this.rng.next() < healChance;
+        const healRoutes = result.filter(v => v.kind === 'heal');
+        if (ctx.bossPhase === 0) {
+            if (wantHeal && !healRoutes.length) {
+                result[n - 1].kind = 'heal';
+                result[n - 1].heal = balance_1.B.heal;
+            }
+            else if (!wantHeal) {
+                for (const v of healRoutes) {
+                    v.kind = v.tier === 0 ? 'normal' : 'safe';
+                    v.heal = 0;
+                    if (v.kind === 'safe') v.enemies = [];
+                }
+            }
+            if (ctx.hp <= balance_1.B.criticalHP && (ctx.damagePressure || 0) >= balance_1.B.damageMercyJumps) {
                 result[0].kind = 'safe';
+                result[0].heal = 0;
                 result[0].enemies = [];
             }
         }
+        // After 2000m, occasionally convert one non-nearest route into a horizontal moving challenge platform.
+        // It is enemy-free, always worth 20 base points, and never replaces the guaranteed static escape route.
+        const d = ctx.distance || 0;
+        const movingChance = d >= 8000 ? balance_1.B.movingChance8000
+            : d >= 5000 ? balance_1.B.movingChance5000
+            : d >= 3000 ? balance_1.B.movingChance3000
+            : d >= balance_1.B.movingUnlockDistance ? balance_1.B.movingChance2000 : 0;
+        if (ctx.bossPhase === 0 && movingChance > 0 && ctx.step - this.lastMovingStep >= balance_1.B.movingCooldownJumps && this.rng.next() < movingChance) {
+            const idx = n >= 3 ? (this.rng.next() < .5 ? 1 : 2) : 1;
+            const v = result[idx];
+            if (v) {
+                v.kind = 'moving'; v.enemies = []; v.heal = 0; v.baseScore = balance_1.B.platformScoreTwenty; v.value = v.baseScore;
+                v.moving = true; v.baseX = v.x; v.moveRange = balance_1.B.movingRange; v.moveSpeed = balance_1.B.movingSpeed;
+                v.moveMin = v.baseX - v.moveRange; v.moveMax = v.baseX + v.moveRange; v.moveDir = this.rng.next() < .5 ? -1 : 1;
+                v.x = v.baseX + this.rng.range(-v.moveRange, v.moveRange); v.anchorX = v.x + 12;
+                v.width = Math.max(112, Math.min(146, v.width));
+                this.lastMovingStep = ctx.step;
+                this.pattern += ' · 流动挑战';
+            }
+        }
         for (const v of result) {
-            const words = { normal: '稳妥路线', heal: '灵药 +32', risk: '险路 ×1.8', safe: '无敌歇脚', pierce: '一线 ' + v.enemies.length + ' 杀', boss: '追击逐风将' };
+            // Healing / mercy may change a route kind after initial creation, so special-kind
+            // base scores are normalized here while ordinary score platforms keep their roll.
+            if (v.kind === 'moving') v.baseScore = balance_1.B.platformScoreTwenty;
+            else if (v.kind === 'heal') v.baseScore = balance_1.B.platformScoreFive;
+            else if (v.kind === 'risk' || v.kind === 'pierce') v.baseScore = balance_1.B.platformScoreTen;
+            else if (v.kind === 'boss') v.baseScore = balance_1.B.platformScoreTwenty;
+            else if (v.kind === 'safe') v.baseScore = 1;
+            v.value = v.baseScore || 1;
+            const words = { normal: '稳妥路线', heal: '灵药 · 回满', risk: '高危险路', safe: '无敌歇脚', pierce: '一线 ' + v.enemies.length + ' 杀', boss: '追击逐风将', moving: '流动挑战台' };
             v.label = words[v.kind];
         }
         return result;
